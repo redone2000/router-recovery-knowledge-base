@@ -248,7 +248,13 @@ def validate_work_queue_row(row: dict[str, Any], source_types: set[str], stage0:
     return issues
 
 
-def validate_source_index_row(row: dict[str, Any], source_types: set[str], recovery_methods: set[str], stage0: bool) -> list[str]:
+def validate_source_index_row(
+    row: dict[str, Any],
+    source_types: set[str],
+    recovery_methods: set[str],
+    stage0: bool,
+    stage1_index: bool,
+) -> list[str]:
     issues: list[str] = []
     missing = sorted(SOURCE_INDEX_REQUIRED - set(row))
     for field in missing:
@@ -256,6 +262,8 @@ def validate_source_index_row(row: dict[str, Any], source_types: set[str], recov
 
     if stage0 and row.get("status") != "template_only":
         issues.append("Stage 0 source index status must be template_only")
+    if stage1_index and row.get("status") != "indexed":
+        issues.append("Stage 1 source index status must be indexed")
 
     source_type = row.get("source_type")
     if source_type not in source_types:
@@ -284,10 +292,14 @@ def validate_source_index_row(row: dict[str, Any], source_types: set[str], recov
         issues.append("series_level sources must include series")
 
     source_url = row.get("source_url")
-    if not isinstance(source_url, str) or not is_placeholder_url(source_url):
+    if stage0 and (not isinstance(source_url, str) or not is_placeholder_url(source_url)):
         issues.append(f"source_url must use placeholder https://example.invalid URL in Stage 0: {source_url}")
+    if stage1_index:
+        parsed_source_url = urlparse(source_url if isinstance(source_url, str) else "")
+        if parsed_source_url.scheme not in {"http", "https"} or not parsed_source_url.hostname:
+            issues.append(f"source_url must be an http(s) URL: {source_url}")
 
-    methods = ensure_list(row, "recovery_methods_claimed", issues)
+    methods = ensure_array(row, "recovery_methods_claimed", issues)
     invalid_methods = sorted(set(str(item) for item in methods) - recovery_methods)
     for item in invalid_methods:
         issues.append(f"invalid recovery_methods_claimed value: {item}")
@@ -396,6 +408,7 @@ def validate_file(path: Path, kind: str, mode: str) -> list[Issue]:
     issues: list[Issue] = []
     rows = 0
     stage0 = mode == "stage0-template"
+    stage1_index = mode == "stage1-index"
 
     for record in iter_jsonl(path):
         rows += 1
@@ -409,7 +422,7 @@ def validate_file(path: Path, kind: str, mode: str) -> list[Issue]:
         elif kind == "work_queue":
             row_issues = validate_work_queue_row(record.data, source_types, stage0)
         else:
-            row_issues = validate_source_index_row(record.data, source_types, recovery_methods, stage0)
+            row_issues = validate_source_index_row(record.data, source_types, recovery_methods, stage0, stage1_index)
         for issue in row_issues:
             issues.append((str(record.path), record.line_number, issue))
 
@@ -425,7 +438,7 @@ def main() -> int:
     parser.add_argument("--source-index", default="data/source_index.template.jsonl", help="Source index JSONL file.")
     parser.add_argument(
         "--mode",
-        choices=("stage0-template", "stage1-proposed"),
+        choices=("stage0-template", "stage1-proposed", "stage1-index"),
         default="stage0-template",
         help="Validation mode.",
     )
@@ -435,7 +448,9 @@ def main() -> int:
     source_index = repo_path(args.source_index)
     issues: list[Issue] = []
 
-    if args.mode == "stage1-proposed" and "source_plan" in work_queue.name:
+    if args.mode == "stage1-index":
+        work_queue_kind = "source_index"
+    elif args.mode == "stage1-proposed" and "source_plan" in work_queue.name:
         work_queue_kind = "source_plan"
     else:
         work_queue_kind = "candidate_queue" if args.mode == "stage1-proposed" else "work_queue"
