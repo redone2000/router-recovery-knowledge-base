@@ -11,15 +11,7 @@ from datetime import date
 from pathlib import Path
 from typing import Any
 
-from profile_utils import (
-    DERIVED_FIELDS,
-    QUALITY_FIELDS,
-    add_common_path_args,
-    collect_jsonl_paths,
-    iter_jsonl,
-    load_enums,
-    load_schema,
-)
+from profile_utils import LEGACY_DERIVED_FIELDS, add_common_path_args, collect_jsonl_paths, iter_jsonl, load_enums, load_schema
 
 
 Issue = tuple[str, int, str]
@@ -81,9 +73,9 @@ def validate_profile(profile: dict[str, Any], schema: dict[str, Any], enums: dic
     errors: list[str] = []
     required = set(schema.get("required", []))
     properties = schema.get("properties", {})
-    allowed_fields = set(properties) | QUALITY_FIELDS
+    allowed_fields = set(properties)
     if allow_derived:
-        allowed_fields.update(DERIVED_FIELDS)
+        allowed_fields.update(LEGACY_DERIVED_FIELDS)
 
     for field in sorted(required):
         if field not in profile or not is_non_empty(profile.get(field)):
@@ -131,12 +123,52 @@ def validate_profile(profile: dict[str, Any], schema: dict[str, Any], enums: dic
     source_evidence = profile.get("source_evidence")
     if not is_non_empty(source_evidence):
         errors.append("source_evidence must be non-empty")
+    elif not isinstance(source_evidence, list):
+        errors.append("source_evidence must be an array")
+    else:
+        evidence_supported_fields: set[str] = set()
+        for index, evidence in enumerate(source_evidence):
+            if not isinstance(evidence, dict):
+                errors.append(f"source_evidence[{index}] must be an object")
+                continue
+            evidence_source_type = evidence.get("source_type")
+            if evidence_source_type not in enums.get("source_type", set()):
+                errors.append(f"invalid source_evidence[{index}].source_type: {evidence_source_type}")
+            if not is_non_empty(evidence.get("snippet")):
+                errors.append(f"source_evidence[{index}].snippet must be non-empty")
+            if not is_non_empty(evidence.get("source_url")) and not is_non_empty(evidence.get("source_document")):
+                errors.append(f"source_evidence[{index}] must include source_url or source_document")
+            supports_fields = evidence.get("supports_fields")
+            if isinstance(supports_fields, list):
+                evidence_supported_fields.update(str(field) for field in supports_fields)
+
+        if isinstance(methods, list):
+            for method in methods:
+                if method not in evidence_supported_fields and "recovery_methods" not in evidence_supported_fields:
+                    errors.append(f"missing source_evidence support for recovery method: {method}")
 
     network_recovery = profile.get("network_recovery")
     if isinstance(network_recovery, dict):
         for field in ("default_ip",):
             if not validate_ip(network_recovery.get(field)):
                 errors.append(f"invalid IP address in network_recovery.{field}: {network_recovery.get(field)}")
+        if isinstance(methods, list) and ("tftp_active" in methods or "tftp_passive" in methods):
+            passive = network_recovery.get("passive_tftp_from_router")
+            active = network_recovery.get("active_tftp_to_router")
+            if passive is None and active is None:
+                errors.append("TFTP recovery method listed but both TFTP direction fields are unknown")
+    elif isinstance(methods, list) and ("tftp_active" in methods or "tftp_passive" in methods):
+        errors.append("TFTP recovery method listed but network_recovery is missing")
+
+    method_detail_requirements = {
+        "uart_serial": "uart_details",
+        "web_ui": "web_recovery",
+        "button_reset": "button_recovery",
+    }
+    if isinstance(methods, list):
+        for method, detail_field in method_detail_requirements.items():
+            if method in methods and not is_non_empty(profile.get(detail_field)):
+                errors.append(f"{method} listed but {detail_field} is missing or empty")
 
     return errors
 

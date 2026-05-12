@@ -74,3 +74,23 @@ Confidence level indicating the accuracy and reliability of the profile.
 | `medium` | Medium confidence: Information comes from a reasonably reliable source but lacks independent verification | Community guide with good reputation, no conflicting reports |
 | `low` | Low confidence: Information comes from an unreliable source or has conflicting reports | Single unconfirmed report, social media, AI-generated content |
 | `unverified` | No confidence: Newly submitted profile awaiting review | Any unvetted source |
+
+## 5. Field Semantics
+
+Use explicit strings for unknown values in scalar fields when the source does not identify a value.
+
+| Value | Meaning |
+|-------|---------|
+| `unknown` | The value may exist, but current evidence does not identify it |
+| `null` | The value does not apply, or the schema explicitly defines null for an unknown boolean state |
+| omitted field | The collector has not evaluated this optional field yet |
+
+For TFTP direction booleans, `null` means direction is unknown or not evidenced. Do not infer `passive_tftp_from_router` or `active_tftp_to_router` from vendor, family, or model patterns.
+
+## 6. deprecation_status
+
+| Value | Description |
+|-------|-------------|
+| `active` | Current profile candidate |
+| `deprecated` | Profile is outdated and should not be used for new guidance |
+| `superseded` | Profile has been replaced by another profile |

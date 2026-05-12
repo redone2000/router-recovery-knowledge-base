@@ -21,14 +21,17 @@ Do not push secrets, credentials, generated caches, destructive outputs, or unre
 Receive and triage new profile submissions.
 
 ### Entry Criteria
-1. Submitter creates a JSON profile file following the schema in `schema/recovery_profile.schema.json`
-2. File is placed in `incoming/` directory with naming convention: `{id}.json`
+1. Submitter creates a JSONL profile file following the schema in `schema/recovery_profile.schema.json`
+2. File is placed in `incoming/` directory with naming convention: `{batch-or-topic}.jsonl`
 3. All required fields are present
 4. Source information is provided (URL or document in `sources/` directory)
+5. Each claimed recovery method has at least one `source_evidence` entry
 
 ### Processing Steps
 1. **Automated Validation (Triage)**
    - Run JSON schema validation
+   - Validate source evidence coverage for each claimed recovery method
+   - Validate hardware version handling (`hardware_version` value or `unknown`)
    - If schema validation fails: Notify submitter of errors, profile remains in `incoming/` for fixes
    - If schema validation passes: Proceed to AI review
 
@@ -65,6 +68,8 @@ Validate profile accuracy and completeness by a human reviewer.
    - [ ] Confirm confidence level is appropriate
    - [ ] Check for missing information
    - [ ] Validate TFTP classification (passive/active) is correct
+   - [ ] Confirm TFTP direction is directly evidenced, not inferred
+   - [ ] Check whether hardware version differences are mentioned or unresolved
    - [ ] Cross-check with existing profiles for the same device if available
 
 3. **Review Decision**

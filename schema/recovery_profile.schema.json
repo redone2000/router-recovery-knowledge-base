@@ -8,7 +8,9 @@
     "id",
     "vendor",
     "model",
+    "hardware_version",
     "recovery_methods",
+    "source_evidence",
     "source_type",
     "confidence_level",
     "submitted_date"
@@ -27,9 +29,17 @@
       "type": "string",
       "description": "Device model number/name"
     },
+    "hardware_version": {
+      "type": ["string", "null"],
+      "description": "Hardware revision this profile applies to. Use null only when evidence shows the profile is hardware-version independent; use 'unknown' when sources do not identify hardware version."
+    },
     "firmware_version": {
       "type": ["string", "null"],
-      "description": "Specific firmware version this profile applies to, null if applies to all versions"
+      "description": "Specific firmware version this profile applies to. Use null only when applies_to_all_firmware_versions is true; use 'unknown' when sources do not identify firmware version."
+    },
+    "applies_to_all_firmware_versions": {
+      "type": ["boolean", "null"],
+      "description": "True when evidence shows the profile applies across firmware versions, false when firmware-specific, null when unknown."
     },
     "device_type": {
       "type": ["string", "null"],
@@ -70,6 +80,50 @@
             "description": "Additional notes about this recovery method"
           }
         }
+      }
+    },
+    "source_evidence": {
+      "type": "array",
+      "description": "Structured evidence supporting recovery claims. Each claimed recovery method should have at least one supporting evidence entry.",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["source_type", "snippet", "extracted_date"],
+        "properties": {
+          "source_type": {
+            "type": "string",
+            "description": "Type of source this evidence comes from (from enums.md)"
+          },
+          "source_url": {
+            "type": ["string", "null"],
+            "description": "Public source URL if available"
+          },
+          "source_document": {
+            "type": ["string", "null"],
+            "description": "Path to local source document under sources/ if available"
+          },
+          "supports_fields": {
+            "type": "array",
+            "description": "Profile fields or recovery methods supported by this evidence entry",
+            "items": {
+              "type": "string"
+            }
+          },
+          "snippet": {
+            "type": "string",
+            "description": "Short excerpt or faithful evidence summary. Avoid long copyrighted excerpts."
+          },
+          "extracted_date": {
+            "type": "string",
+            "format": "date",
+            "description": "Date this evidence was extracted"
+          },
+          "notes": {
+            "type": ["string", "null"],
+            "description": "Reviewer or collector notes about this evidence"
+          }
+        },
+        "additionalProperties": false
       }
     },
     "default_credentials": {
@@ -132,11 +186,11 @@
       "properties": {
         "passive_tftp_from_router": {
           "type": ["boolean", "null"],
-          "description": "Router acts as TFTP server, user connects to download firmware"
+          "description": "Router acts as TFTP server and the user connects with a TFTP client. Null means unknown or not evidenced, not inferred."
         },
         "active_tftp_to_router": {
           "type": ["boolean", "null"],
-          "description": "Router acts as TFTP client, user runs TFTP server to upload firmware"
+          "description": "Router acts as TFTP client and the user runs a TFTP server. Null means unknown or not evidenced, not inferred."
         },
         "default_ip": {
           "type": ["string", "null"],
@@ -247,6 +301,50 @@
       "items": {
         "type": "string"
       }
+    },
+    "risk_warnings": {
+      "type": "array",
+      "description": "User-facing device-specific risks to show before recovery",
+      "items": {
+        "type": "string"
+      }
+    },
+    "deprecation_status": {
+      "type": ["string", "null"],
+      "description": "Lifecycle status for obsolete profiles",
+      "enum": ["active", "deprecated", "superseded", null],
+      "default": "active"
+    },
+    "replaces_profile_id": {
+      "type": ["string", "null"],
+      "description": "Older profile ID replaced by this profile, if any"
+    },
+    "replaced_by_profile_id": {
+      "type": ["string", "null"],
+      "description": "Newer profile ID that supersedes this profile, if any"
+    },
+    "tool_metadata": {
+      "type": "object",
+      "description": "Tool-derived metadata. Collectors should not manually author these fields.",
+      "properties": {
+        "normalized_vendor": {
+          "type": "string"
+        },
+        "normalized_model": {
+          "type": "string"
+        },
+        "dedupe_key": {
+          "type": "string"
+        },
+        "processed_by": {
+          "type": ["string", "null"]
+        },
+        "processed_at": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        }
+      },
+      "additionalProperties": false
     }
   },
   "additionalProperties": false

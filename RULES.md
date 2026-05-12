@@ -14,8 +14,10 @@ All recovery profiles MUST include the following fields. Missing any of these fi
 | `id` | Unique identifier in format: `{vendor}-{model}-{firmware-version}` (all lowercase, hyphen-separated) |
 | `vendor` | Device manufacturer name (e.g., "tp-link", "cisco", "mikrotik") |
 | `model` | Exact device model number/name |
+| `hardware_version` | Hardware revision, or `unknown` if sources do not identify it |
 | `recovery_methods` | Array of at least one valid recovery method from the `recovery_method` enum |
 | `source_type` | Type of source the information comes from, from the `source_type` enum |
+| `source_evidence` | Structured evidence supporting each claimed recovery method |
 | `confidence_level` | Initial confidence level set by submitter, from the `confidence_levels` enum |
 | `submitted_date` | Date of submission in ISO format (YYYY-MM-DD) |
 
@@ -37,8 +39,11 @@ Confidence level MUST be lowered (at least one level) if any of the following co
 | Condition | Maximum Allowed Confidence |
 |-----------|-----------------------------|
 | Any required field is missing | `low` |
+| `source_evidence` is missing or empty | `low` |
+| Claimed recovery method has no supporting evidence entry | Lower by one level |
 | `recovery_methods` is empty array | `low` |
 | TFTP recovery is listed but `passive_tftp_from_router` and `active_tftp_to_router` are both null | `medium` |
+| TFTP direction is inferred from vendor/family/model without direct evidence | `low` |
 | `default_credentials` is present but missing username or password | Lower by one level |
 | Recovery steps are missing for listed recovery methods | Lower by one level |
 | `firmware_version` is null but profile claims to apply only to specific versions | Lower by one level |
@@ -51,7 +56,31 @@ Confidence level MUST be lowered (at least one level) if any of the following co
 | Recovery method claims contradict known device capabilities | `low` |
 | TFTP type classification is inconsistent with device family behavior | Lower by one level |
 
-## 3. Confidence Level Upgrade Rules
+## 3. TFTP Direction Evidence Rules
+TFTP direction MUST be supported by direct evidence. Vendor, chipset, bootloader family, or common model behavior is not enough.
+
+### 3.1 Passive TFTP (`passive_tftp_from_router`)
+Set `network_recovery.passive_tftp_from_router` to true only when evidence states that the router/device runs a TFTP server or that the user connects to the router with a TFTP client and uploads/downloads firmware.
+
+Sufficient evidence examples:
+- The source says the router runs a TFTP server in recovery mode.
+- The source instructs the user to connect to the router IP with a TFTP client.
+- The source instructs the user to use a TFTP `put` command to send firmware to the device.
+
+### 3.2 Active TFTP (`active_tftp_to_router`)
+Set `network_recovery.active_tftp_to_router` to true only when evidence states that the router/device acts as a TFTP client or that the user must run a TFTP server for the device to fetch a named file.
+
+Sufficient evidence examples:
+- The source instructs the user to run a TFTP server on the computer.
+- The source says the router looks for a TFTP server at a specified computer IP.
+- UART or bootloader logs show the device requesting a file from a TFTP server.
+
+### 3.3 Ambiguous TFTP
+If the source only says "TFTP recovery" without server/client direction, set both TFTP direction fields to null, record an evidence gap, and cap confidence at `medium`.
+
+Conflicting TFTP direction evidence caps confidence at `low` until reviewed.
+
+## 4. Confidence Level Upgrade Rules
 Confidence level may be raised after review if:
 - Multiple independent sources confirm the same information
 - Hands-on testing confirms the recovery method works
@@ -65,15 +94,16 @@ To achieve the highest `verified` confidence level, the profile must meet at lea
 3. Official vendor documentation explicitly describing the recovery process
 4. Firmware or bootloader analysis confirming the recovery mechanism
 
-## 4. Field Usage Guidelines
-### 4.1 Optional Fields That Strongly Impact Confidence
+## 5. Field Usage Guidelines
+### 5.1 Optional Fields That Strongly Impact Confidence
 While not required, providing these fields significantly improves confidence:
 - `source_url` or `source_document`: Proof of source material
+- `source_evidence`: Direct evidence for each claimed recovery method
 - `recovery_details`: Step-by-step instructions for each recovery method
 - `default_credentials`: Known default credentials for the device
 - Any device-specific details (UART settings, IP addresses, filenames, etc.)
 
-### 4.2 Null Field Policy
-Fields may be set to null if the information is unknown, but this should be noted in the review process. Fields that are unknown but required for specific recovery methods will trigger a confidence downgrade.
+### 5.2 Unknown and Null Policy
+Use `unknown` for scalar values that may exist but are not identified by current evidence, such as hardware version or firmware version. Use null when the value does not apply, or when a boolean direction field explicitly uses null for unknown/not evidenced state.
 
 Example: If `tftp_active` is listed as a recovery method but `network_recovery.default_ip` is null, confidence cannot be higher than `medium`.

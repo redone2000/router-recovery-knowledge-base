@@ -31,8 +31,9 @@ router-recovery-knowledge/
 ### Workflow Stages
 
 1. **Submission**: New profiles are submitted to the `incoming/` directory
-   - Must follow the JSON schema in `schema/recovery_profile.schema.json`
+   - Must be JSONL records following the JSON schema in `schema/recovery_profile.schema.json`
    - Must include source information
+   - Must include `source_evidence` for each claimed recovery method
    - Initial confidence level set by submitter
 
 2. **AI Review**: Automated review using Claude with the prompt in `prompts/claude_profile_review_prompt.md`

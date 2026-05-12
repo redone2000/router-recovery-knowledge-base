@@ -16,8 +16,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 SCHEMA_PATH = REPO_ROOT / "schema" / "recovery_profile.schema.json"
 ENUMS_PATH = REPO_ROOT / "schema" / "enums.md"
 DEFAULT_SCAN_DIRS = ("incoming", "reviewed")
-DERIVED_FIELDS = {"normalized_brand", "normalized_model", "dedupe_key"}
-QUALITY_FIELDS = {"source_evidence"}
+LEGACY_DERIVED_FIELDS = {"normalized_brand", "normalized_model", "dedupe_key"}
 
 
 @dataclass(frozen=True)
@@ -123,9 +122,12 @@ def dedupe_key(profile: dict[str, Any]) -> str:
 def build_normalized_profile(profile: dict[str, Any]) -> dict[str, Any]:
     normalized = dict(profile)
     brand, model, _firmware = normalized_identity(profile)
-    normalized.setdefault("normalized_brand", brand)
-    normalized.setdefault("normalized_model", model)
-    normalized.setdefault("dedupe_key", dedupe_key(profile))
+    metadata = dict(normalized.get("tool_metadata") or {})
+    metadata.setdefault("normalized_vendor", brand)
+    metadata.setdefault("normalized_model", model)
+    metadata.setdefault("dedupe_key", dedupe_key(profile))
+    metadata.setdefault("processed_by", "tools/normalize_profiles.py")
+    normalized["tool_metadata"] = metadata
     return normalized
 
 
