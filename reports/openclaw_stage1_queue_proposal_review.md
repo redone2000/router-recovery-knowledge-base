@@ -15,6 +15,15 @@ OpenClaw complied with the queue-only boundary: no source collection, no profile
 - Did not write any `incoming/`, `reviewed/`, or `final/` data.
 - Preserved ASUS RT-AX86U, NETGEAR R7000, and Xiaomi AX3600 as proposed candidates.
 - Replaced the ambiguous `TP-Link Archer AX3000` marketing-style label with `TP-Link Archer AX55` as an exact-model placeholder for owner review.
+- Owner accepted `TP-Link Archer AX55` as the exact TP-Link first-batch candidate.
+
+## TP-Link AX Planning Note
+
+Owner provided TP-Link FAQ 1482: `https://www.tp-link.com/us/support/faq/1482/`.
+
+Codex reviewed the page as a planning signal only. The page is useful because it explicitly discusses TP-Link Archer AX series recovery at the official support level and includes macOS network setup context. It should not be treated as model-specific `Archer AX55` profile evidence by itself because the page speaks at the Archer AX series level rather than proving AX55 hardware-version-specific behavior.
+
+For real collection, OpenClaw should verify whether the FAQ applies to `Archer AX55` by checking model-specific official download/support pages and any hardware-version-specific notes before creating an incoming profile.
 
 ## Proposed Queue File
 
@@ -24,11 +33,7 @@ This file is not an incoming profile and does not contain recovery methods, IP a
 
 ## Owner Decision Needed
 
-Confirm whether the TP-Link candidate should be:
-
-1. `TP-Link Archer AX55`
-2. another exact TP-Link AX3000-class model
-3. removed from the first batch
+The TP-Link candidate is confirmed as `TP-Link Archer AX55` for queue planning.
 
 ## Next Step
 
