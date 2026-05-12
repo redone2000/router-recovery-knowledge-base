@@ -1,0 +1,158 @@
+# Review Workflow v0.1
+
+## Overview
+The review process ensures all recovery profiles meet quality standards before being made available for general use. Profiles move through three stages: `incoming/` → `reviewed/` → `final/`.
+
+## Roles
+- **Submitter**: Person submitting a new recovery profile
+- **AI Reviewer**: Automated review by Claude using the review prompt
+- **Reviewer**: Human reviewer with domain knowledge
+- **Maintainer**: Senior team member with final approval authority
+
+---
+
+## Stage 1: incoming/ (New Submissions)
+### Purpose
+Receive and triage new profile submissions.
+
+### Entry Criteria
+1. Submitter creates a JSON profile file following the schema in `schema/recovery_profile.schema.json`
+2. File is placed in `incoming/` directory with naming convention: `{id}.json`
+3. All required fields are present
+4. Source information is provided (URL or document in `sources/` directory)
+
+### Processing Steps
+1. **Automated Validation (Triage)**
+   - Run JSON schema validation
+   - If schema validation fails: Notify submitter of errors, profile remains in `incoming/` for fixes
+   - If schema validation passes: Proceed to AI review
+
+2. **AI Review**
+   - Run Claude review using `prompts/claude_profile_review_prompt.md`
+   - Generate review report with issues found and recommended confidence level
+   - Attach report to the profile as `{id}.review.md`
+
+### Exit Criteria
+- Profile passes schema validation
+- AI review report is generated
+
+### Next Step
+Move to human review queue.
+
+---
+
+## Stage 2: Human Review → reviewed/
+### Purpose
+Validate profile accuracy and completeness by a human reviewer.
+
+### Entry Criteria
+- Profile in `incoming/` with AI review report
+- No critical schema errors
+
+### Processing Steps
+1. **Reviewer Assignment**
+   - Reviewer claims profile from review queue
+   - Reviews the AI report and profile content
+
+2. **Validation Checks**
+   - [ ] Verify source credibility and accuracy
+   - [ ] Validate recovery methods are correct for the device
+   - [ ] Confirm confidence level is appropriate
+   - [ ] Check for missing information
+   - [ ] Validate TFTP classification (passive/active) is correct
+   - [ ] Cross-check with existing profiles for the same device if available
+
+3. **Review Decision**
+   - **Approve**: Profile is accurate and complete
+     - Update `reviewed_by` and `reviewed_date` fields
+     - Move profile to `reviewed/` directory
+     - Move AI review report to `reports/` directory
+   
+   - **Request Changes**: Profile needs corrections or additional information
+     - Add review notes to the report
+     - Notify submitter of required changes
+     - Profile remains in `incoming/` for updates
+     - After updates, restart review process from AI review step
+   
+   - **Reject**: Profile has irreparable issues (wrong device, fake information, etc.)
+     - Add rejection reason to the report
+     - Move profile to archive (or delete as per policy)
+     - Notify submitter of rejection
+
+### Exit Criteria
+- Profile has been reviewed and approved by a human reviewer
+- All required fields are complete
+- Confidence level is appropriate for the source quality
+
+### Next Step
+Move to final approval queue.
+
+---
+
+## Stage 3: Final Approval → final/
+### Purpose
+Final quality check before profile is made generally available.
+
+### Entry Criteria
+- Profile in `reviewed/` directory
+- Has passed human review
+
+### Processing Steps
+1. **Maintainer Review**
+   - Maintainer performs final spot check
+   - Verifies consistency with other profiles from the same vendor
+   - Confirms no known conflicting information exists
+   - Validates that `verified` confidence level has sufficient evidence
+
+2. **Final Decision**
+   - **Approve**: Profile is ready for general use
+     - Move profile to `final/` directory
+     - Index profile in the knowledge base search system
+   
+   - **Request Changes**: Additional changes needed
+     - Send back to reviewer with notes
+     - Profile moves back to `reviewed/` for updates
+   
+   - **Reject**: Profile does not meet quality standards
+     - Send back to `incoming/` for rework or archive
+
+### Exit Criteria
+- Profile is approved by a maintainer
+- Profile is moved to `final/` directory
+
+### Final State
+Profiles in `final/` are considered:
+- Accurate and reliable
+- Ready for use in production tools
+- Available for public querying
+
+---
+
+## Exception Handling
+### Conflicting Profiles
+If multiple profiles exist for the same device:
+1. Compare sources and confidence levels
+2. Prioritize profiles with higher confidence and more recent sources
+3. Merge information where appropriate
+4. Mark older/lower confidence profiles as deprecated
+
+### Profile Updates
+When updating an existing profile:
+1. Submit updated version to `incoming/` as a new submission
+2. Reference the existing profile ID in the submission notes
+3. Go through full review process
+4. Upon approval, replace the old profile in `final/` and archive the old version
+
+### Removal Requests
+If a profile is found to be incorrect:
+1. Submit a removal request with evidence
+2. Reviewer validates the issue
+3. If confirmed: Mark profile as deprecated and remove from `final/`
+4. Add note explaining why the profile was removed
+
+---
+
+## SLAs (Service Level Agreements)
+- AI review: < 1 hour from submission
+- Initial human review: < 3 business days
+- Final approval: < 2 business days after human review

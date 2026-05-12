@@ -1,0 +1,253 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/your-org/router-recovery-knowledge/schema/recovery_profile.schema.json",
+  "title": "Router Recovery Profile",
+  "description": "Schema v0.1 for router/network device recovery profiles",
+  "type": "object",
+  "required": [
+    "id",
+    "vendor",
+    "model",
+    "recovery_methods",
+    "source_type",
+    "confidence_level",
+    "submitted_date"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the profile (format: vendor-model-firmware-version)",
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "vendor": {
+      "type": "string",
+      "description": "Device manufacturer name"
+    },
+    "model": {
+      "type": "string",
+      "description": "Device model number/name"
+    },
+    "firmware_version": {
+      "type": ["string", "null"],
+      "description": "Specific firmware version this profile applies to, null if applies to all versions"
+    },
+    "device_type": {
+      "type": ["string", "null"],
+      "description": "Type of device (router, switch, access_point, firewall, etc.)",
+      "default": "router"
+    },
+    "recovery_family": {
+      "type": ["string", "null"],
+      "description": "Family of recovery mechanisms this device uses (from enums.md)"
+    },
+    "recovery_methods": {
+      "type": "array",
+      "description": "List of supported recovery methods (from enums.md)",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "recovery_details": {
+      "type": "object",
+      "description": "Detailed information for each recovery method",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "steps": {
+            "type": "array",
+            "description": "Step-by-step recovery instructions",
+            "items": {
+              "type": "string"
+            }
+          },
+          "timeout": {
+            "type": ["integer", "null"],
+            "description": "Time window for recovery activation in seconds"
+          },
+          "notes": {
+            "type": ["string", "null"],
+            "description": "Additional notes about this recovery method"
+          }
+        }
+      }
+    },
+    "default_credentials": {
+      "type": "array",
+      "description": "List of default credential pairs",
+      "items": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "service": {
+            "type": ["string", "null"],
+            "description": "Service this credential applies to (web, ssh, telnet, etc.)"
+          }
+        },
+        "required": ["username", "password"]
+      }
+    },
+    "uart_details": {
+      "type": "object",
+      "description": "UART serial recovery details",
+      "properties": {
+        "baud_rate": {
+          "type": ["integer", "null"],
+          "default": 115200
+        },
+        "data_bits": {
+          "type": ["integer", "null"],
+          "default": 8
+        },
+        "stop_bits": {
+          "type": ["integer", "null"],
+          "default": 1
+        },
+        "parity": {
+          "type": ["string", "null"],
+          "default": "none"
+        },
+        "flow_control": {
+          "type": ["string", "null"],
+          "default": "none"
+        },
+        "boot_interrupt_string": {
+          "type": ["string", "null"],
+          "description": "String/key combination to interrupt boot process"
+        },
+        "recovery_command": {
+          "type": ["string", "null"],
+          "description": "Command to initiate recovery from UART prompt"
+        }
+      }
+    },
+    "network_recovery": {
+      "type": "object",
+      "description": "Network-based recovery details",
+      "properties": {
+        "passive_tftp_from_router": {
+          "type": ["boolean", "null"],
+          "description": "Router acts as TFTP server, user connects to download firmware"
+        },
+        "active_tftp_to_router": {
+          "type": ["boolean", "null"],
+          "description": "Router acts as TFTP client, user runs TFTP server to upload firmware"
+        },
+        "default_ip": {
+          "type": ["string", "null"],
+          "description": "Default IP address of device during recovery mode"
+        },
+        "default_subnet": {
+          "type": ["string", "null"],
+          "description": "Default subnet mask during recovery mode"
+        },
+        "tftp_filename": {
+          "type": ["string", "null"],
+          "description": "Expected firmware filename for TFTP recovery"
+        },
+        "listen_port": {
+          "type": ["integer", "null"],
+          "description": "Port used for recovery (usually 69 for TFTP)"
+        }
+      }
+    },
+    "web_recovery": {
+      "type": "object",
+      "description": "Web UI-based recovery details",
+      "properties": {
+        "default_url": {
+          "type": ["string", "null"],
+          "description": "Default web UI URL during recovery mode"
+        },
+        "upload_field_name": {
+          "type": ["string", "null"],
+          "description": "HTML form field name for firmware upload"
+        },
+        "expected_firmware_extension": {
+          "type": ["string", "null"],
+          "description": "Expected file extension for firmware files"
+        }
+      }
+    },
+    "button_recovery": {
+      "type": "object",
+      "description": "Hardware button-based recovery details",
+      "properties": {
+        "button_name": {
+          "type": ["string", "null"],
+          "description": "Name of the recovery button (reset, wps, etc.)"
+        },
+        "press_duration_seconds": {
+          "type": ["integer", "null"],
+          "description": "How long to hold the button during power on"
+        },
+        "led_indicator": {
+          "type": ["string", "null"],
+          "description": "LED behavior indicating recovery mode is active"
+        }
+      }
+    },
+    "source_type": {
+      "type": "string",
+      "description": "Type of source this information comes from (from enums.md)"
+    },
+    "source_url": {
+      "type": ["string", "null"],
+      "description": "URL of the original source (if applicable)"
+    },
+    "source_document": {
+      "type": ["string", "null"],
+      "description": "Path to local source document in sources/ directory"
+    },
+    "confidence_level": {
+      "type": "string",
+      "description": "Confidence level of this profile's accuracy (from enums.md)"
+    },
+    "submitted_by": {
+      "type": ["string", "null"],
+      "description": "Name/ID of person who submitted this profile"
+    },
+    "submitted_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date when this profile was submitted"
+    },
+    "reviewed_by": {
+      "type": ["string", "null"],
+      "description": "Name/ID of person who reviewed this profile"
+    },
+    "reviewed_date": {
+      "type": ["string", "null"],
+      "format": "date",
+      "description": "Date when this profile was reviewed"
+    },
+    "review_notes": {
+      "type": ["string", "null"],
+      "description": "Notes from the review process"
+    },
+    "tags": {
+      "type": "array",
+      "description": "Additional tags for categorization",
+      "items": {
+        "type": "string"
+      }
+    },
+    "notes": {
+      "type": ["string", "null"],
+      "description": "General notes about this device and recovery process"
+    },
+    "known_issues": {
+      "type": "array",
+      "description": "Known issues or limitations with this recovery method",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": false
+}
