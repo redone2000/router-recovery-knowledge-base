@@ -52,6 +52,8 @@ SOURCE_INDEX_REQUIRED = {
     "profile_generation_allowed",
     "profile_generation_blockers",
     "recovery_methods_claimed",
+    "tftp_direction_claimed",
+    "contains_macos_guidance",
     "evidence_snippets",
     "evidence_gaps",
     "conflicts",
@@ -110,6 +112,13 @@ APPLICABILITY_SCOPES = {
     "hardware_version_level",
     "firmware_version_level",
     "unknown",
+}
+
+TFTP_DIRECTION_CLAIMS = {
+    "tftp_passive",
+    "tftp_active",
+    "unknown",
+    None,
 }
 
 NON_PROFILE_GENERATING_SCOPES = {
@@ -303,6 +312,14 @@ def validate_source_index_row(
     invalid_methods = sorted(set(str(item) for item in methods) - recovery_methods)
     for item in invalid_methods:
         issues.append(f"invalid recovery_methods_claimed value: {item}")
+
+    if row.get("tftp_direction_claimed") not in TFTP_DIRECTION_CLAIMS:
+        issues.append(f"invalid tftp_direction_claimed: {row.get('tftp_direction_claimed')}")
+    if row.get("tftp_direction_claimed") in {"tftp_passive", "tftp_active"} and row.get("tftp_direction_claimed") not in methods:
+        issues.append("tftp_direction_claimed must also appear in recovery_methods_claimed")
+
+    if not isinstance(row.get("contains_macos_guidance"), bool):
+        issues.append("contains_macos_guidance must be boolean")
 
     snippets = ensure_list(row, "evidence_snippets", issues)
     if stage0:
