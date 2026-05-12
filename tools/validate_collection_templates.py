@@ -53,6 +53,22 @@ SOURCE_INDEX_REQUIRED = {
     "extracted_date",
 }
 
+CANDIDATE_QUEUE_REQUIRED = {
+    "queue_id",
+    "queue_status",
+    "status",
+    "priority",
+    "vendor",
+    "model",
+    "hardware_version_hint",
+    "firmware_version_hint",
+    "selection_reason",
+    "expected_source_types",
+    "risk_notes",
+    "prohibited_profile_fields",
+    "disallowed_actions",
+}
+
 WORK_QUEUE_REQUIRED_SAFETY = {
     "guess_tftp_direction",
     "access_router_ip",
@@ -73,6 +89,32 @@ PROHIBITED_PROFILE_FIELDS = {
     "network_recovery",
     "source_evidence",
     "confidence_level",
+}
+
+CANDIDATE_REQUIRED_DISALLOWED = {
+    "web_fetching",
+    "source_collection",
+    "page_opening",
+    "search",
+    "downloading",
+    "guess_tftp_direction",
+    "infer_default_ip",
+    "infer_firmware_filename",
+    "access_router_ip",
+    "send_tftp_udp_packets",
+    "network_scanning",
+    "write_incoming",
+    "write_reviewed",
+    "write_final",
+}
+
+CANDIDATE_FORBIDDEN_PROFILE_KEYS = {
+    "recovery_methods",
+    "network_recovery",
+    "source_evidence",
+    "confidence_level",
+    "source_url",
+    "source_document",
 }
 
 IPV4_RE = re.compile(r"\b(?:\d{1,3}\.){3}\d{1,3}\b")
@@ -197,19 +239,64 @@ def validate_source_index_row(row: dict[str, Any], source_types: set[str], recov
     return issues
 
 
-def validate_file(path: Path, kind: str, stage0: bool) -> list[Issue]:
+def validate_candidate_queue_row(row: dict[str, Any], source_types: set[str]) -> list[str]:
+    issues: list[str] = []
+    missing = sorted(CANDIDATE_QUEUE_REQUIRED - set(row))
+    for field in missing:
+        issues.append(f"missing required field: {field}")
+
+    forbidden_keys = sorted(CANDIDATE_FORBIDDEN_PROFILE_KEYS & set(row))
+    for field in forbidden_keys:
+        issues.append(f"candidate queue must not populate profile field: {field}")
+
+    if row.get("queue_status") != "proposed_only":
+        issues.append("candidate queue queue_status must be proposed_only")
+    if row.get("status") != "proposed_candidate":
+        issues.append("candidate queue status must be proposed_candidate")
+
+    priority = row.get("priority")
+    if not isinstance(priority, int) or not 1 <= priority <= 5:
+        issues.append("priority must be an integer from 1 to 5")
+
+    expected_source_types = ensure_list(row, "expected_source_types", issues)
+    invalid_source_types = sorted(set(str(item) for item in expected_source_types) - source_types)
+    for item in invalid_source_types:
+        issues.append(f"invalid expected_source_types value: {item}")
+
+    disallowed_actions = set(str(item) for item in ensure_list(row, "disallowed_actions", issues))
+    missing_disallowed = sorted(CANDIDATE_REQUIRED_DISALLOWED - disallowed_actions)
+    for item in missing_disallowed:
+        issues.append(f"missing required disallowed action: {item}")
+
+    prohibited_fields = set(str(item) for item in ensure_list(row, "prohibited_profile_fields", issues))
+    missing_profile_blocks = sorted(PROHIBITED_PROFILE_FIELDS - prohibited_fields)
+    for item in missing_profile_blocks:
+        issues.append(f"missing prohibited profile field marker: {item}")
+
+    ensure_list(row, "risk_notes", issues)
+
+    if has_private_ip(row):
+        issues.append("candidate queue contains a private, loopback, or link-local IP literal")
+
+    return issues
+
+
+def validate_file(path: Path, kind: str, mode: str) -> list[Issue]:
     enums = load_enums()
     source_types = enums.get("source_type", set())
     recovery_methods = enums.get("recovery_method", set())
     issues: list[Issue] = []
     rows = 0
+    stage0 = mode == "stage0-template"
 
     for record in iter_jsonl(path):
         rows += 1
         if record.json_error or record.data is None:
             issues.append((str(record.path), record.line_number, f"invalid JSONL: {record.json_error}"))
             continue
-        if kind == "work_queue":
+        if kind == "candidate_queue":
+            row_issues = validate_candidate_queue_row(record.data, source_types)
+        elif kind == "work_queue":
             row_issues = validate_work_queue_row(record.data, source_types, stage0)
         else:
             row_issues = validate_source_index_row(record.data, source_types, recovery_methods, stage0)
@@ -226,21 +313,30 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--work-queue", default="data/work_queue.template.jsonl", help="Work queue JSONL file.")
     parser.add_argument("--source-index", default="data/source_index.template.jsonl", help="Source index JSONL file.")
-    parser.add_argument("--stage0", action="store_true", default=True, help="Enforce Stage 0 placeholder-only rules.")
+    parser.add_argument(
+        "--mode",
+        choices=("stage0-template", "stage1-proposed"),
+        default="stage0-template",
+        help="Validation mode.",
+    )
     args = parser.parse_args()
 
     work_queue = repo_path(args.work_queue)
     source_index = repo_path(args.source_index)
     issues: list[Issue] = []
 
-    for path, kind in ((work_queue, "work_queue"), (source_index, "source_index")):
+    targets = [(work_queue, "candidate_queue" if args.mode == "stage1-proposed" else "work_queue")]
+    if args.mode == "stage0-template":
+        targets.append((source_index, "source_index"))
+
+    for path, kind in targets:
         if not path.exists():
             issues.append((str(path), 0, "file does not exist"))
             continue
         if REPO_ROOT not in path.parents:
             issues.append((str(path), 0, "file must be inside this repository"))
             continue
-        issues.extend(validate_file(path, kind, stage0=args.stage0))
+        issues.extend(validate_file(path, kind, mode=args.mode))
 
     if issues:
         print(f"Found {len(issues)} collection template issue(s):")
@@ -248,7 +344,7 @@ def main() -> int:
             print(f"{path}:{line_number}: {message}")
         return 1
 
-    print("Collection templates passed validation.")
+    print(f"Collection {args.mode} files passed validation.")
     return 0
 
 
