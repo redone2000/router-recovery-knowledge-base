@@ -11,7 +11,7 @@ All recovery profiles MUST include the following fields. Missing any of these fi
 
 | Field | Description |
 |-------|-------------|
-| `id` | Unique identifier in format: `{vendor}-{model}-{firmware-version}` (all lowercase, hyphen-separated) |
+| `id` | Unique identifier in format: `{vendor}-{model}-{hardware-version}-{firmware-version}` (all lowercase, hyphen-separated) |
 | `vendor` | Device manufacturer name (e.g., "tp-link", "cisco", "mikrotik") |
 | `model` | Exact device model number/name |
 | `hardware_version` | Hardware revision, or `unknown` if sources do not identify it |

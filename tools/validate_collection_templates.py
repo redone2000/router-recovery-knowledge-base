@@ -18,6 +18,7 @@ from validate_profiles import validate_date
 WORK_QUEUE_REQUIRED = {
     "queue_id",
     "status",
+    "queue_status",
     "priority",
     "vendor",
     "model",
@@ -29,6 +30,7 @@ WORK_QUEUE_REQUIRED = {
     "disallowed_actions",
     "evidence_requirements",
     "stop_conditions",
+    "prohibited_profile_fields",
     "owner_notes",
 }
 
@@ -64,6 +66,13 @@ WORK_QUEUE_REQUIRED_STOPS = {
 
 SOURCE_INDEX_REQUIRED_GAP_EXAMPLES = {
     "tftp_direction_unclear",
+}
+
+PROHIBITED_PROFILE_FIELDS = {
+    "recovery_methods",
+    "network_recovery",
+    "source_evidence",
+    "confidence_level",
 }
 
 IPV4_RE = re.compile(r"\b(?:\d{1,3}\.){3}\d{1,3}\b")
@@ -106,6 +115,10 @@ def validate_work_queue_row(row: dict[str, Any], source_types: set[str], stage0:
 
     if stage0 and row.get("status") != "template_only":
         issues.append("Stage 0 work queue status must be template_only")
+    if stage0 and row.get("queue_status") != "template_only":
+        issues.append("Stage 0 work queue queue_status must be template_only")
+    if not stage0 and row.get("queue_status") != "proposed_only":
+        issues.append("Stage 1 queue-only queue_status must be proposed_only")
 
     if not isinstance(row.get("priority"), int):
         issues.append("priority must be an integer")
@@ -132,6 +145,11 @@ def validate_work_queue_row(row: dict[str, Any], source_types: set[str], stage0:
 
     if has_private_ip(row):
         issues.append("template contains a private, loopback, or link-local IP literal")
+
+    prohibited_fields = set(str(item) for item in ensure_list(row, "prohibited_profile_fields", issues))
+    missing_profile_blocks = sorted(PROHIBITED_PROFILE_FIELDS - prohibited_fields)
+    for item in missing_profile_blocks:
+        issues.append(f"missing prohibited profile field marker: {item}")
 
     return issues
 

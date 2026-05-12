@@ -18,7 +18,7 @@
   "properties": {
     "id": {
       "type": "string",
-      "description": "Unique identifier for the profile (format: vendor-model-firmware-version)",
+      "description": "Unique identifier for the profile (format: vendor-model-hardware-version-firmware-version)",
       "pattern": "^[a-z0-9-]+$"
     },
     "vendor": {
@@ -92,6 +92,20 @@
         "properties": {
           "source_type": {
             "type": "string",
+            "enum": [
+              "official_documentation",
+              "vendor_support_forum",
+              "verified_community_guide",
+              "community_forum_post",
+              "personal_testing",
+              "security_research_paper",
+              "firmware_analysis",
+              "bootloader_dump",
+              "third_party_repository",
+              "social_media",
+              "ai_generated",
+              "unknown"
+            ],
             "description": "Type of source this evidence comes from (from enums.md)"
           },
           "source_url": {

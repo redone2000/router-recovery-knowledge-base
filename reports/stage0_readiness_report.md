@@ -57,3 +57,16 @@ Results:
 Proceed to Claude Code final Stage 0 review.
 
 Do not start real collection yet. If Claude Code approves, the next OpenClaw task should be limited to proposing a Stage 1 queue with 3-5 candidate models, still without fetching sources.
+
+## Claude Code Final Review Outcome
+
+Claude Code returned `APPROVE_STAGE1_QUEUE_ONLY`.
+
+Codex accepted the approval with strict limits: Stage 1 may initialize a candidate queue only. It may not fetch web pages, collect source material, write `incoming/`, write `reviewed/`, write `final/`, or populate recovery methods, IP addresses, filenames, confidence, or evidence fields.
+
+Follow-up governance patches applied after review:
+
+- Updated profile ID documentation to include hardware version.
+- Bound `source_evidence[].source_type` to the current `source_type` enum in schema.
+- Added `queue_status` and `prohibited_profile_fields` markers to queue templates.
+- Updated collection template validation to enforce the new queue-only markers.
