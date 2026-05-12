@@ -222,6 +222,11 @@
           "type": ["string", "null"],
           "description": "Static client CIDR or prefix length required during recovery, if explicitly evidenced"
         },
+        "client_ip_assignment": {
+          "type": ["string", "null"],
+          "enum": ["static", "dhcp", "unknown", null],
+          "description": "Whether the client should use static IP or DHCP during the recovery upload phase"
+        },
         "tftp_filename": {
           "type": ["string", "null"],
           "description": "Expected firmware filename for TFTP recovery"
@@ -304,6 +309,10 @@
       "type": "object",
       "description": "Hardware button-based recovery details",
       "properties": {
+        "entry_method": {
+          "type": ["string", "null"],
+          "description": "Machine-readable recovery entry method, such as reset_hold_power_on"
+        },
         "button_name": {
           "type": ["string", "null"],
           "description": "Name of the recovery button (reset, wps, etc.)"

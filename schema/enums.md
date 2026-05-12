@@ -115,3 +115,23 @@ Observed configuration state after recovery.
 | `factory_reset` | Device was observed to return to factory-default-like state |
 | `mixed` | Both retained and factory-reset-like outcomes have been observed |
 | `unknown` | Configuration retention outcome is not known or not evidenced |
+
+## 9. client_ip_assignment
+
+How the user's computer should obtain an IP address during the recovery upload phase.
+
+| Value | Description |
+|-------|-------------|
+| `static` | User should manually configure a static IP address before recovery upload |
+| `dhcp` | User should use DHCP during recovery upload |
+| `unknown` | IP assignment mode is not known or not evidenced |
+
+## 10. button_recovery.entry_method
+
+Machine-readable recovery entry method values should be stable lowercase identifiers.
+
+| Value | Description |
+|-------|-------------|
+| `reset_hold_power_on` | Hold reset while powering on the device |
+| `wps_hold_power_on` | Hold WPS while powering on the device |
+| `unknown` | Entry method is not known or not evidenced |
