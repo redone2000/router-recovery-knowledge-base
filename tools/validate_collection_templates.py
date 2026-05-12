@@ -69,6 +69,19 @@ CANDIDATE_QUEUE_REQUIRED = {
     "disallowed_actions",
 }
 
+SOURCE_PLAN_REQUIRED = {
+    "queue_id",
+    "vendor",
+    "model",
+    "source_plan_status",
+    "expected_source_types",
+    "future_search_queries",
+    "must_verify",
+    "stop_conditions",
+    "disallowed_outputs",
+    "risk_notes",
+}
+
 WORK_QUEUE_REQUIRED_SAFETY = {
     "guess_tftp_direction",
     "access_router_ip",
@@ -115,6 +128,16 @@ CANDIDATE_FORBIDDEN_PROFILE_KEYS = {
     "confidence_level",
     "source_url",
     "source_document",
+}
+
+SOURCE_PLAN_REQUIRED_DISALLOWED_OUTPUTS = {
+    "recovery_methods",
+    "network_recovery",
+    "source_evidence",
+    "confidence_level",
+    "IP addresses",
+    "firmware filenames",
+    "TFTP direction",
 }
 
 IPV4_RE = re.compile(r"\b(?:\d{1,3}\.){3}\d{1,3}\b")
@@ -281,6 +304,40 @@ def validate_candidate_queue_row(row: dict[str, Any], source_types: set[str]) ->
     return issues
 
 
+def validate_source_plan_row(row: dict[str, Any], source_types: set[str]) -> list[str]:
+    issues: list[str] = []
+    missing = sorted(SOURCE_PLAN_REQUIRED - set(row))
+    for field in missing:
+        issues.append(f"missing required field: {field}")
+
+    forbidden_keys = sorted(CANDIDATE_FORBIDDEN_PROFILE_KEYS & set(row))
+    for field in forbidden_keys:
+        issues.append(f"source plan must not populate profile field: {field}")
+
+    if row.get("source_plan_status") != "proposed_only":
+        issues.append("source plan status must be proposed_only")
+
+    expected_source_types = ensure_list(row, "expected_source_types", issues)
+    invalid_source_types = sorted(set(str(item) for item in expected_source_types) - source_types)
+    for item in invalid_source_types:
+        issues.append(f"invalid expected_source_types value: {item}")
+
+    ensure_list(row, "future_search_queries", issues)
+    ensure_list(row, "must_verify", issues)
+    ensure_list(row, "stop_conditions", issues)
+    ensure_list(row, "risk_notes", issues)
+
+    disallowed_outputs = set(str(item) for item in ensure_list(row, "disallowed_outputs", issues))
+    missing_disallowed = sorted(SOURCE_PLAN_REQUIRED_DISALLOWED_OUTPUTS - disallowed_outputs)
+    for item in missing_disallowed:
+        issues.append(f"missing required disallowed output: {item}")
+
+    if has_private_ip(row):
+        issues.append("source plan contains a private, loopback, or link-local IP literal")
+
+    return issues
+
+
 def validate_file(path: Path, kind: str, mode: str) -> list[Issue]:
     enums = load_enums()
     source_types = enums.get("source_type", set())
@@ -296,6 +353,8 @@ def validate_file(path: Path, kind: str, mode: str) -> list[Issue]:
             continue
         if kind == "candidate_queue":
             row_issues = validate_candidate_queue_row(record.data, source_types)
+        elif kind == "source_plan":
+            row_issues = validate_source_plan_row(record.data, source_types)
         elif kind == "work_queue":
             row_issues = validate_work_queue_row(record.data, source_types, stage0)
         else:
@@ -325,7 +384,11 @@ def main() -> int:
     source_index = repo_path(args.source_index)
     issues: list[Issue] = []
 
-    targets = [(work_queue, "candidate_queue" if args.mode == "stage1-proposed" else "work_queue")]
+    if args.mode == "stage1-proposed" and "source_plan" in work_queue.name:
+        work_queue_kind = "source_plan"
+    else:
+        work_queue_kind = "candidate_queue" if args.mode == "stage1-proposed" else "work_queue"
+    targets = [(work_queue, work_queue_kind)]
     if args.mode == "stage0-template":
         targets.append((source_index, "source_index"))
 
