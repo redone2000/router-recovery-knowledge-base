@@ -1,0 +1,31 @@
+{
+  "generated_at": "2026-05-12T12:58:51.192602+00:00",
+  "input_files": [
+    "/Users/YiYuan/Projects/router-recovery-knowledge/incoming/asus-rt-ac86u-unknown-unknown.jsonl",
+    "/Users/YiYuan/Projects/router-recovery-knowledge/incoming/netgear-r7000-unknown-unknown.jsonl"
+  ],
+  "profile_count": 2,
+  "valid_json_object_count": 2,
+  "malformed_record_count": 0,
+  "brand_count": 2,
+  "model_count": 2,
+  "brands": {
+    "ASUS": 1,
+    "NETGEAR": 1
+  },
+  "models_by_brand": {
+    "ASUS": {
+      "RT-AC86U": 1
+    },
+    "NETGEAR": {
+      "R7000": 1
+    }
+  },
+  "confidence_distribution": {
+    "medium": 2
+  },
+  "missing_fields": {},
+  "duplicate_profile_record_count": 0,
+  "conflict_count": 0,
+  "conflicts": []
+}

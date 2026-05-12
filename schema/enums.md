@@ -94,3 +94,24 @@ For TFTP direction booleans, `null` means direction is unknown or not evidenced.
 | `active` | Current profile candidate |
 | `deprecated` | Profile is outdated and should not be used for new guidance |
 | `superseded` | Profile has been replaced by another profile |
+
+## 7. tftp_port_behavior
+
+TFTP transfer-port behavior observed or documented during recovery.
+
+| Value | Description |
+|-------|-------------|
+| `standard_ephemeral` | Server switches from port 69 to a separate transfer port after request negotiation |
+| `fixed_server_port` | Server continues sending ACK/data from port 69 throughout transfer |
+| `unknown` | Transfer-port behavior is not known or not evidenced |
+
+## 8. config_retention_observed
+
+Observed configuration state after recovery.
+
+| Value | Description |
+|-------|-------------|
+| `retained` | Existing configuration was observed to remain after recovery |
+| `factory_reset` | Device was observed to return to factory-default-like state |
+| `mixed` | Both retained and factory-reset-like outcomes have been observed |
+| `unknown` | Configuration retention outcome is not known or not evidenced |

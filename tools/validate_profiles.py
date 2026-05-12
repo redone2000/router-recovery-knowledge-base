@@ -149,16 +149,28 @@ def validate_profile(profile: dict[str, Any], schema: dict[str, Any], enums: dic
 
     network_recovery = profile.get("network_recovery")
     if isinstance(network_recovery, dict):
-        for field in ("default_ip",):
+        for field in ("default_ip", "client_static_ip"):
             if not validate_ip(network_recovery.get(field)):
                 errors.append(f"invalid IP address in network_recovery.{field}: {network_recovery.get(field)}")
+        passive = network_recovery.get("passive_tftp_from_router")
+        active = network_recovery.get("active_tftp_to_router")
+        if passive is True and active is True:
+            errors.append("network_recovery.passive_tftp_from_router and active_tftp_to_router cannot both be true")
         if isinstance(methods, list) and ("tftp_active" in methods or "tftp_passive" in methods):
-            passive = network_recovery.get("passive_tftp_from_router")
-            active = network_recovery.get("active_tftp_to_router")
             if passive is None and active is None:
                 errors.append("TFTP recovery method listed but both TFTP direction fields are unknown")
+            if "tftp_passive" in methods and passive is not True:
+                errors.append("tftp_passive listed but network_recovery.passive_tftp_from_router is not true")
+            if "tftp_active" in methods and active is not True:
+                errors.append("tftp_active listed but network_recovery.active_tftp_to_router is not true")
     elif isinstance(methods, list) and ("tftp_active" in methods or "tftp_passive" in methods):
         errors.append("TFTP recovery method listed but network_recovery is missing")
+
+    if confidence in {"high", "verified"}:
+        if profile.get("hardware_version") == "unknown":
+            errors.append("confidence_level cannot be high or verified when hardware_version is unknown")
+        if profile.get("firmware_version") == "unknown":
+            errors.append("confidence_level cannot be high or verified when firmware_version is unknown")
 
     method_detail_requirements = {
         "uart_serial": "uart_details",

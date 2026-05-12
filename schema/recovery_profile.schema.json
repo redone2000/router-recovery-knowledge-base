@@ -214,6 +214,14 @@
           "type": ["string", "null"],
           "description": "Default subnet mask during recovery mode"
         },
+        "client_static_ip": {
+          "type": ["string", "null"],
+          "description": "Static client IP address required on the user's computer during recovery, if explicitly evidenced"
+        },
+        "client_static_cidr": {
+          "type": ["string", "null"],
+          "description": "Static client CIDR or prefix length required during recovery, if explicitly evidenced"
+        },
         "tftp_filename": {
           "type": ["string", "null"],
           "description": "Expected firmware filename for TFTP recovery"
@@ -221,6 +229,56 @@
         "listen_port": {
           "type": ["integer", "null"],
           "description": "Port used for recovery (usually 69 for TFTP)"
+        },
+        "required_lan_port": {
+          "type": ["string", "null"],
+          "description": "Physical LAN port required for recovery, if explicitly evidenced"
+        },
+        "rescue_ping_ttl": {
+          "type": ["integer", "null"],
+          "description": "Observed or documented ping TTL while device is in recovery mode"
+        }
+      }
+    },
+    "tftp_details": {
+      "type": "object",
+      "description": "TFTP protocol behavior details observed or documented for this recovery profile",
+      "properties": {
+        "mode": {
+          "type": ["string", "null"],
+          "description": "TFTP transfer mode, such as octet"
+        },
+        "filename_required": {
+          "type": ["boolean", "null"],
+          "description": "Whether the router requires an exact firmware filename. Null means unknown."
+        },
+        "accepted_filename_examples": {
+          "type": "array",
+          "description": "Observed or documented filenames accepted by the recovery service",
+          "items": {
+            "type": "string"
+          }
+        },
+        "server_uses_ephemeral_port": {
+          "type": ["boolean", "null"],
+          "description": "Whether the router switches from port 69 to an ephemeral transfer port after WRQ/RRQ. Null means unknown."
+        },
+        "port_behavior": {
+          "type": ["string", "null"],
+          "enum": ["standard_ephemeral", "fixed_server_port", "unknown", null],
+          "description": "Observed TFTP server transfer-port behavior"
+        },
+        "ack_source_port": {
+          "type": ["integer", "null"],
+          "description": "Observed source port for TFTP ACK packets, if known"
+        },
+        "block_rollover_observed": {
+          "type": ["boolean", "null"],
+          "description": "Whether block number rollover was observed during a successful transfer"
+        },
+        "client_behavior_requirement": {
+          "type": ["string", "null"],
+          "description": "Client-side compatibility requirement, such as following the server ACK source port"
         }
       }
     },
@@ -254,9 +312,90 @@
           "type": ["integer", "null"],
           "description": "How long to hold the button during power on"
         },
+        "press_duration_seconds_min": {
+          "type": ["integer", "null"],
+          "description": "Minimum observed or documented button hold duration during power-on recovery entry"
+        },
+        "press_duration_seconds_max": {
+          "type": ["integer", "null"],
+          "description": "Maximum observed or documented button hold duration during power-on recovery entry"
+        },
         "led_indicator": {
           "type": ["string", "null"],
           "description": "LED behavior indicating recovery mode is active"
+        }
+      }
+    },
+    "firmware_details": {
+      "type": "object",
+      "description": "Firmware artifact details for recovery",
+      "properties": {
+        "file_type": {
+          "type": ["string", "null"],
+          "description": "Required or observed firmware file type or extension"
+        },
+        "official_format": {
+          "type": ["boolean", "null"],
+          "description": "Whether evidence indicates the firmware file is an official vendor format"
+        },
+        "known_successful_versions": {
+          "type": "array",
+          "description": "Firmware versions observed or documented as successfully recovered",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "post_upload_behavior": {
+      "type": "object",
+      "description": "Required behavior after firmware upload completes",
+      "properties": {
+        "wait_seconds": {
+          "type": ["integer", "null"],
+          "description": "Observed or documented wait time after upload before next action"
+        },
+        "power_cycle_required": {
+          "type": ["boolean", "null"],
+          "description": "Whether a manual power cycle is required after upload. Null means unknown."
+        },
+        "dhcp_after_power_cycle": {
+          "type": ["boolean", "null"],
+          "description": "Whether the client should return to DHCP after post-upload power cycle"
+        },
+        "gateway_ip_as_admin_url": {
+          "type": ["boolean", "null"],
+          "description": "Whether the DHCP gateway IP should be used as the admin URL after recovery"
+        },
+        "user_warning_after_upload": {
+          "type": ["string", "null"],
+          "description": "User-facing warning to show after upload completes"
+        }
+      }
+    },
+    "observed_outcomes": {
+      "type": "object",
+      "description": "Observed recovery outcomes from testing or documented reports",
+      "properties": {
+        "config_retention_observed": {
+          "type": ["string", "null"],
+          "enum": ["retained", "factory_reset", "mixed", "unknown", null],
+          "description": "Observed configuration retention outcome"
+        },
+        "factory_reset_observed": {
+          "type": ["boolean", "null"],
+          "description": "Whether factory-reset-like behavior was observed after recovery"
+        },
+        "firmware_downgrade_supported": {
+          "type": ["boolean", "null"],
+          "description": "Whether firmware downgrade or overwrite recovery was observed"
+        },
+        "known_recovery_variants": {
+          "type": "array",
+          "description": "Known observed recovery outcome variants",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
