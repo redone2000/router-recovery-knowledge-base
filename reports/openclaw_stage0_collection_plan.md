@@ -61,9 +61,15 @@ Future Stage 1 collection may use these public source classes, in priority order
 | `source_url` | Public source URL, or placeholder in templates |
 | `source_document` | Local source document path or placeholder |
 | `vendor` | Vendor covered by the source |
-| `model` | Model covered by the source |
+| `applicability_scope` | Source applicability level: `vendor_level`, `series_level`, `model_level`, `hardware_version_level`, `firmware_version_level`, or `unknown` |
+| `series` | Series/family named by the source, such as an AX series, or null when not applicable |
+| `model` | Model covered by the source, or `unknown` when the source is not model-specific |
 | `hardware_version` | Hardware revision stated by source, or `unknown` |
 | `firmware_version` | Firmware version stated by source, or `unknown` |
+| `applies_to_candidate_model` | Whether this source directly applies to the candidate model: true, false, or `unknown` |
+| `applicability_notes` | Notes explaining source scope and any model/hardware/firmware applicability uncertainty |
+| `profile_generation_allowed` | Boolean gate for whether this source can contribute directly to profile generation |
+| `profile_generation_blockers` | Reasons this source must not generate a profile yet |
 | `recovery_methods_claimed` | Existing `recovery_method` enum values claimed by source |
 | `evidence_snippets` | Placeholder or short attributable evidence snippets |
 | `evidence_gaps` | Missing or ambiguous facts that block profile confidence |
@@ -75,6 +81,8 @@ Future Stage 1 collection may use these public source classes, in priority order
 
 Stop and mark `evidence_gap` when any of these conditions appears:
 
+- source is vendor-level or series-level and not model-specific
+- source applicability to the candidate model is unknown
 - TFTP direction unclear
 - hardware version mentioned but not mapped
 - firmware filename missing
@@ -89,6 +97,7 @@ Stop and mark `evidence_gap` when any of these conditions appears:
 Before a future incoming profile may be generated:
 
 - vendor and model are identified
+- source applicability is model-level or more specific, or a reviewer has confirmed that a series-level source applies to the exact model and hardware scope
 - `hardware_version` is identified or set to `unknown`
 - at least one `recovery_method` is supported by direct evidence
 - each claimed recovery method has at least one `source_evidence` entry

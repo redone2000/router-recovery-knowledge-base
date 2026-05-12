@@ -42,9 +42,15 @@ SOURCE_INDEX_REQUIRED = {
     "source_url",
     "source_document",
     "vendor",
+    "applicability_scope",
+    "series",
     "model",
     "hardware_version",
     "firmware_version",
+    "applies_to_candidate_model",
+    "applicability_notes",
+    "profile_generation_allowed",
+    "profile_generation_blockers",
     "recovery_methods_claimed",
     "evidence_snippets",
     "evidence_gaps",
@@ -95,6 +101,21 @@ WORK_QUEUE_REQUIRED_STOPS = {
 
 SOURCE_INDEX_REQUIRED_GAP_EXAMPLES = {
     "tftp_direction_unclear",
+}
+
+APPLICABILITY_SCOPES = {
+    "vendor_level",
+    "series_level",
+    "model_level",
+    "hardware_version_level",
+    "firmware_version_level",
+    "unknown",
+}
+
+NON_PROFILE_GENERATING_SCOPES = {
+    "vendor_level",
+    "series_level",
+    "unknown",
 }
 
 PROHIBITED_PROFILE_FIELDS = {
@@ -172,6 +193,14 @@ def ensure_list(row: dict[str, Any], field: str, issues: list[str]) -> list[Any]
     return value
 
 
+def ensure_array(row: dict[str, Any], field: str, issues: list[str]) -> list[Any]:
+    value = row.get(field)
+    if not isinstance(value, list):
+        issues.append(f"{field} must be an array")
+        return []
+    return value
+
+
 def validate_work_queue_row(row: dict[str, Any], source_types: set[str], stage0: bool) -> list[str]:
     issues: list[str] = []
     missing = sorted(WORK_QUEUE_REQUIRED - set(row))
@@ -231,6 +260,28 @@ def validate_source_index_row(row: dict[str, Any], source_types: set[str], recov
     source_type = row.get("source_type")
     if source_type not in source_types:
         issues.append(f"invalid source_type: {source_type}")
+
+    applicability_scope = row.get("applicability_scope")
+    if applicability_scope not in APPLICABILITY_SCOPES:
+        issues.append(f"invalid applicability_scope: {applicability_scope}")
+
+    applies_to_candidate_model = row.get("applies_to_candidate_model")
+    if applies_to_candidate_model not in {True, False, "unknown"}:
+        issues.append("applies_to_candidate_model must be true, false, or unknown")
+
+    profile_generation_allowed = row.get("profile_generation_allowed")
+    if not isinstance(profile_generation_allowed, bool):
+        issues.append("profile_generation_allowed must be boolean")
+
+    blockers = ensure_array(row, "profile_generation_blockers", issues)
+    if applicability_scope in NON_PROFILE_GENERATING_SCOPES:
+        if profile_generation_allowed is not False:
+            issues.append(f"{applicability_scope} sources must not allow profile generation by default")
+        if not blockers:
+            issues.append(f"{applicability_scope} sources must include profile_generation_blockers")
+
+    if applicability_scope == "series_level" and not row.get("series"):
+        issues.append("series_level sources must include series")
 
     source_url = row.get("source_url")
     if not isinstance(source_url, str) or not is_placeholder_url(source_url):
