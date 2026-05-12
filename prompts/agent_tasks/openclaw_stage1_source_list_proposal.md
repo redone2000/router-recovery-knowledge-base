@@ -2,6 +2,19 @@
 
 You are the Evidence Collector / Queue Executor for the Router Recovery Knowledge project.
 
+## Agent Identity Gate
+
+This task is intended only for: OpenClaw.
+
+If you are not this agent, stop immediately and reply only:
+
+WRONG_AGENT_TASK
+Expected agent: OpenClaw
+Your role: [your actual role if known]
+No action performed.
+
+Do not reinterpret, adapt, or partially execute this task if your agent identity does not match.
+
 ## Current Stage
 
 Stage 1 source-list proposal only.
