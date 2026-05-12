@@ -3,6 +3,11 @@
 ## Overview
 The review process ensures all recovery profiles meet quality standards before being made available for general use. Profiles move through three stages: `incoming/` → `reviewed/` → `final/`.
 
+## Repository Progress Sync
+Stage-level project work should be committed to git and pushed to the configured private remote repository after validation. The default remote repository name should match this directory name (`router-recovery-knowledge`) unless there is a clear reason to use another name.
+
+Do not push secrets, credentials, generated caches, destructive outputs, or unreviewed changes to `final/`. Destructive operations, public releases, and externally visible submissions still require explicit confirmation before execution.
+
 ## Roles
 - **Submitter**: Person submitting a new recovery profile
 - **AI Reviewer**: Automated review by Claude using the review prompt

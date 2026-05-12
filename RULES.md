@@ -1,5 +1,11 @@
 # Profile Rules v0.1
 
+## 0. Project Maintenance Rules
+- Stage-level project work MUST be committed to git and pushed to the configured private remote repository after validation.
+- If no better repository name is specified, the private remote repository SHOULD match the local directory name: `router-recovery-knowledge`.
+- Do not include secrets, credentials, generated caches, or destructive outputs in commits.
+- Do not perform destructive operations, public releases, or externally visible submissions without explicit confirmation.
+
 ## 1. Required Fields
 All recovery profiles MUST include the following fields. Missing any of these fields will automatically trigger a confidence downgrade and require changes before review can proceed.
 
