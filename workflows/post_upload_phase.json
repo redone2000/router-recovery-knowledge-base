@@ -1,0 +1,106 @@
+{
+  "workflow_id": "post-upload-phase",
+  "workflow_type": "post_upload_phase",
+  "status": "draft",
+  "title": "Post-Upload Phase Workflow",
+  "summary": "The phase after firmware upload completes but before the router has returned to usable operation.",
+  "scope": "cross-brand concept; model-specific post-upload behavior required before use",
+  "phases": [
+    {
+      "phase_id": "wait-after-upload",
+      "title": "Wait after upload",
+      "purpose": "Avoid treating upload completion as immediate recovery completion.",
+      "actions": [
+        "Wait for the profile's documented or observed post-upload duration.",
+        "Do not judge failure only from immediate web or ping behavior."
+      ],
+      "required_profile_fields": [
+        "post_upload_behavior.wait_seconds",
+        "post_upload_behavior.user_warning_after_upload"
+      ],
+      "handoff_to_phase": "post-upload-transition"
+    },
+    {
+      "phase_id": "post-upload-transition",
+      "title": "Transition back to normal networking",
+      "purpose": "Handle model-specific requirements such as power cycle or DHCP return.",
+      "actions": [
+        "Follow the profile's power-cycle requirement.",
+        "Switch the client back to DHCP if required.",
+        "Use the DHCP gateway as admin URL if required."
+      ],
+      "required_profile_fields": [
+        "post_upload_behavior.power_cycle_required",
+        "post_upload_behavior.dhcp_after_power_cycle",
+        "post_upload_behavior.gateway_ip_as_admin_url"
+      ],
+      "handoff_to_phase": null
+    }
+  ],
+  "required_profile_parameters": [
+    "post_upload_behavior.wait_seconds",
+    "post_upload_behavior.power_cycle_required",
+    "post_upload_behavior.dhcp_after_power_cycle",
+    "post_upload_behavior.gateway_ip_as_admin_url",
+    "risk_warnings"
+  ],
+  "readiness_signals": [
+    {
+      "signal": "upload-complete",
+      "meaning": "Firmware transfer completed, but recovery may still be in progress.",
+      "reliability": "medium",
+      "warning": "Upload completion does not always mean the router is ready."
+    },
+    {
+      "signal": "dhcp-gateway-acquired",
+      "meaning": "The client received a gateway IP that may be used for admin UI access.",
+      "reliability": "medium",
+      "warning": "Only use this signal when the profile says to return to DHCP."
+    }
+  ],
+  "failure_modes": [
+    {
+      "failure_id": "upload-complete-no-ui",
+      "symptom": "Firmware upload completed but the admin UI is not immediately reachable.",
+      "likely_causes": [
+        "Router is still flashing or rebooting internally",
+        "Manual power cycle is required",
+        "Client is still on recovery static IP instead of DHCP",
+        "Admin URL changed after recovery"
+      ],
+      "recommended_response": "Use model-specific post-upload behavior. Do not tell users to immediately retry or power cycle unless the profile supports it.",
+      "linked_incidents": []
+    }
+  ],
+  "profile_mapping": {
+    "recovery_methods": [],
+    "network_recovery_fields": [
+      "client_ip_assignment"
+    ],
+    "tftp_details_fields": [],
+    "post_upload_behavior_fields": [
+      "wait_seconds",
+      "power_cycle_required",
+      "dhcp_after_power_cycle",
+      "gateway_ip_as_admin_url",
+      "user_warning_after_upload"
+    ]
+  },
+  "panic_entry_queries": [
+    "firmware upload finished but router not working",
+    "router recovery upload complete no web UI",
+    "after TFTP upload nothing happens",
+    "recovery complete but 192.168.1.1 not opening"
+  ],
+  "incident_links": [],
+  "source_refs": [
+    {
+      "source_document": "sources/stage1/lab/asus_rt_ac86u_rescue_tftp_observation.md",
+      "source_url": null,
+      "notes": "ASUS RT-AC86U lab observation motivated explicit post-upload phase modeling."
+    }
+  ],
+  "created_date": "2026-05-13",
+  "updated_date": null,
+  "notes": "Draft workflow. App guidance must use model-specific post-upload fields."
+}

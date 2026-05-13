@@ -1,0 +1,143 @@
+{
+  "workflow_id": "passive-tftp-put",
+  "workflow_type": "passive_tftp_put",
+  "status": "draft",
+  "title": "Passive TFTP PUT Workflow",
+  "summary": "The router acts as a TFTP server and the user or App uploads firmware with a TFTP client.",
+  "scope": "cross-brand workflow; model parameters required before use",
+  "phases": [
+    {
+      "phase_id": "prepare-client",
+      "title": "Prepare client network",
+      "purpose": "Place the user's computer on the recovery subnet before attempting upload.",
+      "actions": [
+        "Use wired Ethernet.",
+        "Apply the profile's client IP assignment requirement.",
+        "Disable unrelated network paths if they interfere with routing."
+      ],
+      "required_profile_fields": [
+        "network_recovery.client_ip_assignment",
+        "network_recovery.client_static_ip",
+        "network_recovery.default_ip"
+      ],
+      "handoff_to_phase": "enter-recovery"
+    },
+    {
+      "phase_id": "enter-recovery",
+      "title": "Enter recovery mode",
+      "purpose": "Put the router into the state where it may accept TFTP requests.",
+      "actions": [
+        "Follow the model-specific recovery entry method.",
+        "Watch model-specific LED or network readiness signals."
+      ],
+      "required_profile_fields": [
+        "button_recovery.entry_method",
+        "button_recovery.led_indicator",
+        "network_recovery.required_lan_port"
+      ],
+      "handoff_to_phase": "upload-firmware"
+    },
+    {
+      "phase_id": "upload-firmware",
+      "title": "Upload firmware",
+      "purpose": "Send firmware to the router-side TFTP server.",
+      "actions": [
+        "Use WRQ/PUT from the client to the router recovery IP.",
+        "Use the profile's firmware file type and filename rule.",
+        "Follow the server ACK source port during transfer."
+      ],
+      "required_profile_fields": [
+        "network_recovery.default_ip",
+        "firmware_details.file_type",
+        "tftp_details.mode",
+        "tftp_details.filename_required",
+        "tftp_details.port_behavior"
+      ],
+      "handoff_to_phase": "post-upload"
+    }
+  ],
+  "required_profile_parameters": [
+    "network_recovery.default_ip",
+    "network_recovery.client_ip_assignment",
+    "network_recovery.passive_tftp_from_router",
+    "network_recovery.active_tftp_to_router",
+    "firmware_details.file_type",
+    "tftp_details.mode",
+    "post_upload_behavior"
+  ],
+  "readiness_signals": [
+    {
+      "signal": "ttl-response",
+      "meaning": "The device may be in or near a recovery window.",
+      "reliability": "weak",
+      "warning": "ICMP readiness does not guarantee that TFTP WRQ is ready."
+    },
+    {
+      "signal": "first-tftp-ack",
+      "meaning": "The router accepted the TFTP write request and transfer can proceed.",
+      "reliability": "strong",
+      "warning": "Client must continue to follow the server ACK source port."
+    }
+  ],
+  "failure_modes": [
+    {
+      "failure_id": "ttl-visible-wrq-timeout",
+      "symptom": "TTL or ping is visible but TFTP PUT receives no ACK or times out.",
+      "likely_causes": [
+        "ICMP readiness occurs before TFTP WRQ readiness",
+        "WRQ acceptance window is narrow",
+        "manual timing is unreliable",
+        "wrong network interface or routing path"
+      ],
+      "recommended_response": "Do not promote a model profile from ping alone. Capture an incident and retest with program-assisted WRQ timing.",
+      "linked_incidents": [
+        "netgear-r7000-ttl100-tftp-timeout-2026-05-13"
+      ]
+    }
+  ],
+  "profile_mapping": {
+    "recovery_methods": [
+      "tftp_passive"
+    ],
+    "network_recovery_fields": [
+      "passive_tftp_from_router",
+      "active_tftp_to_router",
+      "default_ip",
+      "client_ip_assignment",
+      "client_static_ip",
+      "required_lan_port"
+    ],
+    "tftp_details_fields": [
+      "mode",
+      "filename_required",
+      "port_behavior",
+      "server_uses_ephemeral_port",
+      "ack_source_port"
+    ],
+    "post_upload_behavior_fields": [
+      "wait_seconds",
+      "power_cycle_required",
+      "dhcp_after_power_cycle",
+      "gateway_ip_as_admin_url"
+    ]
+  },
+  "panic_entry_queries": [
+    "TFTP timeout",
+    "TTL=100 but upload fails",
+    "router recovery TFTP put no ACK",
+    "firmware upload timed out"
+  ],
+  "incident_links": [
+    "netgear-r7000-ttl100-tftp-timeout-2026-05-13"
+  ],
+  "source_refs": [
+    {
+      "source_document": "docs/recovery_language.md",
+      "source_url": null,
+      "notes": "Shared vocabulary for Passive TFTP / TFTP PUT and Recovery Window."
+    }
+  ],
+  "created_date": "2026-05-13",
+  "updated_date": null,
+  "notes": "Draft workflow. Requires model-specific parameters and evidence before App use."
+}

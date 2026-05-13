@@ -1,0 +1,229 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/redone2000/router-recovery-knowledge/schema/recovery_workflow.schema.json",
+  "title": "Router Recovery Workflow",
+  "description": "Schema v0.1 for reusable recovery workflows that model profiles parameterize",
+  "type": "object",
+  "required": [
+    "workflow_id",
+    "workflow_type",
+    "status",
+    "title",
+    "summary",
+    "phases",
+    "required_profile_parameters",
+    "readiness_signals",
+    "failure_modes",
+    "incident_links",
+    "created_date"
+  ],
+  "properties": {
+    "workflow_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "workflow_type": {
+      "type": "string",
+      "enum": [
+        "web_recovery",
+        "passive_tftp_put",
+        "active_tftp_server",
+        "nmrp",
+        "rescue_mode",
+        "post_upload_phase",
+        "recovery_preparation"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "reviewed", "deprecated"]
+    },
+    "title": {
+      "type": "string"
+    },
+    "summary": {
+      "type": "string"
+    },
+    "scope": {
+      "type": ["string", "null"],
+      "description": "Workflow applicability scope, such as cross-brand, brand-specific, or model-family-specific"
+    },
+    "phases": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["phase_id", "title", "purpose", "actions"],
+        "properties": {
+          "phase_id": {
+            "type": "string",
+            "pattern": "^[a-z0-9-]+$"
+          },
+          "title": {
+            "type": "string"
+          },
+          "purpose": {
+            "type": "string"
+          },
+          "actions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1
+          },
+          "required_profile_fields": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "handoff_to_phase": {
+            "type": ["string", "null"]
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "required_profile_parameters": {
+      "type": "array",
+      "description": "Profile fields needed to instantiate this workflow safely",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "readiness_signals": {
+      "type": "array",
+      "description": "Signals that may indicate the workflow can proceed",
+      "items": {
+        "type": "object",
+        "required": ["signal", "meaning", "reliability"],
+        "properties": {
+          "signal": {
+            "type": "string"
+          },
+          "meaning": {
+            "type": "string"
+          },
+          "reliability": {
+            "type": "string",
+            "enum": ["strong", "medium", "weak", "unknown"]
+          },
+          "warning": {
+            "type": ["string", "null"]
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "failure_modes": {
+      "type": "array",
+      "description": "Known workflow-level failure modes",
+      "items": {
+        "type": "object",
+        "required": ["failure_id", "symptom", "likely_causes", "recommended_response"],
+        "properties": {
+          "failure_id": {
+            "type": "string",
+            "pattern": "^[a-z0-9-]+$"
+          },
+          "symptom": {
+            "type": "string"
+          },
+          "likely_causes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "recommended_response": {
+            "type": "string"
+          },
+          "linked_incidents": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "profile_mapping": {
+      "type": "object",
+      "description": "How this workflow maps to recovery profile fields",
+      "properties": {
+        "recovery_methods": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "network_recovery_fields": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "tftp_details_fields": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "post_upload_behavior_fields": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "panic_entry_queries": {
+      "type": "array",
+      "description": "Panic symptom queries this workflow can help route",
+      "items": {
+        "type": "string"
+      }
+    },
+    "incident_links": {
+      "type": "array",
+      "description": "Known incident IDs that inform this workflow",
+      "items": {
+        "type": "string"
+      }
+    },
+    "source_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "source_document": {
+            "type": ["string", "null"]
+          },
+          "source_url": {
+            "type": ["string", "null"]
+          },
+          "notes": {
+            "type": ["string", "null"]
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "created_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "updated_date": {
+      "type": ["string", "null"],
+      "format": "date"
+    },
+    "notes": {
+      "type": ["string", "null"]
+    }
+  },
+  "additionalProperties": false
+}
