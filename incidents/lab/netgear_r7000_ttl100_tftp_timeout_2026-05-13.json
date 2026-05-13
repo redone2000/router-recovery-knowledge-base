@@ -1,0 +1,85 @@
+{
+  "incident_id": "netgear-r7000-ttl100-tftp-timeout-2026-05-13",
+  "status": "observed-only",
+  "resolution": "unresolved",
+  "evidence_type": "lab_observation",
+  "confidence": "medium",
+  "profile_gate": "blocked",
+  "linked_profile_id": "netgear-r7000-unknown-unknown",
+  "linked_workflow": "passive-tftp-put",
+  "vendor": "NETGEAR",
+  "model": "R7000",
+  "hardware_version": "unknown",
+  "firmware_version": "unknown",
+  "symptom": "TTL=100 visible but manual TFTP PUT receives no ACK or times out",
+  "context": {
+    "client_os": "macOS",
+    "client_tool": "macOS terminal tftp",
+    "connection": "wired LAN with static client IP configured",
+    "client_ip_assignment": "static",
+    "official_path_exists": true,
+    "notes": "Official NETGEAR TFTP procedure exists and R7000 is listed in official applies-to evidence, but local manual timing did not produce a clear successful TFTP recovery."
+  },
+  "observed_signals": [
+    "TTL=100 was observable during the apparent recovery window",
+    "Ping was reachable during the recovery window",
+    "Manual TFTP PUT did not receive ACK or timed out",
+    "Human timing appeared unreliable",
+    "nmrpflash completed recovery easily"
+  ],
+  "failed_patterns": [
+    "manual put after observing recovery window",
+    "prepared terminal put attempt",
+    "repeated manual attempts"
+  ],
+  "successful_patterns": [
+    "nmrpflash completed recovery easily"
+  ],
+  "hypotheses": [
+    "ICMP readiness does not imply TFTP WRQ readiness",
+    "The TFTP WRQ acceptance window may be later or narrower than the TTL=100 ping window",
+    "Manual timing may be unreliable for R7000 TFTP recovery",
+    "R7000 may be better treated as NMRP-preferred or timing-sensitive legacy NETGEAR recovery until TFTP is reproduced"
+  ],
+  "experiments": [
+    {
+      "name": "manual-tftp-put",
+      "method": "Attempted macOS terminal TFTP PUT during the observed recovery window",
+      "result": "No clear successful TFTP recovery; PUT received no ACK or timed out",
+      "notes": "Exact timing remains unresolved."
+    },
+    {
+      "name": "nmrpflash-recovery",
+      "method": "Used nmrpflash recovery path on the same device class",
+      "result": "Recovery completed easily",
+      "notes": "Suggests NMRP path may be more reliable than manual TFTP for this test context."
+    }
+  ],
+  "results": [
+    "R7000 should not enter reviewed profile status from current TFTP evidence",
+    "Official TFTP source evidence remains retained, but lab validation is unresolved",
+    "Future tests should use program-assisted WRQ timing or compare against a modern NETGEAR reference device"
+  ],
+  "next_actions": [
+    "Build or use a program-assisted workflow to detect TTL and retry WRQ automatically",
+    "Compare behavior against nmrpflash timing and packet sequence",
+    "Retest with packet/app logs before reconsidering reviewed-candidate status"
+  ],
+  "source_refs": [
+    {
+      "source_id": "src-stage1-batch1-003",
+      "source_document": "sources/stage1/batch1/netgear_kb_000059633.md",
+      "source_url": "https://kb.netgear.com/000059633/How-to-upload-firmware-to-a-NETGEAR-router-using-TFTP-client",
+      "notes": "Official NETGEAR TFTP source evidence retained but insufficient for reviewed profile without successful lab reproduction."
+    },
+    {
+      "source_id": "src-stage1-batch2-001",
+      "source_document": "sources/stage1/batch2/netgear_kb_000064624_macos.md",
+      "source_url": "https://kb.netgear.com/000064624/How-do-I-upload-firmware-to-my-NETGEAR-router-using-TFTP-on-Apple-macOS",
+      "notes": "Official macOS TFTP source evidence retained."
+    }
+  ],
+  "created_date": "2026-05-13",
+  "created_by": "owner-lab-observation",
+  "notes": "This incident is a schema validation sample and lab observation record. It must not be promoted to reviewed/model profile guidance without successful retest or stronger evidence."
+}

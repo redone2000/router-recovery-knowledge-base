@@ -1,0 +1,204 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/redone2000/router-recovery-knowledge/schema/recovery_incident.schema.json",
+  "title": "Router Recovery Incident",
+  "description": "Schema v0.1 for structured recovery success/failure incidents and tacit recovery knowledge",
+  "type": "object",
+  "required": [
+    "incident_id",
+    "status",
+    "resolution",
+    "evidence_type",
+    "confidence",
+    "profile_gate",
+    "vendor",
+    "model",
+    "symptom",
+    "context",
+    "observed_signals",
+    "hypotheses",
+    "experiments",
+    "results",
+    "next_actions",
+    "created_date"
+  ],
+  "properties": {
+    "incident_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$",
+      "description": "Stable incident identifier"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["observed-only", "pattern-candidate", "validated", "rejected", "archived"],
+      "description": "Incident lifecycle status"
+    },
+    "resolution": {
+      "type": "string",
+      "enum": ["unresolved", "workaround-found", "resolved", "not-reproducible", "superseded"],
+      "description": "Current incident resolution state"
+    },
+    "evidence_type": {
+      "type": "string",
+      "enum": ["lab_observation", "user_report", "official_documentation", "community_report", "source_correlation"],
+      "description": "Type of evidence behind the incident"
+    },
+    "confidence": {
+      "type": "string",
+      "enum": ["low", "medium", "high"],
+      "description": "Incident confidence, not profile confidence"
+    },
+    "profile_gate": {
+      "type": "string",
+      "enum": ["blocked", "not_applicable", "candidate", "allowed_after_review"],
+      "description": "Whether this incident allows or blocks profile advancement"
+    },
+    "linked_profile_id": {
+      "type": ["string", "null"],
+      "description": "Related profile id if one exists"
+    },
+    "linked_workflow": {
+      "type": ["string", "null"],
+      "description": "Related recovery workflow identifier or name"
+    },
+    "vendor": {
+      "type": "string"
+    },
+    "model": {
+      "type": "string"
+    },
+    "hardware_version": {
+      "type": ["string", "null"],
+      "description": "Hardware revision involved in the incident, or unknown"
+    },
+    "firmware_version": {
+      "type": ["string", "null"],
+      "description": "Firmware version involved in the incident, or unknown"
+    },
+    "symptom": {
+      "type": "string",
+      "description": "User-visible or tester-visible recovery symptom"
+    },
+    "context": {
+      "type": "object",
+      "description": "Test or report context",
+      "properties": {
+        "client_os": {
+          "type": ["string", "null"]
+        },
+        "client_tool": {
+          "type": ["string", "null"]
+        },
+        "connection": {
+          "type": ["string", "null"]
+        },
+        "client_ip_assignment": {
+          "type": ["string", "null"],
+          "enum": ["static", "dhcp", "unknown", null]
+        },
+        "official_path_exists": {
+          "type": ["boolean", "null"]
+        },
+        "notes": {
+          "type": ["string", "null"]
+        }
+      },
+      "additionalProperties": false
+    },
+    "observed_signals": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "failed_patterns": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "successful_patterns": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "hypotheses": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "experiments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "method", "result"],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "method": {
+            "type": "string"
+          },
+          "result": {
+            "type": "string"
+          },
+          "notes": {
+            "type": ["string", "null"]
+          }
+        },
+        "additionalProperties": false
+      },
+      "minItems": 1
+    },
+    "results": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "next_actions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "source_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "source_id": {
+            "type": ["string", "null"]
+          },
+          "source_document": {
+            "type": ["string", "null"]
+          },
+          "source_url": {
+            "type": ["string", "null"]
+          },
+          "notes": {
+            "type": ["string", "null"]
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "created_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "created_by": {
+      "type": ["string", "null"]
+    },
+    "notes": {
+      "type": ["string", "null"]
+    }
+  },
+  "additionalProperties": false
+}
