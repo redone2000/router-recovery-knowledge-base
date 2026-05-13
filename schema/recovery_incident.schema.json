@@ -33,6 +33,10 @@
       "enum": ["observed-only", "pattern-candidate", "validated", "rejected", "archived"],
       "description": "Incident lifecycle status"
     },
+    "observation_only": {
+      "type": ["boolean", "null"],
+      "description": "True when this incident records observed behavior that must not be generalized without additional evidence"
+    },
     "resolution": {
       "type": "string",
       "enum": ["unresolved", "workaround-found", "resolved", "not-reproducible", "superseded"],
@@ -52,6 +56,14 @@
       "type": "string",
       "enum": ["blocked", "not_applicable", "candidate", "allowed_after_review"],
       "description": "Whether this incident allows or blocks profile advancement"
+    },
+    "blocked_gates": {
+      "type": "array",
+      "description": "Specific lifecycle gates blocked by this incident",
+      "items": {
+        "type": "string",
+        "enum": ["source_to_incoming", "incoming_to_reviewed", "reviewed_to_final", "app_guidance", "seo_publication"]
+      }
     },
     "linked_profile_id": {
       "type": ["string", "null"],

@@ -160,5 +160,7 @@
   ],
   "created_date": "2026-05-13",
   "updated_date": null,
-  "notes": "Draft workflow. Do not use as model-specific guidance without model-level profile parameters and evidence."
+  "notes": "Draft workflow. Do not use as model-specific guidance without model-level profile parameters and evidence. TP-Link Archer AX series evidence is used for abstraction only, not model-specific guidance.",
+  "confidence": "medium",
+  "observation_only": false
 }

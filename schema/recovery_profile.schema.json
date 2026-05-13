@@ -477,6 +477,27 @@
         "type": "string"
       }
     },
+    "linked_workflows": {
+      "type": "array",
+      "description": "Workflow IDs this profile parameterizes",
+      "items": {
+        "type": "string"
+      }
+    },
+    "blocking_incidents": {
+      "type": "array",
+      "description": "Incident IDs that currently block profile promotion or App-ready use",
+      "items": {
+        "type": "string"
+      }
+    },
+    "observation_only_groups": {
+      "type": "array",
+      "description": "Profile field groups that are observed-only and must not be generalized without additional evidence",
+      "items": {
+        "type": "string"
+      }
+    },
     "notes": {
       "type": ["string", "null"],
       "description": "General notes about this device and recovery process"

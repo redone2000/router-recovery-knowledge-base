@@ -38,6 +38,15 @@
       "type": "string",
       "enum": ["draft", "reviewed", "deprecated"]
     },
+    "confidence": {
+      "type": ["string", "null"],
+      "enum": ["low", "medium", "high", null],
+      "description": "Workflow reliability confidence, separate from profile confidence"
+    },
+    "observation_only": {
+      "type": ["boolean", "null"],
+      "description": "True when the workflow or key workflow details are based on limited observations and must not be generalized"
+    },
     "title": {
       "type": "string"
     },

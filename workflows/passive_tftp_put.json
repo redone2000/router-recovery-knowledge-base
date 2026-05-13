@@ -139,5 +139,7 @@
   ],
   "created_date": "2026-05-13",
   "updated_date": null,
-  "notes": "Draft workflow. Requires model-specific parameters and evidence before App use."
+  "notes": "Draft workflow. Requires model-specific parameters and evidence before App use. Manual TFTP timing reliability is model-specific and may require program-assisted timing for some devices.",
+  "confidence": "medium",
+  "observation_only": false
 }

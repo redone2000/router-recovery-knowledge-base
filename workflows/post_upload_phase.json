@@ -102,5 +102,7 @@
   ],
   "created_date": "2026-05-13",
   "updated_date": null,
-  "notes": "Draft workflow. App guidance must use model-specific post-upload fields."
+  "notes": "Draft workflow. App guidance must use model-specific post-upload fields. ASUS RT-AC86U observed post-upload behavior is a supporting example, not universal proof.",
+  "confidence": "medium",
+  "observation_only": false
 }

@@ -81,5 +81,11 @@
   ],
   "created_date": "2026-05-13",
   "created_by": "owner-lab-observation",
-  "notes": "This incident is a schema validation sample and lab observation record. It must not be promoted to reviewed/model profile guidance without successful retest or stronger evidence."
+  "notes": "This incident is a schema validation sample and lab observation record. It must not be promoted to reviewed/model profile guidance without successful retest or stronger evidence. NMRP may be a more reliable recovery path for R7000 in this test context, but that remains an incident-level observation until separately modeled and reviewed.",
+  "observation_only": true,
+  "blocked_gates": [
+    "incoming_to_reviewed",
+    "reviewed_to_final",
+    "app_guidance"
+  ]
 }
