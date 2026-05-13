@@ -1,0 +1,1025 @@
+{
+  "generated_at": "2026-05-13T12:44:47.604363+00:00",
+  "source_inputs": {
+    "workflows": [
+      "workflows/passive_tftp_put.json",
+      "workflows/post_upload_phase.json"
+    ],
+    "incidents": [
+      "incidents/lab/netgear_r7000_ttl100_tftp_timeout_2026-05-13.json"
+    ],
+    "foundations": [
+      "docs/recovery_language.md"
+    ]
+  },
+  "sections": {
+    "foundation_keywords": [
+      {
+        "keyword": "router bricked what to do",
+        "category": "panic_symptom",
+        "intent": "troubleshooting",
+        "sources": [
+          "docs/recovery_language.md"
+        ],
+        "notes": []
+      },
+      {
+        "keyword": "192.168.1.1 not working after firmware update",
+        "category": "panic_symptom",
+        "intent": "troubleshooting",
+        "sources": [
+          "docs/recovery_language.md"
+        ],
+        "notes": []
+      },
+      {
+        "keyword": "router recovery mode",
+        "category": "foundation",
+        "intent": "concept_explainer",
+        "sources": [
+          "docs/recovery_language.md"
+        ],
+        "notes": []
+      },
+      {
+        "keyword": "router recovery window",
+        "category": "foundation",
+        "intent": "concept_explainer",
+        "sources": [
+          "docs/recovery_language.md"
+        ],
+        "notes": []
+      },
+      {
+        "keyword": "router recovery static IP setup",
+        "category": "foundation",
+        "intent": "how_to",
+        "sources": [
+          "docs/recovery_language.md"
+        ],
+        "notes": []
+      },
+      {
+        "keyword": "ping works but router page not opening",
+        "category": "panic_symptom",
+        "intent": "troubleshooting",
+        "sources": [
+          "docs/recovery_language.md"
+        ],
+        "notes": []
+      },
+      {
+        "keyword": "upload complete does not mean recovery complete",
+        "category": "post_upload",
+        "intent": "troubleshooting",
+        "sources": [
+          "docs/recovery_language.md"
+        ],
+        "notes": []
+      },
+      {
+        "keyword": "router recovery observed-only behavior",
+        "category": "evidence_language",
+        "intent": "concept_explainer",
+        "sources": [
+          "docs/recovery_language.md"
+        ],
+        "notes": []
+      }
+    ],
+    "workflow_keywords": [
+      {
+        "keyword": "Passive TFTP PUT Workflow",
+        "category": "workflow",
+        "intent": "workflow_explainer",
+        "sources": [
+          "workflows/passive_tftp_put.json"
+        ],
+        "notes": []
+      },
+      {
+        "keyword": "how passive tftp put workflow works",
+        "category": "workflow",
+        "intent": "workflow_explainer",
+        "sources": [
+          "workflows/passive_tftp_put.json"
+        ],
+        "notes": []
+      },
+      {
+        "keyword": "TFTP timeout",
+        "category": "panic_symptom",
+        "intent": "troubleshooting",
+        "sources": [
+          "workflows/passive_tftp_put.json"
+        ],
+        "notes": [
+          "Defined as workflow panic entry query."
+        ]
+      },
+      {
+        "keyword": "TTL=100 but upload fails",
+        "category": "panic_symptom",
+        "intent": "troubleshooting",
+        "sources": [
+          "workflows/passive_tftp_put.json"
+        ],
+        "notes": [
+          "Defined as workflow panic entry query."
+        ]
+      },
+      {
+        "keyword": "router recovery TFTP put no ACK",
+        "category": "panic_symptom",
+        "intent": "troubleshooting",
+        "sources": [
+          "workflows/passive_tftp_put.json"
+        ],
+        "notes": [
+          "Defined as workflow panic entry query."
+        ]
+      },
+      {
+        "keyword": "firmware upload timed out",
+        "category": "panic_symptom",
+        "intent": "troubleshooting",
+        "sources": [
+          "workflows/passive_tftp_put.json"
+        ],
+        "notes": [
+          "Defined as workflow panic entry query."
+        ]
+      },
+      {
+        "keyword": "router recovery ttl response",
+        "category": "readiness_signal",
+        "intent": "troubleshooting",
+        "sources": [
+          "workflows/passive_tftp_put.json"
+        ],
+        "notes": [
+          "ICMP readiness does not guarantee that TFTP WRQ is ready."
+        ]
+      },
+      {
+        "keyword": "router recovery first tftp ack",
+        "category": "readiness_signal",
+        "intent": "troubleshooting",
+        "sources": [
+          "workflows/passive_tftp_put.json"
+        ],
+        "notes": [
+          "Client must continue to follow the server ACK source port."
+        ]
+      },
+      {
+        "keyword": "TTL or ping is visible but TFTP PUT receives no ACK or times out.",
+        "category": "failure_mode",
+        "intent": "troubleshooting",
+        "sources": [
+          "workflows/passive_tftp_put.json"
+        ],
+        "notes": [
+          "Workflow failure mode."
+        ]
+      },
+      {
+        "keyword": "router TFTP put no ACK",
+        "category": "tftp",
+        "intent": "troubleshooting",
+        "sources": [
+          "workflows/passive_tftp_put.json"
+        ],
+        "notes": []
+      },
+      {
+        "keyword": "TFTP timeout router recovery",
+        "category": "tftp",
+        "intent": "troubleshooting",
+        "sources": [
+          "workflows/passive_tftp_put.json"
+        ],
+        "notes": []
+      },
+      {
+        "keyword": "Post-Upload Phase Workflow",
+        "category": "workflow",
+        "intent": "workflow_explainer",
+        "sources": [
+          "workflows/post_upload_phase.json"
+        ],
+        "notes": []
+      },
+      {
+        "keyword": "how post-upload phase workflow works",
+        "category": "workflow",
+        "intent": "workflow_explainer",
+        "sources": [
+          "workflows/post_upload_phase.json"
+        ],
+        "notes": []
+      },
+      {
+        "keyword": "firmware upload finished but router not working",
+        "category": "panic_symptom",
+        "intent": "troubleshooting",
+        "sources": [
+          "workflows/post_upload_phase.json"
+        ],
+        "notes": [
+          "Defined as workflow panic entry query."
+        ]
+      },
+      {
+        "keyword": "router recovery upload complete no web UI",
+        "category": "panic_symptom",
+        "intent": "troubleshooting",
+        "sources": [
+          "workflows/post_upload_phase.json"
+        ],
+        "notes": [
+          "Defined as workflow panic entry query."
+        ]
+      },
+      {
+        "keyword": "after TFTP upload nothing happens",
+        "category": "panic_symptom",
+        "intent": "troubleshooting",
+        "sources": [
+          "workflows/post_upload_phase.json"
+        ],
+        "notes": [
+          "Defined as workflow panic entry query."
+        ]
+      },
+      {
+        "keyword": "recovery complete but 192.168.1.1 not opening",
+        "category": "panic_symptom",
+        "intent": "troubleshooting",
+        "sources": [
+          "workflows/post_upload_phase.json"
+        ],
+        "notes": [
+          "Defined as workflow panic entry query."
+        ]
+      },
+      {
+        "keyword": "router recovery upload complete",
+        "category": "readiness_signal",
+        "intent": "troubleshooting",
+        "sources": [
+          "workflows/post_upload_phase.json"
+        ],
+        "notes": [
+          "Upload completion does not always mean the router is ready."
+        ]
+      },
+      {
+        "keyword": "router recovery dhcp gateway acquired",
+        "category": "readiness_signal",
+        "intent": "troubleshooting",
+        "sources": [
+          "workflows/post_upload_phase.json"
+        ],
+        "notes": [
+          "Only use this signal when the profile says to return to DHCP."
+        ]
+      },
+      {
+        "keyword": "Firmware upload completed but the admin UI is not immediately reachable.",
+        "category": "failure_mode",
+        "intent": "troubleshooting",
+        "sources": [
+          "workflows/post_upload_phase.json"
+        ],
+        "notes": [
+          "Workflow failure mode."
+        ]
+      },
+      {
+        "keyword": "firmware upload complete but router not working",
+        "category": "post_upload",
+        "intent": "troubleshooting",
+        "sources": [
+          "workflows/post_upload_phase.json"
+        ],
+        "notes": []
+      },
+      {
+        "keyword": "router recovery upload finished no web UI",
+        "category": "post_upload",
+        "intent": "troubleshooting",
+        "sources": [
+          "workflows/post_upload_phase.json"
+        ],
+        "notes": []
+      }
+    ],
+    "incident_keywords": [
+      {
+        "keyword": "TTL=100 visible but manual TFTP PUT receives no ACK or times out",
+        "category": "incident_symptom",
+        "intent": "troubleshooting",
+        "sources": [
+          "incidents/lab/netgear_r7000_ttl100_tftp_timeout_2026-05-13.json"
+        ],
+        "notes": [
+          "Observed-only incident symptom."
+        ]
+      },
+      {
+        "keyword": "NETGEAR R7000 TTL=100 visible but manual TFTP PUT receives no ACK or times out",
+        "category": "model_incident",
+        "intent": "long_tail_troubleshooting",
+        "sources": [
+          "incidents/lab/netgear_r7000_ttl100_tftp_timeout_2026-05-13.json"
+        ],
+        "notes": [
+          "Model-specific observed-only incident."
+        ]
+      },
+      {
+        "keyword": "TTL=100 was observable during the apparent recovery window",
+        "category": "incident_signal",
+        "intent": "troubleshooting",
+        "sources": [
+          "incidents/lab/netgear_r7000_ttl100_tftp_timeout_2026-05-13.json"
+        ],
+        "notes": [
+          "Observed signal from incident."
+        ]
+      },
+      {
+        "keyword": "Ping was reachable during the recovery window",
+        "category": "incident_signal",
+        "intent": "troubleshooting",
+        "sources": [
+          "incidents/lab/netgear_r7000_ttl100_tftp_timeout_2026-05-13.json"
+        ],
+        "notes": [
+          "Observed signal from incident."
+        ]
+      },
+      {
+        "keyword": "Manual TFTP PUT did not receive ACK or timed out",
+        "category": "incident_signal",
+        "intent": "troubleshooting",
+        "sources": [
+          "incidents/lab/netgear_r7000_ttl100_tftp_timeout_2026-05-13.json"
+        ],
+        "notes": [
+          "Observed signal from incident."
+        ]
+      },
+      {
+        "keyword": "Human timing appeared unreliable",
+        "category": "incident_signal",
+        "intent": "troubleshooting",
+        "sources": [
+          "incidents/lab/netgear_r7000_ttl100_tftp_timeout_2026-05-13.json"
+        ],
+        "notes": [
+          "Observed signal from incident."
+        ]
+      },
+      {
+        "keyword": "nmrpflash completed recovery easily",
+        "category": "incident_signal",
+        "intent": "troubleshooting",
+        "sources": [
+          "incidents/lab/netgear_r7000_ttl100_tftp_timeout_2026-05-13.json"
+        ],
+        "notes": [
+          "Observed signal from incident.",
+          "Successful pattern from incident."
+        ]
+      },
+      {
+        "keyword": "manual put after observing recovery window",
+        "category": "failed_pattern",
+        "intent": "troubleshooting",
+        "sources": [
+          "incidents/lab/netgear_r7000_ttl100_tftp_timeout_2026-05-13.json"
+        ],
+        "notes": [
+          "Failed pattern from incident."
+        ]
+      },
+      {
+        "keyword": "prepared terminal put attempt",
+        "category": "failed_pattern",
+        "intent": "troubleshooting",
+        "sources": [
+          "incidents/lab/netgear_r7000_ttl100_tftp_timeout_2026-05-13.json"
+        ],
+        "notes": [
+          "Failed pattern from incident."
+        ]
+      },
+      {
+        "keyword": "repeated manual attempts",
+        "category": "failed_pattern",
+        "intent": "troubleshooting",
+        "sources": [
+          "incidents/lab/netgear_r7000_ttl100_tftp_timeout_2026-05-13.json"
+        ],
+        "notes": [
+          "Failed pattern from incident."
+        ]
+      }
+    ]
+  },
+  "all_keywords": [
+    {
+      "keyword": "router bricked what to do",
+      "category": "panic_symptom",
+      "intent": "troubleshooting",
+      "sources": [
+        "docs/recovery_language.md"
+      ],
+      "notes": []
+    },
+    {
+      "keyword": "192.168.1.1 not working after firmware update",
+      "category": "panic_symptom",
+      "intent": "troubleshooting",
+      "sources": [
+        "docs/recovery_language.md"
+      ],
+      "notes": []
+    },
+    {
+      "keyword": "router recovery mode",
+      "category": "foundation",
+      "intent": "concept_explainer",
+      "sources": [
+        "docs/recovery_language.md"
+      ],
+      "notes": []
+    },
+    {
+      "keyword": "router recovery window",
+      "category": "foundation",
+      "intent": "concept_explainer",
+      "sources": [
+        "docs/recovery_language.md"
+      ],
+      "notes": []
+    },
+    {
+      "keyword": "router recovery static IP setup",
+      "category": "foundation",
+      "intent": "how_to",
+      "sources": [
+        "docs/recovery_language.md"
+      ],
+      "notes": []
+    },
+    {
+      "keyword": "ping works but router page not opening",
+      "category": "panic_symptom",
+      "intent": "troubleshooting",
+      "sources": [
+        "docs/recovery_language.md"
+      ],
+      "notes": []
+    },
+    {
+      "keyword": "upload complete does not mean recovery complete",
+      "category": "post_upload",
+      "intent": "troubleshooting",
+      "sources": [
+        "docs/recovery_language.md"
+      ],
+      "notes": []
+    },
+    {
+      "keyword": "router recovery observed-only behavior",
+      "category": "evidence_language",
+      "intent": "concept_explainer",
+      "sources": [
+        "docs/recovery_language.md"
+      ],
+      "notes": []
+    },
+    {
+      "keyword": "Passive TFTP PUT Workflow",
+      "category": "workflow",
+      "intent": "workflow_explainer",
+      "sources": [
+        "workflows/passive_tftp_put.json"
+      ],
+      "notes": []
+    },
+    {
+      "keyword": "how passive tftp put workflow works",
+      "category": "workflow",
+      "intent": "workflow_explainer",
+      "sources": [
+        "workflows/passive_tftp_put.json"
+      ],
+      "notes": []
+    },
+    {
+      "keyword": "TFTP timeout",
+      "category": "panic_symptom",
+      "intent": "troubleshooting",
+      "sources": [
+        "workflows/passive_tftp_put.json"
+      ],
+      "notes": [
+        "Defined as workflow panic entry query."
+      ]
+    },
+    {
+      "keyword": "TTL=100 but upload fails",
+      "category": "panic_symptom",
+      "intent": "troubleshooting",
+      "sources": [
+        "workflows/passive_tftp_put.json"
+      ],
+      "notes": [
+        "Defined as workflow panic entry query."
+      ]
+    },
+    {
+      "keyword": "router recovery TFTP put no ACK",
+      "category": "panic_symptom",
+      "intent": "troubleshooting",
+      "sources": [
+        "workflows/passive_tftp_put.json"
+      ],
+      "notes": [
+        "Defined as workflow panic entry query."
+      ]
+    },
+    {
+      "keyword": "firmware upload timed out",
+      "category": "panic_symptom",
+      "intent": "troubleshooting",
+      "sources": [
+        "workflows/passive_tftp_put.json"
+      ],
+      "notes": [
+        "Defined as workflow panic entry query."
+      ]
+    },
+    {
+      "keyword": "router recovery ttl response",
+      "category": "readiness_signal",
+      "intent": "troubleshooting",
+      "sources": [
+        "workflows/passive_tftp_put.json"
+      ],
+      "notes": [
+        "ICMP readiness does not guarantee that TFTP WRQ is ready."
+      ]
+    },
+    {
+      "keyword": "router recovery first tftp ack",
+      "category": "readiness_signal",
+      "intent": "troubleshooting",
+      "sources": [
+        "workflows/passive_tftp_put.json"
+      ],
+      "notes": [
+        "Client must continue to follow the server ACK source port."
+      ]
+    },
+    {
+      "keyword": "TTL or ping is visible but TFTP PUT receives no ACK or times out.",
+      "category": "failure_mode",
+      "intent": "troubleshooting",
+      "sources": [
+        "workflows/passive_tftp_put.json"
+      ],
+      "notes": [
+        "Workflow failure mode."
+      ]
+    },
+    {
+      "keyword": "router TFTP put no ACK",
+      "category": "tftp",
+      "intent": "troubleshooting",
+      "sources": [
+        "workflows/passive_tftp_put.json"
+      ],
+      "notes": []
+    },
+    {
+      "keyword": "TFTP timeout router recovery",
+      "category": "tftp",
+      "intent": "troubleshooting",
+      "sources": [
+        "workflows/passive_tftp_put.json"
+      ],
+      "notes": []
+    },
+    {
+      "keyword": "Post-Upload Phase Workflow",
+      "category": "workflow",
+      "intent": "workflow_explainer",
+      "sources": [
+        "workflows/post_upload_phase.json"
+      ],
+      "notes": []
+    },
+    {
+      "keyword": "how post-upload phase workflow works",
+      "category": "workflow",
+      "intent": "workflow_explainer",
+      "sources": [
+        "workflows/post_upload_phase.json"
+      ],
+      "notes": []
+    },
+    {
+      "keyword": "firmware upload finished but router not working",
+      "category": "panic_symptom",
+      "intent": "troubleshooting",
+      "sources": [
+        "workflows/post_upload_phase.json"
+      ],
+      "notes": [
+        "Defined as workflow panic entry query."
+      ]
+    },
+    {
+      "keyword": "router recovery upload complete no web UI",
+      "category": "panic_symptom",
+      "intent": "troubleshooting",
+      "sources": [
+        "workflows/post_upload_phase.json"
+      ],
+      "notes": [
+        "Defined as workflow panic entry query."
+      ]
+    },
+    {
+      "keyword": "after TFTP upload nothing happens",
+      "category": "panic_symptom",
+      "intent": "troubleshooting",
+      "sources": [
+        "workflows/post_upload_phase.json"
+      ],
+      "notes": [
+        "Defined as workflow panic entry query."
+      ]
+    },
+    {
+      "keyword": "recovery complete but 192.168.1.1 not opening",
+      "category": "panic_symptom",
+      "intent": "troubleshooting",
+      "sources": [
+        "workflows/post_upload_phase.json"
+      ],
+      "notes": [
+        "Defined as workflow panic entry query."
+      ]
+    },
+    {
+      "keyword": "router recovery upload complete",
+      "category": "readiness_signal",
+      "intent": "troubleshooting",
+      "sources": [
+        "workflows/post_upload_phase.json"
+      ],
+      "notes": [
+        "Upload completion does not always mean the router is ready."
+      ]
+    },
+    {
+      "keyword": "router recovery dhcp gateway acquired",
+      "category": "readiness_signal",
+      "intent": "troubleshooting",
+      "sources": [
+        "workflows/post_upload_phase.json"
+      ],
+      "notes": [
+        "Only use this signal when the profile says to return to DHCP."
+      ]
+    },
+    {
+      "keyword": "Firmware upload completed but the admin UI is not immediately reachable.",
+      "category": "failure_mode",
+      "intent": "troubleshooting",
+      "sources": [
+        "workflows/post_upload_phase.json"
+      ],
+      "notes": [
+        "Workflow failure mode."
+      ]
+    },
+    {
+      "keyword": "firmware upload complete but router not working",
+      "category": "post_upload",
+      "intent": "troubleshooting",
+      "sources": [
+        "workflows/post_upload_phase.json"
+      ],
+      "notes": []
+    },
+    {
+      "keyword": "router recovery upload finished no web UI",
+      "category": "post_upload",
+      "intent": "troubleshooting",
+      "sources": [
+        "workflows/post_upload_phase.json"
+      ],
+      "notes": []
+    },
+    {
+      "keyword": "TTL=100 visible but manual TFTP PUT receives no ACK or times out",
+      "category": "incident_symptom",
+      "intent": "troubleshooting",
+      "sources": [
+        "incidents/lab/netgear_r7000_ttl100_tftp_timeout_2026-05-13.json"
+      ],
+      "notes": [
+        "Observed-only incident symptom."
+      ]
+    },
+    {
+      "keyword": "NETGEAR R7000 TTL=100 visible but manual TFTP PUT receives no ACK or times out",
+      "category": "model_incident",
+      "intent": "long_tail_troubleshooting",
+      "sources": [
+        "incidents/lab/netgear_r7000_ttl100_tftp_timeout_2026-05-13.json"
+      ],
+      "notes": [
+        "Model-specific observed-only incident."
+      ]
+    },
+    {
+      "keyword": "TTL=100 was observable during the apparent recovery window",
+      "category": "incident_signal",
+      "intent": "troubleshooting",
+      "sources": [
+        "incidents/lab/netgear_r7000_ttl100_tftp_timeout_2026-05-13.json"
+      ],
+      "notes": [
+        "Observed signal from incident."
+      ]
+    },
+    {
+      "keyword": "Ping was reachable during the recovery window",
+      "category": "incident_signal",
+      "intent": "troubleshooting",
+      "sources": [
+        "incidents/lab/netgear_r7000_ttl100_tftp_timeout_2026-05-13.json"
+      ],
+      "notes": [
+        "Observed signal from incident."
+      ]
+    },
+    {
+      "keyword": "Manual TFTP PUT did not receive ACK or timed out",
+      "category": "incident_signal",
+      "intent": "troubleshooting",
+      "sources": [
+        "incidents/lab/netgear_r7000_ttl100_tftp_timeout_2026-05-13.json"
+      ],
+      "notes": [
+        "Observed signal from incident."
+      ]
+    },
+    {
+      "keyword": "Human timing appeared unreliable",
+      "category": "incident_signal",
+      "intent": "troubleshooting",
+      "sources": [
+        "incidents/lab/netgear_r7000_ttl100_tftp_timeout_2026-05-13.json"
+      ],
+      "notes": [
+        "Observed signal from incident."
+      ]
+    },
+    {
+      "keyword": "nmrpflash completed recovery easily",
+      "category": "incident_signal",
+      "intent": "troubleshooting",
+      "sources": [
+        "incidents/lab/netgear_r7000_ttl100_tftp_timeout_2026-05-13.json"
+      ],
+      "notes": [
+        "Observed signal from incident.; Successful pattern from incident."
+      ]
+    },
+    {
+      "keyword": "manual put after observing recovery window",
+      "category": "failed_pattern",
+      "intent": "troubleshooting",
+      "sources": [
+        "incidents/lab/netgear_r7000_ttl100_tftp_timeout_2026-05-13.json"
+      ],
+      "notes": [
+        "Failed pattern from incident."
+      ]
+    },
+    {
+      "keyword": "prepared terminal put attempt",
+      "category": "failed_pattern",
+      "intent": "troubleshooting",
+      "sources": [
+        "incidents/lab/netgear_r7000_ttl100_tftp_timeout_2026-05-13.json"
+      ],
+      "notes": [
+        "Failed pattern from incident."
+      ]
+    },
+    {
+      "keyword": "repeated manual attempts",
+      "category": "failed_pattern",
+      "intent": "troubleshooting",
+      "sources": [
+        "incidents/lab/netgear_r7000_ttl100_tftp_timeout_2026-05-13.json"
+      ],
+      "notes": [
+        "Failed pattern from incident."
+      ]
+    }
+  ],
+  "suggested_pages": [
+    {
+      "slug": "router-bricked-what-to-do",
+      "primary_keyword": "router bricked what to do",
+      "intent": "troubleshooting",
+      "source_categories": [
+        "panic_symptom"
+      ],
+      "stage": "candidate"
+    },
+    {
+      "slug": "192-168-1-1-not-working-after-firmware-update",
+      "primary_keyword": "192.168.1.1 not working after firmware update",
+      "intent": "troubleshooting",
+      "source_categories": [
+        "panic_symptom"
+      ],
+      "stage": "candidate"
+    },
+    {
+      "slug": "ping-works-but-router-page-not-opening",
+      "primary_keyword": "ping works but router page not opening",
+      "intent": "troubleshooting",
+      "source_categories": [
+        "panic_symptom"
+      ],
+      "stage": "candidate"
+    },
+    {
+      "slug": "upload-complete-does-not-mean-recovery-complete",
+      "primary_keyword": "upload complete does not mean recovery complete",
+      "intent": "troubleshooting",
+      "source_categories": [
+        "post_upload"
+      ],
+      "stage": "candidate"
+    },
+    {
+      "slug": "tftp-timeout",
+      "primary_keyword": "TFTP timeout",
+      "intent": "troubleshooting",
+      "source_categories": [
+        "panic_symptom"
+      ],
+      "stage": "candidate"
+    },
+    {
+      "slug": "ttl-100-but-upload-fails",
+      "primary_keyword": "TTL=100 but upload fails",
+      "intent": "troubleshooting",
+      "source_categories": [
+        "panic_symptom"
+      ],
+      "stage": "candidate"
+    },
+    {
+      "slug": "router-recovery-tftp-put-no-ack",
+      "primary_keyword": "router recovery TFTP put no ACK",
+      "intent": "troubleshooting",
+      "source_categories": [
+        "panic_symptom"
+      ],
+      "stage": "candidate"
+    },
+    {
+      "slug": "firmware-upload-timed-out",
+      "primary_keyword": "firmware upload timed out",
+      "intent": "troubleshooting",
+      "source_categories": [
+        "panic_symptom"
+      ],
+      "stage": "candidate"
+    },
+    {
+      "slug": "ttl-or-ping-is-visible-but-tftp-put-receives-no-ack-or-times-out",
+      "primary_keyword": "TTL or ping is visible but TFTP PUT receives no ACK or times out.",
+      "intent": "troubleshooting",
+      "source_categories": [
+        "failure_mode"
+      ],
+      "stage": "candidate"
+    },
+    {
+      "slug": "router-tftp-put-no-ack",
+      "primary_keyword": "router TFTP put no ACK",
+      "intent": "troubleshooting",
+      "source_categories": [
+        "tftp"
+      ],
+      "stage": "candidate"
+    },
+    {
+      "slug": "tftp-timeout-router-recovery",
+      "primary_keyword": "TFTP timeout router recovery",
+      "intent": "troubleshooting",
+      "source_categories": [
+        "tftp"
+      ],
+      "stage": "candidate"
+    },
+    {
+      "slug": "firmware-upload-finished-but-router-not-working",
+      "primary_keyword": "firmware upload finished but router not working",
+      "intent": "troubleshooting",
+      "source_categories": [
+        "panic_symptom"
+      ],
+      "stage": "candidate"
+    },
+    {
+      "slug": "router-recovery-upload-complete-no-web-ui",
+      "primary_keyword": "router recovery upload complete no web UI",
+      "intent": "troubleshooting",
+      "source_categories": [
+        "panic_symptom"
+      ],
+      "stage": "candidate"
+    },
+    {
+      "slug": "after-tftp-upload-nothing-happens",
+      "primary_keyword": "after TFTP upload nothing happens",
+      "intent": "troubleshooting",
+      "source_categories": [
+        "panic_symptom"
+      ],
+      "stage": "candidate"
+    },
+    {
+      "slug": "recovery-complete-but-192-168-1-1-not-opening",
+      "primary_keyword": "recovery complete but 192.168.1.1 not opening",
+      "intent": "troubleshooting",
+      "source_categories": [
+        "panic_symptom"
+      ],
+      "stage": "candidate"
+    },
+    {
+      "slug": "firmware-upload-completed-but-the-admin-ui-is-not-immediately-reachable",
+      "primary_keyword": "Firmware upload completed but the admin UI is not immediately reachable.",
+      "intent": "troubleshooting",
+      "source_categories": [
+        "failure_mode"
+      ],
+      "stage": "candidate"
+    },
+    {
+      "slug": "firmware-upload-complete-but-router-not-working",
+      "primary_keyword": "firmware upload complete but router not working",
+      "intent": "troubleshooting",
+      "source_categories": [
+        "post_upload"
+      ],
+      "stage": "candidate"
+    },
+    {
+      "slug": "router-recovery-upload-finished-no-web-ui",
+      "primary_keyword": "router recovery upload finished no web UI",
+      "intent": "troubleshooting",
+      "source_categories": [
+        "post_upload"
+      ],
+      "stage": "candidate"
+    },
+    {
+      "slug": "ttl-100-visible-but-manual-tftp-put-receives-no-ack-or-times-out",
+      "primary_keyword": "TTL=100 visible but manual TFTP PUT receives no ACK or times out",
+      "intent": "troubleshooting",
+      "source_categories": [
+        "incident_symptom"
+      ],
+      "stage": "candidate"
+    },
+    {
+      "slug": "netgear-r7000-ttl-100-visible-but-manual-tftp-put-receives-no-ack-or-times-out",
+      "primary_keyword": "NETGEAR R7000 TTL=100 visible but manual TFTP PUT receives no ACK or times out",
+      "intent": "long_tail_troubleshooting",
+      "source_categories": [
+        "model_incident"
+      ],
+      "stage": "candidate"
+    }
+  ],
+  "safety_note": "SEO candidates are not recovery guidance. They must route into reviewed workflow/profile content before publication."
+}
