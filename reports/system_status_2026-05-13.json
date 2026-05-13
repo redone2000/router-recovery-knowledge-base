@@ -1,0 +1,94 @@
+{
+  "generated_at": "2026-05-13T13:03:52.331539+00:00",
+  "profiles": {
+    "incoming": {
+      "count": 2,
+      "valid_count": 2,
+      "invalid_count": 0,
+      "confidence_distribution": {
+        "medium": 2
+      },
+      "vendor_distribution": {
+        "ASUS": 1,
+        "NETGEAR": 1
+      },
+      "profiles": [
+        {
+          "id": "asus-rt-ac86u-unknown-unknown",
+          "vendor": "ASUS",
+          "model": "RT-AC86U",
+          "confidence_level": "medium",
+          "file": "incoming/asus-rt-ac86u-unknown-unknown.jsonl"
+        },
+        {
+          "id": "netgear-r7000-unknown-unknown",
+          "vendor": "NETGEAR",
+          "model": "R7000",
+          "confidence_level": "medium",
+          "file": "incoming/netgear-r7000-unknown-unknown.jsonl"
+        }
+      ]
+    },
+    "reviewed": {
+      "count": 0,
+      "valid_count": 0,
+      "invalid_count": 0,
+      "confidence_distribution": {},
+      "vendor_distribution": {},
+      "profiles": []
+    },
+    "final": {
+      "count": 0,
+      "valid_count": 0,
+      "invalid_count": 0,
+      "confidence_distribution": {},
+      "vendor_distribution": {},
+      "profiles": []
+    }
+  },
+  "incidents": {
+    "count": 1,
+    "blocked_profile_gate_count": 1,
+    "blocked_incidents": [
+      {
+        "incident_id": "netgear-r7000-ttl100-tftp-timeout-2026-05-13",
+        "vendor": "NETGEAR",
+        "model": "R7000",
+        "symptom": "TTL=100 visible but manual TFTP PUT receives no ACK or times out",
+        "profile_gate": "blocked",
+        "resolution": "unresolved",
+        "file": "incidents/lab/netgear_r7000_ttl100_tftp_timeout_2026-05-13.json"
+      }
+    ]
+  },
+  "workflows": {
+    "count": 2,
+    "workflow_ids": [
+      "passive-tftp-put",
+      "post-upload-phase"
+    ],
+    "draft_count": 2
+  },
+  "lifecycle_decisions": {
+    "count": 1,
+    "paused_profiles": [
+      "netgear-r7000-unknown-unknown"
+    ]
+  },
+  "seo": {
+    "keyword_count": 40,
+    "suggested_page_count": 20,
+    "file": "exports/seo_keyword_candidates.json"
+  },
+  "recommended_next_actions": [
+    "Owner confirm ASUS RT-AC86U lab observation before reviewed-candidate migration.",
+    "Keep NETGEAR R7000 out of reviewed/final until lab retest resolves timing incident.",
+    "Draft Web Recovery workflow before expanding TP-Link/AX model coverage."
+  ],
+  "prohibited_actions": [
+    "Do not write final/ automatically.",
+    "Do not promote incidents directly to profile guidance.",
+    "Do not use R7000 as App-ready guidance while paused.",
+    "Do not expand broad model coverage before workflow and incident gates are stable."
+  ]
+}
