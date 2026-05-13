@@ -69,6 +69,13 @@ def validate_date(value: Any) -> bool:
     return True
 
 
+def contains_warning_text(values: Any, patterns: tuple[str, ...]) -> bool:
+    if not isinstance(values, list):
+        return False
+    combined = " ".join(str(value).lower() for value in values)
+    return any(pattern in combined for pattern in patterns)
+
+
 def validate_profile(profile: dict[str, Any], schema: dict[str, Any], enums: dict[str, set[str]], allow_derived: bool) -> list[str]:
     errors: list[str] = []
     required = set(schema.get("required", []))
@@ -119,6 +126,9 @@ def validate_profile(profile: dict[str, Any], schema: dict[str, Any], enums: dic
     confidence_enum = enums.get("confidence_levels", set())
     if confidence is not None and confidence not in confidence_enum:
         errors.append(f"invalid confidence_level: {confidence}")
+
+    if source_type == "personal_testing" and confidence in {"high", "verified"}:
+        errors.append("personal_testing profiles cannot use confidence_level high or verified")
 
     source_evidence = profile.get("source_evidence")
     if not is_non_empty(source_evidence):
@@ -171,6 +181,26 @@ def validate_profile(profile: dict[str, Any], schema: dict[str, Any], enums: dic
             errors.append("confidence_level cannot be high or verified when hardware_version is unknown")
         if profile.get("firmware_version") == "unknown":
             errors.append("confidence_level cannot be high or verified when firmware_version is unknown")
+
+    known_issues = profile.get("known_issues")
+    risk_warnings = profile.get("risk_warnings")
+    if profile.get("hardware_version") == "unknown":
+        if not contains_warning_text(known_issues, ("hardware version",)) and not contains_warning_text(risk_warnings, ("hardware version",)):
+            errors.append("hardware_version unknown requires corresponding known_issues or risk_warnings entry")
+    if profile.get("firmware_version") == "unknown":
+        if not contains_warning_text(known_issues, ("firmware version", "firmware applicability", "broad firmware")) and not contains_warning_text(risk_warnings, ("firmware version", "firmware applicability", "broad firmware")):
+            errors.append("firmware_version unknown requires corresponding known_issues or risk_warnings entry")
+
+    post_upload_behavior = profile.get("post_upload_behavior")
+    if isinstance(post_upload_behavior, dict) and post_upload_behavior.get("power_cycle_required") is True:
+        warning_text = str(post_upload_behavior.get("user_warning_after_upload") or "").lower()
+        has_power_cycle_warning = (
+            "power cycle" in warning_text
+            or ("unplug" in warning_text and ("reconnect" in warning_text or "reconnecting" in warning_text))
+            or contains_warning_text(risk_warnings, ("power cycle", "unplug"))
+        )
+        if not has_power_cycle_warning:
+            errors.append("post_upload_behavior.power_cycle_required true requires a prominent user warning")
 
     method_detail_requirements = {
         "uart_serial": "uart_details",

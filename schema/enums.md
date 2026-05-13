@@ -135,3 +135,13 @@ Machine-readable recovery entry method values should be stable lowercase identif
 | `reset_hold_power_on` | Hold reset while powering on the device |
 | `wps_hold_power_on` | Hold WPS while powering on the device |
 | `unknown` | Entry method is not known or not evidenced |
+
+## 11. observation_only
+
+`observation_only` is an optional boolean used inside profile field groups.
+
+| Value | Description |
+|-------|-------------|
+| `true` | The field group records behavior observed on tested units and must not be generalized without additional evidence |
+| `false` | The field group is supported as generally applicable by stronger source evidence |
+| `null` or omitted | Generalization status has not been evaluated |

@@ -198,6 +198,10 @@
       "type": "object",
       "description": "Network-based recovery details",
       "properties": {
+        "observation_only": {
+          "type": ["boolean", "null"],
+          "description": "True when this group is based on observed tested-unit behavior rather than vendor-documented general applicability"
+        },
         "passive_tftp_from_router": {
           "type": ["boolean", "null"],
           "description": "Router acts as TFTP server and the user connects with a TFTP client. Null means unknown or not evidenced, not inferred."
@@ -249,6 +253,10 @@
       "type": "object",
       "description": "TFTP protocol behavior details observed or documented for this recovery profile",
       "properties": {
+        "observation_only": {
+          "type": ["boolean", "null"],
+          "description": "True when this group is based on observed tested-unit behavior rather than vendor-documented general applicability"
+        },
         "mode": {
           "type": ["string", "null"],
           "description": "TFTP transfer mode, such as octet"
@@ -309,6 +317,10 @@
       "type": "object",
       "description": "Hardware button-based recovery details",
       "properties": {
+        "observation_only": {
+          "type": ["boolean", "null"],
+          "description": "True when this group is based on observed tested-unit behavior rather than vendor-documented general applicability"
+        },
         "entry_method": {
           "type": ["string", "null"],
           "description": "Machine-readable recovery entry method, such as reset_hold_power_on"
@@ -339,6 +351,10 @@
       "type": "object",
       "description": "Firmware artifact details for recovery",
       "properties": {
+        "observation_only": {
+          "type": ["boolean", "null"],
+          "description": "True when this group is based on observed tested-unit behavior rather than vendor-documented general applicability"
+        },
         "file_type": {
           "type": ["string", "null"],
           "description": "Required or observed firmware file type or extension"
@@ -360,6 +376,10 @@
       "type": "object",
       "description": "Required behavior after firmware upload completes",
       "properties": {
+        "observation_only": {
+          "type": ["boolean", "null"],
+          "description": "True when this group is based on observed tested-unit behavior rather than vendor-documented general applicability"
+        },
         "wait_seconds": {
           "type": ["integer", "null"],
           "description": "Observed or documented wait time after upload before next action"
@@ -386,6 +406,10 @@
       "type": "object",
       "description": "Observed recovery outcomes from testing or documented reports",
       "properties": {
+        "observation_only": {
+          "type": ["boolean", "null"],
+          "description": "True when this group is based on observed tested-unit behavior rather than vendor-documented general applicability"
+        },
         "config_retention_observed": {
           "type": ["string", "null"],
           "enum": ["retained", "factory_reset", "mixed", "unknown", null],
