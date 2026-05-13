@@ -40,6 +40,7 @@ ALLOWED_SOURCE_TYPES = {
     "third_party_repository",
     "verified_community_guide",
     "community_forum_post",
+    "social_media",
 }
 
 ALLOWED_SCOPES = {
