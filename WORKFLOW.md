@@ -3,6 +3,16 @@
 ## Overview
 The review process ensures all recovery profiles meet quality standards before being made available for general use. Profiles move through three stages: `incoming/` → `reviewed/` → `final/`.
 
+This profile workflow is now part of the broader Recovery Knowledge System. Evidence may also live as source indexes, incidents, workflows, and governance reports before it is eligible to become profile data.
+
+See:
+
+- `docs/recovery_knowledge_system_architecture.md`
+- `docs/recovery_language.md`
+- `docs/evidence_lifecycle.md`
+
+Unresolved incidents and draft workflows must not be treated as profile guidance.
+
 ## Repository Progress Sync
 Stage-level project work should be committed to git and pushed to the configured private remote repository after validation. The default remote repository name should match this directory name (`router-recovery-knowledge`) unless there is a clear reason to use another name.
 

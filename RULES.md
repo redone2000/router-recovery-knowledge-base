@@ -7,6 +7,9 @@
 - Do not perform destructive operations, public releases, or externally visible submissions without explicit confirmation.
 - OpenClaw does not reliably share this project's working directory context. Any task file given to OpenClaw MUST be referenced by absolute path, for example `/Users/YiYuan/Projects/router-recovery-knowledge/prompts/agent_tasks/openclaw_stage1_source_list_proposal.md`.
 - Store long agent handoff prompts under `prompts/agent_tasks/`; chat messages to agents should reference the absolute file path plus the current safety limits.
+- The project is a Recovery Knowledge System, not only a model profile database. Source indexes, incidents, workflows, and profiles have separate lifecycles. See `docs/evidence_lifecycle.md`.
+- Incidents and draft workflows MUST NOT be treated as reviewed or final profile guidance.
+- Failed lab tests SHOULD be preserved as incidents when they contain useful recovery signals, timing clues, or workflow hypotheses.
 
 ## 1. Required Fields
 All recovery profiles MUST include the following fields. Missing any of these fields will automatically trigger a confidence downgrade and require changes before review can proceed.
