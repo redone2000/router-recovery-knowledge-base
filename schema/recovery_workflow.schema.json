@@ -222,6 +222,13 @@
         "additionalProperties": false
       }
     },
+    "evidence_source_refs": {
+      "type": "array",
+      "description": "Workflow source-index IDs that may support future workflow updates without becoming profile evidence by themselves",
+      "items": {
+        "type": "string"
+      }
+    },
     "created_date": {
       "type": "string",
       "format": "date"

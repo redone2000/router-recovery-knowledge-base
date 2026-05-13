@@ -81,6 +81,23 @@ LIST_FIELDS = {
     "conflicts",
 }
 
+SCOPE_GAP_REQUIREMENTS = {
+    "workflow_level": "workflow_level_not_model_specific",
+    "brand_level": "brand_level_not_model_specific",
+    "series_level": "series_level_not_model_specific",
+    "unknown": "applicability_scope_unknown",
+}
+
+WORKFLOW_TOPIC_HINTS = {
+    "web_recovery": ("recovery", "firmware_upload", "web"),
+    "passive_tftp_put": ("tftp", "put", "upload"),
+    "post_upload_phase": ("post_upload", "upload", "wait", "reboot"),
+    "recovery_preparation": ("preparation", "static_ip", "ethernet"),
+    "active_tftp_server": ("tftp", "server", "filename"),
+    "nmrp": ("nmrp",),
+    "rescue_mode": ("rescue", "recovery_mode", "reset"),
+}
+
 
 Issue = tuple[str, int, str]
 
@@ -138,6 +155,11 @@ def validate_row(row: dict[str, Any], path: Path) -> list[str]:
     if row.get("applicability_scope") not in ALLOWED_SCOPES:
         issues.append(f"invalid applicability_scope: {row.get('applicability_scope')}")
 
+    evidence_gaps = row.get("evidence_gaps")
+    scope_gap = SCOPE_GAP_REQUIREMENTS.get(row.get("applicability_scope"))
+    if scope_gap and isinstance(evidence_gaps, list) and scope_gap not in evidence_gaps:
+        issues.append(f"non-model scope must include evidence gap: {scope_gap}")
+
     if row.get("profile_generation_allowed") is not False:
         issues.append("workflow source index rows must not allow profile generation")
 
@@ -165,8 +187,19 @@ def validate_row(row: dict[str, Any], path: Path) -> list[str]:
         if not isinstance(row.get(field), list) or not row[field]:
             issues.append(f"{field} must be a non-empty array")
 
+    topics = " ".join(str(topic).lower() for topic in row.get("evidence_topics", []))
+    if isinstance(workflow_targets, list):
+        for target in workflow_targets:
+            hints = WORKFLOW_TOPIC_HINTS.get(target, ())
+            if hints and not any(hint in topics for hint in hints):
+                issues.append(f"evidence_topics must include a topic matching workflow target: {target}")
+
     if row.get("status") == "indexed_context_only" and row.get("workflow_update_allowed") is True:
         issues.append("context-only rows must not set workflow_update_allowed=true")
+
+    collector_notes = str(row.get("collector_notes", "")).lower()
+    if "profile" not in collector_notes or not any(marker in collector_notes for marker in ("not", "no ", "without", "must not", "does not")):
+        issues.append("collector_notes must explicitly state the profile-generation boundary")
 
     if not validate_date(row.get("extracted_date")):
         issues.append("extracted_date must be YYYY-MM-DD")
