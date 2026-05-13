@@ -10,6 +10,9 @@
 - The project is a Recovery Knowledge System, not only a model profile database. Source indexes, incidents, workflows, and profiles have separate lifecycles. See `docs/evidence_lifecycle.md`.
 - Incidents and draft workflows MUST NOT be treated as reviewed or final profile guidance.
 - Failed lab tests SHOULD be preserved as incidents when they contain useful recovery signals, timing clues, or workflow hypotheses.
+- Recovery knowledge production MUST follow `docs/recovery_priority_strategy.md`. Do not expand by arbitrary model count, market-sales lists, or long-tail profile hunting before workflow and brand-system gaps are closed.
+- Current Stage 1 brand priority is TP-Link, ASUS, then NETGEAR. This is a knowledge-production priority, not a market-share ranking.
+- OpenClaw collection tasks MUST be framed by Recovery Workflow Coverage Gap, reference-device evidence, brand-system assumptions, or incident resolution. Open-ended model scraping is prohibited.
 
 ## 1. Required Fields
 All recovery profiles MUST include the following fields. Missing any of these fields will automatically trigger a confidence downgrade and require changes before review can proceed.

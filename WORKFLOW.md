@@ -10,8 +10,32 @@ See:
 - `docs/recovery_knowledge_system_architecture.md`
 - `docs/recovery_language.md`
 - `docs/evidence_lifecycle.md`
+- `docs/recovery_priority_strategy.md`
 
 Unresolved incidents and draft workflows must not be treated as profile guidance.
+
+## Production Priority
+
+Recovery knowledge production must follow a deliberate priority order:
+
+```text
+Recovery Foundations
+  -> Recovery Workflow Types
+  -> Brand Recovery Worlds
+  -> Reference Devices
+  -> Family Expansion
+  -> Long-tail Profiles
+```
+
+Do not expand by market-share lists or arbitrary model count.
+
+Current brand priority:
+
+1. TP-Link
+2. ASUS
+3. NETGEAR
+
+OpenClaw tasks should be framed as workflow coverage gaps or reference-device evidence gaps, not as open-ended model collection.
 
 ## Repository Progress Sync
 Stage-level project work should be committed to git and pushed to the configured private remote repository after validation. The default remote repository name should match this directory name (`router-recovery-knowledge`) unless there is a clear reason to use another name.

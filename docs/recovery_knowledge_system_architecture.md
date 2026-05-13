@@ -98,6 +98,14 @@ Examples:
 
 Brand systems help avoid duplicating the same explanation across many model profiles.
 
+Current brand priority is intentionally limited:
+
+1. TP-Link: Web Recovery and panic recovery reference world
+2. ASUS: Rescue Mode, enthusiast recovery, and post-upload behavior
+3. NETGEAR: NMRP/TFTP orchestration, timing sensitivity, and legacy complexity
+
+This is a knowledge-production order, not a market-share ranking.
+
 ## Layer 4: Model Profiles
 
 Model profiles are structured, evidence-backed parameter sets.
@@ -177,6 +185,41 @@ The graph is bidirectional:
 - lab observations and incidents correct the workflow
 
 ## Current Project Implications
+
+### Priority Discipline
+
+The project should not expand by market-sales lists or arbitrary model coverage.
+
+Production must follow Recovery Opportunity Priority:
+
+- recovery user volume
+- panic recovery likelihood
+- workflow abstraction value
+- recovery transparency
+- evidence collectability
+- beginner-user impact
+- SEO/search demand
+
+The intended production order is:
+
+```text
+Recovery Foundations
+  -> Recovery Workflow Types
+  -> Brand Recovery Worlds
+  -> Reference Devices
+  -> Family Expansion
+  -> Long-tail Profiles
+```
+
+Reference device strategy:
+
+| Brand | Reference Direction |
+| --- | --- |
+| TP-Link | Archer AX55 first, then AX family expansion |
+| ASUS | AX86U-class Rescue Mode family, with RT-AC86U lab data kept as observed evidence |
+| NETGEAR | RAX40 as modern reference; R7000 stays incident/research until reproducible |
+
+OpenClaw should collect by workflow coverage gap, not by unlimited model hunting.
 
 ### R7000
 
