@@ -1,9 +1,10 @@
 {
-  "generated_at": "2026-05-13T12:44:47.604363+00:00",
+  "generated_at": "2026-05-13T13:13:36.195545+00:00",
   "source_inputs": {
     "workflows": [
       "workflows/passive_tftp_put.json",
-      "workflows/post_upload_phase.json"
+      "workflows/post_upload_phase.json",
+      "workflows/web_recovery.json"
     ],
     "incidents": [
       "incidents/lab/netgear_r7000_ttl100_tftp_timeout_2026-05-13.json"
@@ -313,6 +314,123 @@
           "workflows/post_upload_phase.json"
         ],
         "notes": []
+      },
+      {
+        "keyword": "Web Recovery Workflow",
+        "category": "workflow",
+        "intent": "workflow_explainer",
+        "sources": [
+          "workflows/web_recovery.json"
+        ],
+        "notes": []
+      },
+      {
+        "keyword": "how web recovery workflow works",
+        "category": "workflow",
+        "intent": "workflow_explainer",
+        "sources": [
+          "workflows/web_recovery.json"
+        ],
+        "notes": []
+      },
+      {
+        "keyword": "recovery page does not open",
+        "category": "panic_symptom",
+        "intent": "troubleshooting",
+        "sources": [
+          "workflows/web_recovery.json"
+        ],
+        "notes": [
+          "Defined as workflow panic entry query."
+        ]
+      },
+      {
+        "keyword": "router recovery page not opening",
+        "category": "panic_symptom",
+        "intent": "troubleshooting",
+        "sources": [
+          "workflows/web_recovery.json"
+        ],
+        "notes": [
+          "Defined as workflow panic entry query."
+        ]
+      },
+      {
+        "keyword": "192.168.1.1 recovery page not working",
+        "category": "panic_symptom",
+        "intent": "troubleshooting",
+        "sources": [
+          "workflows/web_recovery.json"
+        ],
+        "notes": [
+          "Defined as workflow panic entry query."
+        ]
+      },
+      {
+        "keyword": "firmware upload page not reachable",
+        "category": "panic_symptom",
+        "intent": "troubleshooting",
+        "sources": [
+          "workflows/web_recovery.json"
+        ],
+        "notes": [
+          "Defined as workflow panic entry query."
+        ]
+      },
+      {
+        "keyword": "web recovery upload complete router not working",
+        "category": "panic_symptom",
+        "intent": "troubleshooting",
+        "sources": [
+          "workflows/web_recovery.json"
+        ],
+        "notes": [
+          "Defined as workflow panic entry query."
+        ]
+      },
+      {
+        "keyword": "router recovery recovery page loads",
+        "category": "readiness_signal",
+        "intent": "troubleshooting",
+        "sources": [
+          "workflows/web_recovery.json"
+        ],
+        "notes": [
+          "Page availability still does not prove the firmware file is correct."
+        ]
+      },
+      {
+        "keyword": "router recovery ping response",
+        "category": "readiness_signal",
+        "intent": "troubleshooting",
+        "sources": [
+          "workflows/web_recovery.json"
+        ],
+        "notes": [
+          "Ping does not guarantee that the recovery web page is ready."
+        ]
+      },
+      {
+        "keyword": "Recovery page does not open at the expected router IP.",
+        "category": "failure_mode",
+        "intent": "troubleshooting",
+        "sources": [
+          "workflows/web_recovery.json"
+        ],
+        "notes": [
+          "Workflow failure mode."
+        ]
+      },
+      {
+        "keyword": "Firmware upload completes but the router is not reachable afterward.",
+        "category": "failure_mode",
+        "intent": "troubleshooting",
+        "sources": [
+          "workflows/web_recovery.json"
+        ],
+        "notes": [
+          "Workflow failure mode."
+        ]
       }
     ],
     "incident_keywords": [
@@ -729,6 +847,123 @@
       "notes": []
     },
     {
+      "keyword": "Web Recovery Workflow",
+      "category": "workflow",
+      "intent": "workflow_explainer",
+      "sources": [
+        "workflows/web_recovery.json"
+      ],
+      "notes": []
+    },
+    {
+      "keyword": "how web recovery workflow works",
+      "category": "workflow",
+      "intent": "workflow_explainer",
+      "sources": [
+        "workflows/web_recovery.json"
+      ],
+      "notes": []
+    },
+    {
+      "keyword": "recovery page does not open",
+      "category": "panic_symptom",
+      "intent": "troubleshooting",
+      "sources": [
+        "workflows/web_recovery.json"
+      ],
+      "notes": [
+        "Defined as workflow panic entry query."
+      ]
+    },
+    {
+      "keyword": "router recovery page not opening",
+      "category": "panic_symptom",
+      "intent": "troubleshooting",
+      "sources": [
+        "workflows/web_recovery.json"
+      ],
+      "notes": [
+        "Defined as workflow panic entry query."
+      ]
+    },
+    {
+      "keyword": "192.168.1.1 recovery page not working",
+      "category": "panic_symptom",
+      "intent": "troubleshooting",
+      "sources": [
+        "workflows/web_recovery.json"
+      ],
+      "notes": [
+        "Defined as workflow panic entry query."
+      ]
+    },
+    {
+      "keyword": "firmware upload page not reachable",
+      "category": "panic_symptom",
+      "intent": "troubleshooting",
+      "sources": [
+        "workflows/web_recovery.json"
+      ],
+      "notes": [
+        "Defined as workflow panic entry query."
+      ]
+    },
+    {
+      "keyword": "web recovery upload complete router not working",
+      "category": "panic_symptom",
+      "intent": "troubleshooting",
+      "sources": [
+        "workflows/web_recovery.json"
+      ],
+      "notes": [
+        "Defined as workflow panic entry query."
+      ]
+    },
+    {
+      "keyword": "router recovery recovery page loads",
+      "category": "readiness_signal",
+      "intent": "troubleshooting",
+      "sources": [
+        "workflows/web_recovery.json"
+      ],
+      "notes": [
+        "Page availability still does not prove the firmware file is correct."
+      ]
+    },
+    {
+      "keyword": "router recovery ping response",
+      "category": "readiness_signal",
+      "intent": "troubleshooting",
+      "sources": [
+        "workflows/web_recovery.json"
+      ],
+      "notes": [
+        "Ping does not guarantee that the recovery web page is ready."
+      ]
+    },
+    {
+      "keyword": "Recovery page does not open at the expected router IP.",
+      "category": "failure_mode",
+      "intent": "troubleshooting",
+      "sources": [
+        "workflows/web_recovery.json"
+      ],
+      "notes": [
+        "Workflow failure mode."
+      ]
+    },
+    {
+      "keyword": "Firmware upload completes but the router is not reachable afterward.",
+      "category": "failure_mode",
+      "intent": "troubleshooting",
+      "sources": [
+        "workflows/web_recovery.json"
+      ],
+      "notes": [
+        "Workflow failure mode."
+      ]
+    },
+    {
       "keyword": "TTL=100 visible but manual TFTP PUT receives no ACK or times out",
       "category": "incident_symptom",
       "intent": "troubleshooting",
@@ -999,6 +1234,69 @@
       "intent": "troubleshooting",
       "source_categories": [
         "post_upload"
+      ],
+      "stage": "candidate"
+    },
+    {
+      "slug": "recovery-page-does-not-open",
+      "primary_keyword": "recovery page does not open",
+      "intent": "troubleshooting",
+      "source_categories": [
+        "panic_symptom"
+      ],
+      "stage": "candidate"
+    },
+    {
+      "slug": "router-recovery-page-not-opening",
+      "primary_keyword": "router recovery page not opening",
+      "intent": "troubleshooting",
+      "source_categories": [
+        "panic_symptom"
+      ],
+      "stage": "candidate"
+    },
+    {
+      "slug": "192-168-1-1-recovery-page-not-working",
+      "primary_keyword": "192.168.1.1 recovery page not working",
+      "intent": "troubleshooting",
+      "source_categories": [
+        "panic_symptom"
+      ],
+      "stage": "candidate"
+    },
+    {
+      "slug": "firmware-upload-page-not-reachable",
+      "primary_keyword": "firmware upload page not reachable",
+      "intent": "troubleshooting",
+      "source_categories": [
+        "panic_symptom"
+      ],
+      "stage": "candidate"
+    },
+    {
+      "slug": "web-recovery-upload-complete-router-not-working",
+      "primary_keyword": "web recovery upload complete router not working",
+      "intent": "troubleshooting",
+      "source_categories": [
+        "panic_symptom"
+      ],
+      "stage": "candidate"
+    },
+    {
+      "slug": "recovery-page-does-not-open-at-the-expected-router-ip",
+      "primary_keyword": "Recovery page does not open at the expected router IP.",
+      "intent": "troubleshooting",
+      "source_categories": [
+        "failure_mode"
+      ],
+      "stage": "candidate"
+    },
+    {
+      "slug": "firmware-upload-completes-but-the-router-is-not-reachable-afterward",
+      "primary_keyword": "Firmware upload completes but the router is not reachable afterward.",
+      "intent": "troubleshooting",
+      "source_categories": [
+        "failure_mode"
       ],
       "stage": "candidate"
     },

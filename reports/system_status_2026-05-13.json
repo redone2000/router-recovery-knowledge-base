@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-13T13:03:52.331539+00:00",
+  "generated_at": "2026-05-13T13:13:36.195914+00:00",
   "profiles": {
     "incoming": {
       "count": 2,
@@ -62,12 +62,13 @@
     ]
   },
   "workflows": {
-    "count": 2,
+    "count": 3,
     "workflow_ids": [
       "passive-tftp-put",
-      "post-upload-phase"
+      "post-upload-phase",
+      "web-recovery"
     ],
-    "draft_count": 2
+    "draft_count": 3
   },
   "lifecycle_decisions": {
     "count": 1,
@@ -76,9 +77,9 @@
     ]
   },
   "seo": {
-    "keyword_count": 40,
-    "suggested_page_count": 20,
-    "file": "exports/seo_keyword_candidates.json"
+    "keyword_count": 0,
+    "suggested_page_count": 0,
+    "file": null
   },
   "recommended_next_actions": [
     "Owner confirm ASUS RT-AC86U lab observation before reviewed-candidate migration.",

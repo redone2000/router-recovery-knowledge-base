@@ -1,0 +1,164 @@
+{
+  "workflow_id": "web-recovery",
+  "workflow_type": "web_recovery",
+  "status": "draft",
+  "title": "Web Recovery Workflow",
+  "summary": "The router exposes a temporary recovery web page where the user uploads firmware through a browser.",
+  "scope": "cross-brand workflow; model or series applicability must be verified before use",
+  "phases": [
+    {
+      "phase_id": "prepare-client",
+      "title": "Prepare client network",
+      "purpose": "Put the user's computer on the subnet expected by the recovery web page.",
+      "actions": [
+        "Use wired Ethernet.",
+        "Apply the profile's client IP assignment rule.",
+        "Open the model-specific recovery URL only after recovery mode is active."
+      ],
+      "required_profile_fields": [
+        "network_recovery.client_ip_assignment",
+        "network_recovery.client_static_ip",
+        "web_recovery.default_url"
+      ],
+      "handoff_to_phase": "enter-recovery"
+    },
+    {
+      "phase_id": "enter-recovery",
+      "title": "Enter recovery mode",
+      "purpose": "Trigger the temporary recovery web server.",
+      "actions": [
+        "Follow the profile's button or power-on entry method.",
+        "Use model-specific LED or page availability signals.",
+        "Do not assume the page is ready only because ping responds."
+      ],
+      "required_profile_fields": [
+        "button_recovery.entry_method",
+        "button_recovery.led_indicator",
+        "network_recovery.required_lan_port"
+      ],
+      "handoff_to_phase": "open-upload-page"
+    },
+    {
+      "phase_id": "open-upload-page",
+      "title": "Open recovery page",
+      "purpose": "Reach the router's temporary firmware upload page.",
+      "actions": [
+        "Open the profile's recovery URL in a browser.",
+        "If the page does not open, verify static IP, Ethernet route, and recovery mode state.",
+        "Do not switch to normal admin UI assumptions while in recovery mode."
+      ],
+      "required_profile_fields": [
+        "web_recovery.default_url",
+        "network_recovery.default_ip"
+      ],
+      "handoff_to_phase": "upload-firmware"
+    },
+    {
+      "phase_id": "upload-firmware",
+      "title": "Upload firmware",
+      "purpose": "Submit a firmware image through the recovery web page.",
+      "actions": [
+        "Use only firmware format and hardware version supported by the profile.",
+        "Wait for the page or device to finish accepting the upload.",
+        "Continue into post-upload behavior instead of assuming immediate success."
+      ],
+      "required_profile_fields": [
+        "firmware_details.file_type",
+        "web_recovery.expected_firmware_extension",
+        "post_upload_behavior"
+      ],
+      "handoff_to_phase": "post-upload"
+    }
+  ],
+  "required_profile_parameters": [
+    "web_recovery.default_url",
+    "web_recovery.expected_firmware_extension",
+    "network_recovery.client_ip_assignment",
+    "network_recovery.default_ip",
+    "firmware_details.file_type",
+    "post_upload_behavior",
+    "risk_warnings"
+  ],
+  "readiness_signals": [
+    {
+      "signal": "recovery-page-loads",
+      "meaning": "The temporary web recovery server is reachable.",
+      "reliability": "strong",
+      "warning": "Page availability still does not prove the firmware file is correct."
+    },
+    {
+      "signal": "ping-response",
+      "meaning": "The router may be reachable at the recovery IP.",
+      "reliability": "weak",
+      "warning": "Ping does not guarantee that the recovery web page is ready."
+    }
+  ],
+  "failure_modes": [
+    {
+      "failure_id": "recovery-page-not-opening",
+      "symptom": "Recovery page does not open at the expected router IP.",
+      "likely_causes": [
+        "Client IP is not on the recovery subnet",
+        "Wrong Ethernet interface is active",
+        "Recovery mode was not entered",
+        "Wrong LAN port or cable path",
+        "The source is series-level and not proven for this model"
+      ],
+      "recommended_response": "Check client IP assignment, wired route, recovery mode entry, and model applicability before generating profile guidance.",
+      "linked_incidents": []
+    },
+    {
+      "failure_id": "upload-complete-no-recovery",
+      "symptom": "Firmware upload completes but the router is not reachable afterward.",
+      "likely_causes": [
+        "Post-upload phase still in progress",
+        "Manual power cycle or DHCP return may be required",
+        "Firmware file may not match hardware version"
+      ],
+      "recommended_response": "Route to Post-Upload Phase workflow and preserve hardware/firmware uncertainty.",
+      "linked_incidents": []
+    }
+  ],
+  "profile_mapping": {
+    "recovery_methods": [
+      "web_ui"
+    ],
+    "network_recovery_fields": [
+      "default_ip",
+      "client_ip_assignment",
+      "client_static_ip",
+      "required_lan_port"
+    ],
+    "tftp_details_fields": [],
+    "post_upload_behavior_fields": [
+      "wait_seconds",
+      "power_cycle_required",
+      "dhcp_after_power_cycle",
+      "gateway_ip_as_admin_url",
+      "user_warning_after_upload"
+    ]
+  },
+  "panic_entry_queries": [
+    "recovery page does not open",
+    "router recovery page not opening",
+    "192.168.1.1 recovery page not working",
+    "firmware upload page not reachable",
+    "web recovery upload complete router not working"
+  ],
+  "incident_links": [],
+  "source_refs": [
+    {
+      "source_document": "sources/stage1/batch1/tplink_faq_1482.md",
+      "source_url": "https://www.tp-link.com/us/support/faq/1482/",
+      "notes": "Series-level TP-Link Archer AX source used for workflow abstraction only, not AX55 profile generation."
+    },
+    {
+      "source_document": "docs/recovery_language.md",
+      "source_url": null,
+      "notes": "Shared vocabulary for Recovery Mode, Recovery Window, and Post-upload phase."
+    }
+  ],
+  "created_date": "2026-05-13",
+  "updated_date": null,
+  "notes": "Draft workflow. Do not use as model-specific guidance without model-level profile parameters and evidence."
+}
