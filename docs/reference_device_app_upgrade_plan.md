@@ -165,6 +165,8 @@ For each reference device, produce these artifacts in order:
    - successful reproducible facts may update incoming/reviewed candidates
    - unresolved or failed behavior becomes incident data
 
+Before live testing, use the preparation files in `lab_tests/reference_devices/` and the quick note template at `lab_tests/runtime_attempt_quick_note_template.md`.
+
 ## Gates
 
 Allowed now:
