@@ -202,6 +202,14 @@ def validate_row(row: dict[str, Any], path: Path) -> list[str]:
     if "profile" not in collector_notes or not any(marker in collector_notes for marker in ("not", "no ", "without", "must not", "does not")):
         issues.append("collector_notes must explicitly state the profile-generation boundary")
 
+    source_type = row.get("source_type")
+    if (
+        row.get("workflow_update_allowed") is True
+        and source_type in {"third_party_repository", "social_media"}
+        and "reviewer approval" not in collector_notes
+    ):
+        issues.append(f"{source_type} rows with workflow_update_allowed=true must require reviewer approval in collector_notes")
+
     if not validate_date(row.get("extracted_date")):
         issues.append("extracted_date must be YYYY-MM-DD")
 

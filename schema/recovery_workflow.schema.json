@@ -229,6 +229,14 @@
         "type": "string"
       }
     },
+    "evidence_source_type_summary": {
+      "type": "object",
+      "description": "Transparent count or summary of evidence source types supporting this workflow",
+      "additionalProperties": {
+        "type": "integer",
+        "minimum": 0
+      }
+    },
     "created_date": {
       "type": "string",
       "format": "date"
