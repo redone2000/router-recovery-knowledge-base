@@ -56,6 +56,9 @@
   },
   "transfer": {
     "method": "passive_tftp_put",
+    "tftp_direction": "passive_put",
+    "mac_role": "tftp_client",
+    "router_role": "tftp_server",
     "started": true,
     "completed": true,
     "duration_seconds": 36,
@@ -63,6 +66,10 @@
     "block_count": 152833,
     "ack_source_port": 69,
     "server_uses_ephemeral_port_observed": false,
+    "required_filename": null,
+    "first_packet_timing": "WRQ sent after Rescue Mode was observed; exact relative timing not recorded in this sample.",
+    "retry_pattern": "not recorded",
+    "retry_effect": "unknown",
     "error_category": "none",
     "error_message": null
   },

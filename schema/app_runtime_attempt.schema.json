@@ -212,6 +212,19 @@
           "type": "string",
           "enum": ["web_upload", "passive_tftp_put", "active_tftp_server", "nmrp", "unknown"]
         },
+        "tftp_direction": {
+          "type": ["string", "null"],
+          "enum": ["passive_put", "active_server", "not_applicable", "unknown", null],
+          "description": "TFTP direction observed in this attempt, if TFTP is involved"
+        },
+        "mac_role": {
+          "type": ["string", "null"],
+          "enum": ["tftp_client", "tftp_server", "web_client", "nmrp_tool", "unknown", null]
+        },
+        "router_role": {
+          "type": ["string", "null"],
+          "enum": ["tftp_server", "tftp_client", "web_server", "nmrp_peer", "unknown", null]
+        },
         "started": {
           "type": "boolean"
         },
@@ -237,6 +250,22 @@
         },
         "server_uses_ephemeral_port_observed": {
           "type": ["boolean", "null"]
+        },
+        "required_filename": {
+          "type": ["string", "null"],
+          "description": "Required firmware filename observed or used, without local path"
+        },
+        "first_packet_timing": {
+          "type": ["string", "null"],
+          "description": "Timing of first WRQ/RRQ or upload request relative to power-on, LED, ping, or TTL"
+        },
+        "retry_pattern": {
+          "type": ["string", "null"],
+          "description": "Retry behavior used, such as manual retry, continuous retry, or no retry"
+        },
+        "retry_effect": {
+          "type": ["string", "null"],
+          "enum": ["helped", "hurt", "no_visible_effect", "unknown", "not_tested", null]
         },
         "error_category": {
           "type": "string",

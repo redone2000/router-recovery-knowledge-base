@@ -115,6 +115,8 @@ def build_export(profile: dict[str, Any]) -> dict[str, Any]:
             "recovery_methods": profile.get("recovery_methods") or [],
             "passive_tftp_from_router": network.get("passive_tftp_from_router"),
             "active_tftp_to_router": network.get("active_tftp_to_router"),
+            "runtime_tftp_direction_field": "transfer.tftp_direction",
+            "runtime_role_fields": ["transfer.mac_role", "transfer.router_role"],
             "listen_port": network.get("listen_port"),
             "tftp_mode": tftp.get("mode"),
             "filename_required": tftp.get("filename_required"),

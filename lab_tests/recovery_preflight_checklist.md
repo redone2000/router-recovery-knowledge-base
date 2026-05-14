@@ -4,6 +4,8 @@ Use this before each reference-device recovery attempt.
 
 This checklist is intentionally practical. It captures default preparation steps that are easy to do and usually improve success rate, while leaving room for device-specific overrides.
 
+After the test, copy and fill one of the runtime JSON templates in `runtime_attempts/templates/`.
+
 ## 1. Device And Firmware
 
 - [ ] Exact model confirmed:

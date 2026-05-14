@@ -1,0 +1,98 @@
+{
+  "attempt_id": "asus-rt-ax86u-passive-tftp-put-2026-05-14",
+  "status": "draft",
+  "created_date": "2026-05-14",
+  "profile_id": null,
+  "workflow_ids": [
+    "passive-tftp-put"
+  ],
+  "device": {
+    "vendor": "ASUS",
+    "model": "RT-AX86U",
+    "hardware_version": "unknown",
+    "firmware_version_before": "unknown",
+    "firmware_version_after": "unknown",
+    "serial_number_recorded": false
+  },
+  "firmware_file": {
+    "source_type": "official_vendor_page",
+    "official_download_page_url": null,
+    "local_path_recorded": false,
+    "filename_recorded": null,
+    "extension": null,
+    "size_bytes": null,
+    "appears_compressed": null,
+    "checksum_algorithm": null,
+    "checksum_status": "not_checked",
+    "model_match_confirmed_by_user": null
+  },
+  "macos_preflight": {
+    "wired_interface_selected": null,
+    "wifi_available_during_recovery": true,
+    "wired_route_confirmed": null,
+    "local_network_permission": "not_checked",
+    "file_picker_authorized": null,
+    "static_ip_set": null,
+    "client_ip": null,
+    "client_cidr": null,
+    "notes": null
+  },
+  "recovery_entry": {
+    "method": null,
+    "button": null,
+    "hold_seconds_observed": null,
+    "lan_port_used": null,
+    "led_state_observed": null,
+    "user_confirmed_recovery_mode": null
+  },
+  "readiness_observations": {
+    "ping_replied": null,
+    "ttl_observed": null,
+    "service_probe_attempted": null,
+    "service_probe_result": "not_attempted",
+    "readiness_signal_strength": "unknown",
+    "notes": null
+  },
+  "transfer": {
+    "method": "unknown",
+    "tftp_direction": "unknown",
+    "mac_role": "unknown",
+    "router_role": "unknown",
+    "started": false,
+    "completed": false,
+    "duration_seconds": null,
+    "bytes_sent": null,
+    "block_count": null,
+    "ack_source_port": null,
+    "server_uses_ephemeral_port_observed": null,
+    "required_filename": null,
+    "first_packet_timing": null,
+    "retry_pattern": null,
+    "retry_effect": "not_tested",
+    "error_category": "unknown",
+    "error_message": null
+  },
+  "post_upload": {
+    "wait_completed": null,
+    "wait_seconds_actual": null,
+    "power_cycle_performed": null,
+    "dhcp_restored": null,
+    "gateway_detected": null,
+    "admin_ui_opened": null,
+    "notes": null
+  },
+  "outcome": {
+    "result": "unknown",
+    "firmware_version_after_observed": null,
+    "configuration_state": "unknown",
+    "incident_candidate": null,
+    "incident_reason": null
+  },
+  "privacy": {
+    "local_only_by_default": true,
+    "user_export_approved": false,
+    "private_paths_redacted": true,
+    "serials_redacted": true
+  },
+  "notes": "Draft runtime attempt template. Fill from lab notes before using as evidence."
+}
