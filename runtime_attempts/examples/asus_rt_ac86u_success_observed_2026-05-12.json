@@ -1,0 +1,91 @@
+{
+  "attempt_id": "asus-rt-ac86u-success-observed-2026-05-12",
+  "status": "completed",
+  "created_date": "2026-05-12",
+  "profile_id": "asus-rt-ac86u-unknown-unknown",
+  "workflow_ids": [
+    "passive-tftp-put",
+    "post-upload-phase"
+  ],
+  "device": {
+    "vendor": "ASUS",
+    "model": "RT-AC86U",
+    "hardware_version": "unknown",
+    "firmware_version_before": "52334",
+    "firmware_version_after": "52294",
+    "serial_number_recorded": false
+  },
+  "firmware_file": {
+    "source_type": "official_vendor_page",
+    "official_download_page_url": "https://www.asus.com/us/networking-iot-servers/wifi-routers/asus-wifi-routers/rt-ac86u/helpdesk_bios?model2Name=RT-AC86U",
+    "local_path_recorded": false,
+    "filename_recorded": "test.w",
+    "extension": ".w",
+    "size_bytes": 78250004,
+    "appears_compressed": false,
+    "checksum_algorithm": null,
+    "checksum_status": "not_checked",
+    "model_match_confirmed_by_user": true
+  },
+  "macos_preflight": {
+    "wired_interface_selected": "unknown",
+    "wifi_disabled_or_warned": null,
+    "local_network_permission": "allowed",
+    "file_picker_authorized": true,
+    "static_ip_set": true,
+    "client_ip": "192.168.1.10",
+    "client_cidr": "192.168.1.10/24",
+    "notes": "Sandboxed macOS App succeeded when Local Network permission and file-picker access were available."
+  },
+  "recovery_entry": {
+    "method": "reset_hold_power_on",
+    "button": "reset",
+    "hold_seconds_observed": 20,
+    "lan_port_used": "LAN1 nearest the WAN port",
+    "led_state_observed": "Power LED slow flashing",
+    "user_confirmed_recovery_mode": true
+  },
+  "readiness_observations": {
+    "ping_replied": true,
+    "ttl_observed": 100,
+    "service_probe_attempted": false,
+    "service_probe_result": "not_attempted",
+    "readiness_signal_strength": "medium",
+    "notes": "Ping/TTL were useful signals but should not be treated as sufficient success or failure proof."
+  },
+  "transfer": {
+    "method": "passive_tftp_put",
+    "started": true,
+    "completed": true,
+    "duration_seconds": 36,
+    "bytes_sent": 78250004,
+    "block_count": 152833,
+    "ack_source_port": 69,
+    "server_uses_ephemeral_port_observed": false,
+    "error_category": "none",
+    "error_message": null
+  },
+  "post_upload": {
+    "wait_completed": true,
+    "wait_seconds_actual": 180,
+    "power_cycle_performed": true,
+    "dhcp_restored": true,
+    "gateway_detected": "192.168.50.1",
+    "admin_ui_opened": true,
+    "notes": "Observed local runs required waiting about 3 minutes and manually reconnecting power before normal access returned."
+  },
+  "outcome": {
+    "result": "success",
+    "firmware_version_after_observed": "52294",
+    "configuration_state": "retained",
+    "incident_candidate": false,
+    "incident_reason": null
+  },
+  "privacy": {
+    "local_only_by_default": true,
+    "user_export_approved": false,
+    "private_paths_redacted": true,
+    "serials_redacted": true
+  },
+  "notes": "Example runtime attempt for schema validation only. This is not final profile data."
+}

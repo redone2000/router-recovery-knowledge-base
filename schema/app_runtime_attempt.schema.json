@@ -1,0 +1,333 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/redone2000/router-recovery-knowledge/schema/app_runtime_attempt.schema.json",
+  "title": "App Recovery Runtime Attempt",
+  "description": "Schema v0.1 for one local App-guided router recovery attempt. Runtime attempts are local/private by default and are not model profiles.",
+  "type": "object",
+  "required": [
+    "attempt_id",
+    "status",
+    "created_date",
+    "profile_id",
+    "workflow_ids",
+    "device",
+    "firmware_file",
+    "macos_preflight",
+    "recovery_entry",
+    "readiness_observations",
+    "transfer",
+    "post_upload",
+    "outcome",
+    "privacy"
+  ],
+  "properties": {
+    "attempt_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$",
+      "description": "Local stable identifier for this recovery attempt"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "in_progress", "completed", "failed", "abandoned", "redacted_for_export"],
+      "description": "Runtime attempt lifecycle status"
+    },
+    "created_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "profile_id": {
+      "type": ["string", "null"],
+      "description": "Recovery profile used by the App, if any"
+    },
+    "workflow_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "device": {
+      "type": "object",
+      "required": ["vendor", "model", "hardware_version", "firmware_version_before"],
+      "properties": {
+        "vendor": {
+          "type": "string"
+        },
+        "model": {
+          "type": "string"
+        },
+        "hardware_version": {
+          "type": ["string", "null"]
+        },
+        "firmware_version_before": {
+          "type": ["string", "null"]
+        },
+        "firmware_version_after": {
+          "type": ["string", "null"]
+        },
+        "serial_number_recorded": {
+          "type": "boolean",
+          "description": "Whether a serial number was recorded. Avoid exporting serial numbers unless explicitly allowed."
+        }
+      },
+      "additionalProperties": false
+    },
+    "firmware_file": {
+      "type": "object",
+      "required": ["source_type", "local_path_recorded", "extension", "checksum_status"],
+      "properties": {
+        "source_type": {
+          "type": "string",
+          "enum": ["official_vendor_page", "user_supplied", "unknown"]
+        },
+        "official_download_page_url": {
+          "type": ["string", "null"]
+        },
+        "local_path_recorded": {
+          "type": "boolean",
+          "description": "Must be false for exported/shared attempt records"
+        },
+        "filename_recorded": {
+          "type": ["string", "null"],
+          "description": "Optional redacted or base filename; do not include private local paths"
+        },
+        "extension": {
+          "type": ["string", "null"]
+        },
+        "size_bytes": {
+          "type": ["integer", "null"],
+          "minimum": 0
+        },
+        "appears_compressed": {
+          "type": ["boolean", "null"]
+        },
+        "checksum_algorithm": {
+          "type": ["string", "null"]
+        },
+        "checksum_status": {
+          "type": "string",
+          "enum": ["not_checked", "matched", "mismatched", "not_available", "user_skipped"]
+        },
+        "model_match_confirmed_by_user": {
+          "type": ["boolean", "null"]
+        }
+      },
+      "additionalProperties": false
+    },
+    "macos_preflight": {
+      "type": "object",
+      "required": ["wired_interface_selected", "wifi_disabled_or_warned", "local_network_permission", "file_picker_authorized"],
+      "properties": {
+        "wired_interface_selected": {
+          "type": ["string", "null"],
+          "description": "Interface display name or BSD name selected by the user/App"
+        },
+        "wifi_disabled_or_warned": {
+          "type": ["boolean", "null"]
+        },
+        "local_network_permission": {
+          "type": "string",
+          "enum": ["allowed", "denied", "unknown", "not_checked"]
+        },
+        "file_picker_authorized": {
+          "type": ["boolean", "null"]
+        },
+        "static_ip_set": {
+          "type": ["boolean", "null"]
+        },
+        "client_ip": {
+          "type": ["string", "null"]
+        },
+        "client_cidr": {
+          "type": ["string", "null"]
+        },
+        "notes": {
+          "type": ["string", "null"]
+        }
+      },
+      "additionalProperties": false
+    },
+    "recovery_entry": {
+      "type": "object",
+      "required": ["method", "button", "hold_seconds_observed", "lan_port_used"],
+      "properties": {
+        "method": {
+          "type": ["string", "null"]
+        },
+        "button": {
+          "type": ["string", "null"]
+        },
+        "hold_seconds_observed": {
+          "type": ["integer", "null"],
+          "minimum": 0
+        },
+        "lan_port_used": {
+          "type": ["string", "null"]
+        },
+        "led_state_observed": {
+          "type": ["string", "null"]
+        },
+        "user_confirmed_recovery_mode": {
+          "type": ["boolean", "null"]
+        }
+      },
+      "additionalProperties": false
+    },
+    "readiness_observations": {
+      "type": "object",
+      "required": ["ping_replied", "ttl_observed", "readiness_signal_strength"],
+      "properties": {
+        "ping_replied": {
+          "type": ["boolean", "null"]
+        },
+        "ttl_observed": {
+          "type": ["integer", "null"]
+        },
+        "service_probe_attempted": {
+          "type": ["boolean", "null"]
+        },
+        "service_probe_result": {
+          "type": ["string", "null"],
+          "enum": ["reachable", "unreachable", "not_attempted", "unknown", null]
+        },
+        "readiness_signal_strength": {
+          "type": "string",
+          "enum": ["strong", "medium", "weak", "unknown"]
+        },
+        "notes": {
+          "type": ["string", "null"]
+        }
+      },
+      "additionalProperties": false
+    },
+    "transfer": {
+      "type": "object",
+      "required": ["method", "started", "completed", "error_category"],
+      "properties": {
+        "method": {
+          "type": "string",
+          "enum": ["web_upload", "passive_tftp_put", "active_tftp_server", "nmrp", "unknown"]
+        },
+        "started": {
+          "type": "boolean"
+        },
+        "completed": {
+          "type": "boolean"
+        },
+        "duration_seconds": {
+          "type": ["integer", "null"],
+          "minimum": 0
+        },
+        "bytes_sent": {
+          "type": ["integer", "null"],
+          "minimum": 0
+        },
+        "block_count": {
+          "type": ["integer", "null"],
+          "minimum": 0
+        },
+        "ack_source_port": {
+          "type": ["integer", "null"],
+          "minimum": 0,
+          "maximum": 65535
+        },
+        "server_uses_ephemeral_port_observed": {
+          "type": ["boolean", "null"]
+        },
+        "error_category": {
+          "type": "string",
+          "enum": [
+            "none",
+            "local_network_permission",
+            "wrong_interface_or_ip",
+            "recovery_window_missed",
+            "firmware_rejected",
+            "transfer_timeout",
+            "link_interrupted",
+            "unknown"
+          ]
+        },
+        "error_message": {
+          "type": ["string", "null"]
+        }
+      },
+      "additionalProperties": false
+    },
+    "post_upload": {
+      "type": "object",
+      "required": ["wait_completed", "power_cycle_performed", "dhcp_restored", "gateway_detected"],
+      "properties": {
+        "wait_completed": {
+          "type": ["boolean", "null"]
+        },
+        "wait_seconds_actual": {
+          "type": ["integer", "null"],
+          "minimum": 0
+        },
+        "power_cycle_performed": {
+          "type": ["boolean", "null"]
+        },
+        "dhcp_restored": {
+          "type": ["boolean", "null"]
+        },
+        "gateway_detected": {
+          "type": ["string", "null"]
+        },
+        "admin_ui_opened": {
+          "type": ["boolean", "null"]
+        },
+        "notes": {
+          "type": ["string", "null"]
+        }
+      },
+      "additionalProperties": false
+    },
+    "outcome": {
+      "type": "object",
+      "required": ["result", "configuration_state"],
+      "properties": {
+        "result": {
+          "type": "string",
+          "enum": ["success", "failed", "partial", "unknown"]
+        },
+        "firmware_version_after_observed": {
+          "type": ["string", "null"]
+        },
+        "configuration_state": {
+          "type": "string",
+          "enum": ["retained", "factory_reset_like", "lost_or_changed", "unknown"]
+        },
+        "incident_candidate": {
+          "type": ["boolean", "null"]
+        },
+        "incident_reason": {
+          "type": ["string", "null"]
+        }
+      },
+      "additionalProperties": false
+    },
+    "privacy": {
+      "type": "object",
+      "required": ["local_only_by_default", "user_export_approved", "private_paths_redacted", "serials_redacted"],
+      "properties": {
+        "local_only_by_default": {
+          "type": "boolean"
+        },
+        "user_export_approved": {
+          "type": "boolean"
+        },
+        "private_paths_redacted": {
+          "type": "boolean"
+        },
+        "serials_redacted": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "notes": {
+      "type": ["string", "null"]
+    }
+  },
+  "additionalProperties": false
+}
