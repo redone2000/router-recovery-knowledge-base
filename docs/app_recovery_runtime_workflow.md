@@ -95,7 +95,8 @@ Do not store the user's local path in profiles.
 Needed runtime checks:
 
 - selected wired Ethernet interface
-- Wi-Fi disabled or warning shown
+- Wi-Fi availability state when needed for App/network access
+- wired service priority or route ownership confirmation
 - current interface IP before modification
 - ability to set static IP or instructions for manual setup
 - Local Network permission state

@@ -78,7 +78,9 @@
     "default_subnet": "255.255.255.0",
     "local_network_permission_warning": "Initial macOS Local Network permission denial can appear as sendto() No route to host.",
     "file_picker_required": true,
-    "wired_interface_required": true
+    "wired_interface_required": true,
+    "wifi_can_remain_available": true,
+    "wired_service_priority_or_route_check_required": true
   },
   "physical_setup": {
     "required_lan_port": "LAN1 nearest the WAN port",

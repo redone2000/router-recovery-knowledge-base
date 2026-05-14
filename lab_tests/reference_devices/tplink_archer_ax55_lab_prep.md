@@ -39,7 +39,7 @@ Known state:
 - Record whether checksum is available.
 - Prepare Ethernet cable and Mac wired adapter.
 - Note Mac wired interface name.
-- Decide whether Wi-Fi will be disabled or only warned.
+- Keep Wi-Fi available if needed, but confirm wired service priority or route ownership before recovery transfer.
 
 ## Firmware Preparation
 

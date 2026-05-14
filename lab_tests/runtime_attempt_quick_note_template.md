@@ -30,7 +30,8 @@ Use this during live testing. After the test, convert the notes into `schema/app
 - Direct Mac-to-router Ethernet:
 - WAN/other LAN cables disconnected:
 - Mac interface:
-- Wi-Fi disabled or warned:
+- Wi-Fi kept available:
+- Wired service priority / route confirmed:
 - Local Network permission:
 - File picker authorized:
 - Static IP set:
@@ -74,7 +75,7 @@ Use this during live testing. After the test, convert the notes into `schema/app
 
 - Wait completed:
 - Wait seconds:
-- Waited 2-3 minutes before judging:
+- Waited 2-3 minutes before judging result:
 - Power cycle performed:
 - DHCP restored:
 - Gateway:

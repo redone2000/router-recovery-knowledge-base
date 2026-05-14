@@ -38,7 +38,7 @@ Examples:
 
 - What is Recovery Mode?
 - Why static IP may be required
-- Why Wi-Fi should be disabled during wired recovery
+- Why wired route ownership matters when Wi-Fi remains available
 - Why upload completion may not mean recovery completion
 - Why ping is not a sufficient success/failure signal
 - How to think about recovery windows

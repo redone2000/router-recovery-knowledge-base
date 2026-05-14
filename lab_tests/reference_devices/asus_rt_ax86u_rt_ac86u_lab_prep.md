@@ -45,7 +45,7 @@ RT-AX86U:
 - Prepare Mac wired adapter and note interface name.
 - Confirm Local Network permission behavior if using the App.
 - Confirm file picker access to selected firmware.
-- Decide whether Wi-Fi is disabled or warning-only.
+- Keep Wi-Fi available if needed, but confirm wired service priority or route ownership before recovery transfer.
 - Prepare packet capture if available.
 
 ## Firmware Preparation
@@ -103,7 +103,7 @@ Success-rate details to test and record:
 - whether ACK source port remains fixed at 69 across multiple runs
 - whether filename changes affect acceptance
 - whether a different LAN port changes reliability
-- whether Wi-Fi enabled/disabled changes routing or success
+- whether wired service priority/route ownership changes routing or success while Wi-Fi remains available
 - whether Local Network permission failure can be detected before transfer
 
 If ACK source port behavior differs from the profile, do not update profile directly. Record a runtime attempt and incident candidate.

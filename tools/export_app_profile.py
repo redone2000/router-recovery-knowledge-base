@@ -94,6 +94,8 @@ def build_export(profile: dict[str, Any]) -> dict[str, Any]:
             "local_network_permission_warning": "Initial macOS Local Network permission denial can appear as sendto() No route to host.",
             "file_picker_required": True,
             "wired_interface_required": True,
+            "wifi_can_remain_available": True,
+            "wired_service_priority_or_route_check_required": True,
         },
         "physical_setup": {
             "required_lan_port": network.get("required_lan_port"),

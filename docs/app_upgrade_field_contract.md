@@ -114,7 +114,8 @@ Consumes profile fields:
 Writes runtime fields:
 
 - `macos_preflight.wired_interface_selected`
-- `macos_preflight.wifi_disabled_or_warned`
+- `macos_preflight.wifi_available_during_recovery`
+- `macos_preflight.wired_route_confirmed`
 - `macos_preflight.local_network_permission`
 - `macos_preflight.file_picker_authorized`
 - `macos_preflight.static_ip_set`
@@ -125,7 +126,7 @@ UI rule:
 
 - Treat Local Network permission and file-picker authorization as first-class preflight checks.
 - If static IP setup is manual, record whether the user confirmed it.
-- Apply recovery hygiene defaults: prefer direct Ethernet, disable or warn about Wi-Fi, disconnect other router cables, and confirm wired interface ownership unless profile evidence says otherwise.
+- Apply recovery hygiene defaults: prefer direct Ethernet, keep Wi-Fi available when needed, confirm wired service priority/route ownership, disconnect other router cables, and confirm wired interface ownership unless profile evidence says otherwise.
 
 ### 5. Physical Setup
 
@@ -263,7 +264,7 @@ UI rule:
 
 - Upload completion is not recovery completion.
 - If a profile says power cycle is required, the App must present it as an explicit step rather than a troubleshooting footnote.
-- If the profile does not specify post-upload behavior, recommend waiting 2-3 minutes before judging failure unless there is a clear device-specific reason not to wait.
+- If the profile does not specify post-upload behavior, recommend waiting 2-3 minutes before judging the result unless there is a clear device-specific reason not to wait.
 
 ### 10. Outcome And Feedback
 

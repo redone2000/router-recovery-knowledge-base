@@ -116,13 +116,17 @@
     },
     "macos_preflight": {
       "type": "object",
-      "required": ["wired_interface_selected", "wifi_disabled_or_warned", "local_network_permission", "file_picker_authorized"],
+      "required": ["wired_interface_selected", "wifi_available_during_recovery", "wired_route_confirmed", "local_network_permission", "file_picker_authorized"],
       "properties": {
         "wired_interface_selected": {
           "type": ["string", "null"],
           "description": "Interface display name or BSD name selected by the user/App"
         },
-        "wifi_disabled_or_warned": {
+        "wifi_available_during_recovery": {
+          "type": ["boolean", "null"],
+          "description": "Whether Wi-Fi remained available during recovery, for App/network access or billing/login requirements"
+        },
+        "wired_route_confirmed": {
           "type": ["boolean", "null"]
         },
         "local_network_permission": {

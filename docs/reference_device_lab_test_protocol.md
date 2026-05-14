@@ -30,7 +30,7 @@ For this testing round, prioritize details that ordinary vendor instructions oft
 - whether the accepted filename differs from the downloaded firmware filename
 - whether retrying WRQ/RRQ improves success rate or causes failure
 - which LAN port is most reliable
-- whether Wi-Fi or multiple interfaces disturb routing
+- whether wired service priority or route ownership remains correct while Wi-Fi is available
 - whether macOS Local Network permission appears as a network error
 - whether upload completion leads to automatic reboot or requires manual action
 
@@ -58,10 +58,10 @@ The App may recommend recovery hygiene defaults unless contradicted by profile e
 - direct Mac-to-router Ethernet
 - disconnect WAN and other LAN clients
 - prefer LAN1 / LAN port nearest WAN when no model-specific port is known
-- disable Wi-Fi or warn strongly
+- keep Wi-Fi available when needed, while confirming wired service priority or route ownership
 - confirm wired interface owns the static IP
 - use official firmware source and extract archive before selecting firmware
-- wait 2-3 minutes after upload before judging failure
+- wait 2-3 minutes after upload before judging the result
 - return Mac to DHCP after recovery
 
 See `docs/recovery_hygiene_defaults.md`.
@@ -78,7 +78,7 @@ Prepare these before touching the router:
 - checksum availability
 - Ethernet adapter name
 - current Mac network state
-- whether Wi-Fi is on/off
+- whether Wi-Fi remains available and wired route is confirmed
 - packet capture plan, if available
 - expected recovery workflow
 - stop conditions

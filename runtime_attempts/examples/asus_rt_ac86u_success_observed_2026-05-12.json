@@ -29,7 +29,8 @@
   },
   "macos_preflight": {
     "wired_interface_selected": "unknown",
-    "wifi_disabled_or_warned": null,
+    "wifi_available_during_recovery": true,
+    "wired_route_confirmed": true,
     "local_network_permission": "allowed",
     "file_picker_authorized": true,
     "static_ip_set": true,

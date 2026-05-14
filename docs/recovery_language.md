@@ -28,7 +28,7 @@ The phase before attempting recovery.
 Includes:
 
 - wired Ethernet setup
-- disabling Wi-Fi if needed
+- keeping Wi-Fi available when needed while confirming the wired recovery interface has priority or owns the route
 - setting static IP or DHCP
 - selecting the correct firmware file
 - choosing the right LAN port
