@@ -17,6 +17,7 @@ It is intentionally module-based. The App should not read profile fields as a fl
 | Runtime attempt | `schema/app_runtime_attempt.schema.json` | One local recovery attempt record |
 | Incident | `schema/recovery_incident.schema.json` | Exportable success/failure/tacit knowledge candidate |
 | Workflow docs | `docs/app_recovery_runtime_workflow.md` | UI flow and state-machine guidance |
+| Hygiene defaults | `docs/recovery_hygiene_defaults.md` | Default preparation recommendations when not contradicted by profile evidence |
 
 ## App Modules
 
@@ -124,6 +125,7 @@ UI rule:
 
 - Treat Local Network permission and file-picker authorization as first-class preflight checks.
 - If static IP setup is manual, record whether the user confirmed it.
+- Apply recovery hygiene defaults: prefer direct Ethernet, disable or warn about Wi-Fi, disconnect other router cables, and confirm wired interface ownership unless profile evidence says otherwise.
 
 ### 5. Physical Setup
 
@@ -149,6 +151,8 @@ UI rule:
 
 - Use timers and visual confirmations where possible.
 - Do not advance automatically based only on elapsed time when LED/state confirmation is required.
+- If the profile does not specify a better sequence, recommend powering off for about 10 seconds before holding the recovery button and reconnecting power.
+- If the profile does not specify a port, start with LAN1 / the LAN port nearest WAN as a recommended default, not a universal fact.
 
 ### 6. Recovery Readiness
 
@@ -259,6 +263,7 @@ UI rule:
 
 - Upload completion is not recovery completion.
 - If a profile says power cycle is required, the App must present it as an explicit step rather than a troubleshooting footnote.
+- If the profile does not specify post-upload behavior, recommend waiting 2-3 minutes before judging failure unless there is a clear device-specific reason not to wait.
 
 ### 10. Outcome And Feedback
 

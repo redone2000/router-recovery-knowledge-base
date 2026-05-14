@@ -50,6 +50,22 @@ Every test result must land in one of these buckets:
 
 Do not update model profiles directly from a single test without review.
 
+## Hygiene Defaults Under Test
+
+The App may recommend recovery hygiene defaults unless contradicted by profile evidence. During reference-device testing, explicitly note whether these defaults helped, had no visible effect, or were contradicted:
+
+- power off for about 10 seconds before recovery entry
+- direct Mac-to-router Ethernet
+- disconnect WAN and other LAN clients
+- prefer LAN1 / LAN port nearest WAN when no model-specific port is known
+- disable Wi-Fi or warn strongly
+- confirm wired interface owns the static IP
+- use official firmware source and extract archive before selecting firmware
+- wait 2-3 minutes after upload before judging failure
+- return Mac to DHCP after recovery
+
+See `docs/recovery_hygiene_defaults.md`.
+
 ## Before Testing
 
 Prepare these before touching the router:

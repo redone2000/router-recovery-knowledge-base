@@ -26,6 +26,9 @@ Use this during live testing. After the test, convert the notes into `schema/app
 
 ## Mac / Network Preflight
 
+- Power-off wait before entry:
+- Direct Mac-to-router Ethernet:
+- WAN/other LAN cables disconnected:
 - Mac interface:
 - Wi-Fi disabled or warned:
 - Local Network permission:
@@ -37,6 +40,7 @@ Use this during live testing. After the test, convert the notes into `schema/app
 ## Recovery Entry
 
 - LAN port:
+- LAN1/nearest-WAN default used:
 - Button:
 - Hold seconds:
 - LED state:
@@ -70,6 +74,7 @@ Use this during live testing. After the test, convert the notes into `schema/app
 
 - Wait completed:
 - Wait seconds:
+- Waited 2-3 minutes before judging:
 - Power cycle performed:
 - DHCP restored:
 - Gateway:

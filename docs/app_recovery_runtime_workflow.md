@@ -17,6 +17,8 @@ Do not put runtime-only data, such as a user's selected local firmware path or c
 
 For module-level implementation mapping, see `docs/app_upgrade_field_contract.md`.
 
+For low-cost preparation recommendations that apply unless contradicted by device-specific evidence, see `docs/recovery_hygiene_defaults.md`.
+
 ## Runtime Step Map
 
 | Step | App user action or state | Profile / knowledge fields | Runtime-only state | Current RT-AC86U coverage |
