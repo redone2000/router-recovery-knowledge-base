@@ -35,3 +35,14 @@ Keep these defaults unless there is an explicit reviewed reason to change them:
 ## Incident Rule
 
 If a test fails, remains ambiguous, or reveals a timing/detail issue that can improve App success rate, keep the runtime attempt and create an incident candidate instead of editing a model profile directly.
+
+Generate a first draft with:
+
+```text
+python3 tools/create_incident_from_runtime_attempt.py \
+  --input <filled-runtime-attempt.json> \
+  --output incidents/lab/<incident-id>.json \
+  --symptom "<short symptom summary>"
+```
+
+Then review and edit the incident before treating it as evidence.

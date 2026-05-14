@@ -98,6 +98,7 @@ After the test, copy and fill one of the runtime JSON templates in `runtime_atte
 
 - [ ] Runtime attempt record needed:
 - [ ] Incident candidate needed:
+- [ ] Incident generated from runtime attempt:
 - [ ] Profile update candidate:
 - [ ] App issue found:
 - [ ] Schema gap found:
