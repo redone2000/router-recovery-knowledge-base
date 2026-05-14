@@ -1,0 +1,17 @@
+{
+  "decision_id": "decision-2026-05-14-asus-rt-ac86u-reviewed-candidate",
+  "profile_id": "asus-rt-ac86u-unknown-unknown",
+  "decision": "reviewed_candidate_allowed",
+  "decision_scope": "incoming_to_reviewed",
+  "reason": "Owner confirmed RT-AC86U lab observations and approved reviewed-candidate migration only. Hardware and firmware scope remain unknown; observed-only limits remain in force.",
+  "decision_date": "2026-05-14",
+  "decided_by": "owner",
+  "next_allowed_action": "create_reviewed_candidate_only",
+  "prohibited_actions": [
+    "write_final",
+    "raise_confidence",
+    "generalize_to_other_asus_models",
+    "remove_observation_only_labels"
+  ],
+  "notes": "Reviewed-candidate status is not final App guidance."
+}
