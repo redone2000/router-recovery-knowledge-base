@@ -7,13 +7,34 @@ Status: Stage 1 lab preparation draft
 
 This protocol defines how to test the three reference devices before App upgrade integration.
 
-The goal is not to "get the router recovered once." The goal is to produce structured evidence that can safely feed:
+The goal is not to "get the router recovered once." The near-term test focus is TFTP active/passive completion behavior and the small operational details that improve user recovery success rate.
+
+The goal is to produce structured evidence that can safely feed:
 
 - App runtime behavior
 - runtime attempt records
 - incident candidates
 - profile updates after review
 - workflow/schema improvements
+
+## TFTP Success-Rate Focus
+
+For this testing round, prioritize details that ordinary vendor instructions often omit:
+
+- whether the device acts as TFTP server or TFTP client
+- whether the App should run a TFTP client or TFTP server
+- exact timing relationship between power-on, LED state, ping, and first WRQ/RRQ
+- whether ping/TTL appears before the TFTP service is actually ready
+- whether the server ACKs from port 69 or switches to an ephemeral port
+- whether the router requires a fixed filename
+- whether the accepted filename differs from the downloaded firmware filename
+- whether retrying WRQ/RRQ improves success rate or causes failure
+- which LAN port is most reliable
+- whether Wi-Fi or multiple interfaces disturb routing
+- whether macOS Local Network permission appears as a network error
+- whether upload completion leads to automatic reboot or requires manual action
+
+These details should become App workflow improvements before they become broad profile claims.
 
 ## Core Rule
 
@@ -80,6 +101,17 @@ Capture filters by workflow:
 
 Do not send test packets to unrelated networks or scan broad ranges.
 
+## TFTP Direction Classification
+
+Use these labels consistently:
+
+| Label | Router role | Mac/App role | Typical packet clue |
+| --- | --- | --- | --- |
+| Passive TFTP PUT | router is TFTP server | Mac/App sends WRQ and uploads firmware | Mac sends WRQ to router, router ACKs |
+| Active TFTP Server | router is TFTP client | Mac/App runs TFTP server | router sends RRQ to Mac-side server |
+
+Do not infer direction from brand or model. Direction must come from packet behavior, official documentation, or successful tool behavior.
+
 ## Runtime Attempt Mapping
 
 After each test, fill or generate an `app_runtime_attempt` record when enough data exists.
@@ -138,6 +170,7 @@ Do not solve App product issues by stuffing extra text into profile notes.
 Stop a test and record an incident instead of continuing to guess when:
 
 - the same failure repeats 3 times with the same setup
+- timing tuning becomes arbitrary without new observations
 - firmware source or model match is uncertain
 - the router enters an unknown LED/state loop
 - the App cannot confirm interface/IP ownership

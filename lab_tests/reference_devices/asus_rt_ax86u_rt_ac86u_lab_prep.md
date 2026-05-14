@@ -2,7 +2,7 @@
 
 Date: 2026-05-14
 Status: pre-test plan
-Reference role: Rescue Mode / Passive TFTP PUT / post-upload phase
+Reference role: Rescue Mode / Passive TFTP PUT success-rate details / post-upload phase
 
 ## Goal
 
@@ -13,10 +13,12 @@ Use ASUS testing to validate the App's complex guided recovery flow:
 - static IP setup
 - Rescue Mode entry
 - Passive TFTP PUT transfer
+- TFTP timing and ACK-port behavior
 - transfer error mapping
 - post-upload wait
 - manual power-cycle handling
 - DHCP return and admin URL discovery
+- small details that materially improve success rate
 
 ## Current Gate
 
@@ -93,6 +95,17 @@ Record:
 - block count
 - error packet, if any
 
+Success-rate details to test and record:
+
+- whether sending WRQ immediately after TTL=100 differs from waiting 1-2 seconds
+- whether repeated WRQ attempts improve success or create instability
+- whether macOS `tftp`, Swift POC, and App behavior differ
+- whether ACK source port remains fixed at 69 across multiple runs
+- whether filename changes affect acceptance
+- whether a different LAN port changes reliability
+- whether Wi-Fi enabled/disabled changes routing or success
+- whether Local Network permission failure can be detected before transfer
+
 If ACK source port behavior differs from the profile, do not update profile directly. Record a runtime attempt and incident candidate.
 
 ## Post-Upload Test
@@ -119,6 +132,7 @@ For RT-AC86U, manual power-cycle after about 3 minutes is currently a critical o
 - Does the App preserve enough transfer metadata for debugging?
 - Does the App guide DHCP return and gateway discovery clearly?
 - Does the App avoid promising configuration retention/reset?
+- Does the App need a "TFTP ready but not yet safe" wait step after ping/TTL?
 
 ## Stop Conditions
 
@@ -127,6 +141,7 @@ Stop and record an incident if:
 - Local Network permission blocks transfer
 - no ACK appears after repeated controlled entries
 - ACK port behavior differs from expected
+- timing tuning becomes arbitrary rather than evidence-driven
 - upload completes but post-upload state remains unclear
 - RT-AX86U behavior diverges from RT-AC86U in any material way
 

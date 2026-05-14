@@ -48,13 +48,21 @@ Use this during live testing. After the test, convert the notes into `schema/app
 ## Transfer
 
 - Method:
+- TFTP direction, if applicable:
+- Mac/App role:
+- Router role:
 - Tool:
 - Started:
 - Completed:
+- First WRQ/RRQ timing:
+- Required filename:
 - Duration:
 - Bytes sent:
 - Block count:
 - ACK source port:
+- Ephemeral port switch observed:
+- Retry pattern:
+- Retry helped / hurt / unknown:
 - Error message:
 - Error category:
 

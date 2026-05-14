@@ -2,7 +2,7 @@
 
 Date: 2026-05-14
 Status: pre-test plan
-Reference role: NETGEAR orchestration / timing-sensitive recovery research
+Reference role: NETGEAR TFTP/NMRP orchestration / timing-sensitive recovery research
 
 ## Goal
 
@@ -12,6 +12,7 @@ This test should determine:
 
 - which recovery path appears most relevant: Web, TFTP, NMRP, or other
 - whether timing/orchestration is the primary blocker
+- whether TFTP, if present, is active or passive
 - what App runtime signals are needed before guidance can be safe
 - whether R7000 lessons apply only as incident context or broader NETGEAR pattern
 
@@ -75,9 +76,14 @@ Only if a TFTP path is explicitly selected for test:
 - target IP
 - client tool
 - first WRQ time relative to power-on
+- whether any router RRQ appears when a Mac-side server is running
+- whether the tested direction is passive PUT or active server
+- required filename, if any
+- whether ACK/error comes from port 69 or another port
 - ACK/error/timeout behavior
 - number of repeated controlled attempts
 - whether timing appears manual or automatable
+- whether continuous retry improves success or masks the real recovery window
 
 If repeated timing attempts fail, stop and record an incident rather than tuning indefinitely.
 
@@ -102,6 +108,7 @@ NMRP findings should remain research/incident data unless official or lab-repeat
 - Which runtime signals are misleading?
 - Which error category best describes failed attempts?
 - Is RAX40 a better reference than R7000 for modern NETGEAR behavior?
+- Should the App present NETGEAR TFTP as timing-sensitive/research-only until lab success is reproduced?
 
 ## Stop Conditions
 
@@ -109,6 +116,7 @@ Stop and record an incident if:
 
 - timing attempts become guesswork
 - ping responds but transfer service does not
+- TFTP direction cannot be confirmed from packet behavior
 - official instructions conflict with observed behavior
 - NMRP/TFTP behavior is unclear after controlled attempts
 - firmware source/model applicability is uncertain

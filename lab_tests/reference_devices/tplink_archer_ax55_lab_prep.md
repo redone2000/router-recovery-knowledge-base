@@ -2,11 +2,11 @@
 
 Date: 2026-05-14
 Status: pre-test plan
-Reference role: Web Recovery / beginner panic flow
+Reference role: TP-Link Web Recovery boundary / TFTP active-passive comparison / beginner panic flow
 
 ## Goal
 
-Validate whether Archer AX55 can support an App-guided Web Recovery workflow.
+Validate whether Archer AX55 can support an App-guided recovery workflow, with special attention to whether the practical path is Web Recovery, Active TFTP Server, Passive TFTP PUT, or a combination.
 
 This test should answer:
 
@@ -15,6 +15,8 @@ This test should answer:
 - Which button/LED sequence reliably enters recovery mode?
 - What firmware source and file format are accepted?
 - What happens after upload: wait, reboot, DHCP, admin URL?
+- Is there any TFTP behavior at all, and if so, is it router-as-server or router-as-client?
+- Are there small timing, LAN-port, filename, or interface details that make recovery more reliable?
 
 ## Current Gate
 
@@ -85,6 +87,24 @@ If a recovery page is reachable, record:
 - firmware version after recovery, if reachable
 - whether configuration was retained/reset/unknown
 
+## TFTP Direction Probe
+
+Only perform controlled, narrow TFTP probing if the recovery state suggests TFTP may be involved or official/source evidence points that way.
+
+Record:
+
+- whether the Mac/App is acting as TFTP client or server
+- whether the router sends RRQ to the Mac
+- whether the Mac sends WRQ to the router
+- required filename, if any
+- whether filename must be renamed from the official download
+- first packet timing relative to power-on and LED state
+- whether ping/TTL precedes TFTP readiness
+- whether retry behavior helps or hurts
+- exact packet/error behavior
+
+If no TFTP packets appear, record that as a negative observation rather than forcing a TFTP workflow.
+
 ## App Questions To Answer
 
 - Can the App guide this as Web Recovery without TFTP?
@@ -93,6 +113,7 @@ If a recovery page is reachable, record:
 - Is ping useful or irrelevant?
 - Does the App need a post-upload wait timer?
 - Does the App need manual power-cycle guidance?
+- Does the App need to support a TP-Link active TFTP server mode for this device, or is AX55 Web-only in practice?
 
 ## Stop Conditions
 
@@ -102,6 +123,7 @@ Stop and record an incident if:
 - different LAN ports produce conflicting behavior
 - firmware source/model match is uncertain
 - upload page appears but rejects the official firmware
+- TFTP probing becomes arbitrary without packet evidence
 - post-upload state is unclear after a reasonable wait
 
 ## Expected Outputs
