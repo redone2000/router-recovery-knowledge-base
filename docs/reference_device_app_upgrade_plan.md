@@ -193,3 +193,5 @@ Not allowed yet:
 4. Prepare RAX40 source-list and lab plan only after AX55/ASUS runtime flow has stabilized.
 
 This keeps the App upgrade grounded in real device behavior while preventing profile sprawl.
+
+The first App implementation slice should follow the module-level field contract in `docs/app_upgrade_field_contract.md`.

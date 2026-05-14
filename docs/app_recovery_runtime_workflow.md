@@ -15,6 +15,8 @@ The App runtime workflow is not the same as a recovery profile:
 
 Do not put runtime-only data, such as a user's selected local firmware path or current network interface state, into model profiles.
 
+For module-level implementation mapping, see `docs/app_upgrade_field_contract.md`.
+
 ## Runtime Step Map
 
 | Step | App user action or state | Profile / knowledge fields | Runtime-only state | Current RT-AC86U coverage |
