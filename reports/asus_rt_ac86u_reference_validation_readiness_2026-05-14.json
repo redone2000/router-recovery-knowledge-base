@@ -1,0 +1,38 @@
+{
+  "generated_at": "2026-05-14T03:07:41.473407+00:00",
+  "profile_id": "asus-rt-ac86u-unknown-unknown",
+  "input_file": "incoming/asus-rt-ac86u-unknown-unknown.jsonl",
+  "ready_for_owner_confirmation": true,
+  "ready_for_reviewed_migration": false,
+  "migration_requires_owner_confirmation": true,
+  "final_write_allowed": false,
+  "schema_errors": [],
+  "guardrail_issues": [],
+  "owner_confirmation_required": [
+    "lab observations are accurate for the tested RT-AC86U unit",
+    "profile remains scoped to observed/tested behavior only",
+    "hardware_version remains unknown",
+    "firmware_version remains unknown",
+    "applies_to_all_firmware_versions remains null",
+    "confidence_level medium is acceptable for reviewed-candidate status",
+    "post-upload warning and manual power-cycle behavior are accurate",
+    "configuration outcome remains mixed/uncertain",
+    "ping and previous LAN IP are not reliable failure signals",
+    "reviewed status is approved only as reviewed-candidate data, not final guidance"
+  ],
+  "preserve_fields": {
+    "confidence_level": "medium",
+    "hardware_version": "unknown",
+    "firmware_version": "unknown",
+    "applies_to_all_firmware_versions": null,
+    "observation_only_groups": [
+      "button_recovery",
+      "network_recovery",
+      "tftp_details",
+      "firmware_details",
+      "post_upload_behavior",
+      "observed_outcomes"
+    ]
+  },
+  "next_action": "Owner must confirm the checklist before Codex prepares any reviewed-candidate migration."
+}
