@@ -66,6 +66,7 @@ REQUIRED_FIELDS = {
     "model",
     "profile_generation_allowed",
     "workflow_update_allowed",
+    "independent_source_count",
     "evidence_topics",
     "evidence_snippets",
     "evidence_gaps",
@@ -166,6 +167,10 @@ def validate_row(row: dict[str, Any], path: Path) -> list[str]:
 
     if not isinstance(row.get("workflow_update_allowed"), bool):
         issues.append("workflow_update_allowed must be boolean")
+
+    independent_source_count = row.get("independent_source_count")
+    if not isinstance(independent_source_count, int) or isinstance(independent_source_count, bool) or independent_source_count < 1:
+        issues.append("independent_source_count must be an integer greater than or equal to 1")
 
     if not is_public_url(row.get("source_url")):
         issues.append("source_url must be a public http(s) URL")
