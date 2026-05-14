@@ -99,6 +99,8 @@ Goal:
 - compare NMRP, TFTP, and web/discovery paths
 - avoid over-promoting legacy timing-sensitive behavior from R7000
 
+Stage 1 official-source search did not find NETGEAR documentation that mentions NMRP. Until official or lab-validated evidence exists, NMRP remains research-only and must not become App guidance or a reviewed workflow.
+
 ## Production Order
 
 The project should produce knowledge in this order:
