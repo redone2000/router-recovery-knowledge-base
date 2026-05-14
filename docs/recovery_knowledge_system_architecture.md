@@ -221,6 +221,8 @@ Reference device strategy:
 | ASUS | AX86U-class Rescue Mode family, with RT-AC86U lab data kept as observed evidence |
 | NETGEAR | RAX40 as modern reference; R7000 stays incident/research until reproducible |
 
+The App upgrade validation path should follow these reference devices before long-tail expansion. See `docs/reference_device_app_upgrade_plan.md`.
+
 OpenClaw should collect by workflow coverage gap, not by unlimited model hunting.
 
 ### R7000
