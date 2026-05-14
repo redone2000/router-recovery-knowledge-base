@@ -11,6 +11,7 @@ See:
 - `docs/recovery_language.md`
 - `docs/evidence_lifecycle.md`
 - `docs/recovery_priority_strategy.md`
+- `docs/reference_device_validation_process.md`
 
 Unresolved incidents and draft workflows must not be treated as profile guidance.
 
@@ -36,6 +37,8 @@ Current brand priority:
 3. NETGEAR
 
 OpenClaw tasks should be framed as workflow coverage gaps or reference-device evidence gaps, not as open-ended model collection.
+
+After Stage 1 official workflow evidence indexing is paused, the next governance focus is reference device validation. The first candidate is `incoming/asus-rt-ac86u-unknown-unknown.jsonl`. Moving it to `reviewed/` requires the gates in `docs/reference_device_validation_process.md` and explicit Owner confirmation.
 
 ## Repository Progress Sync
 Stage-level project work should be committed to git and pushed to the configured private remote repository after validation. The default remote repository name should match this directory name (`router-recovery-knowledge`) unless there is a clear reason to use another name.
