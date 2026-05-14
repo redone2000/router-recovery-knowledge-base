@@ -204,3 +204,5 @@ Do not export:
 - private LAN details beyond what is needed for the recovery record
 
 Runtime records are local/private by default.
+
+For a one-page checklist to use during live testing, see `lab_tests/recovery_preflight_checklist.md`.
