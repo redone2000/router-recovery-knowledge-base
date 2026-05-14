@@ -332,6 +332,8 @@ Recommended first implementation slice:
 
 Do not implement AX55 or RAX40 user-facing flows until their source/lab coverage improves.
 
+For a generated RT-AC86U App-facing draft, see `app_exports/examples/asus_rt_ac86u_app_profile_draft.json`. This export is an implementation aid only and is not final production guidance.
+
 ## Stop Lines
 
 - Do not use RT-AC86U fields for RT-AX86U without direct evidence.
