@@ -131,6 +131,8 @@ Current rule:
 - `reviewed/`: reviewed candidates only after explicit approval
 - `final/`: never written automatically
 
+App runtime execution is separate from model profiles. The profile provides parameters and warnings; the App records live state such as selected local firmware file, selected network interface, permission state, transfer progress, errors, and outcome. See `docs/app_recovery_runtime_workflow.md`.
+
 ## Layer 5: Recovery Incidents
 
 Incidents record success/failure cases, timing clues, and tacit knowledge.
