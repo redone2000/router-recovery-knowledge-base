@@ -60,6 +60,14 @@ def check_rt_ac86u_guardrails(profile: dict[str, Any]) -> list[str]:
     if profile.get("blocking_incidents"):
         issues.append("blocking_incidents must be empty before reviewed-candidate migration")
 
+    firmware_source = profile.get("firmware_source") if isinstance(profile.get("firmware_source"), dict) else {}
+    if not firmware_source.get("official_download_page_url"):
+        issues.append("firmware_source.official_download_page_url is required before reviewed-candidate migration")
+    if firmware_source.get("binary_stored") is not False:
+        issues.append("firmware_source.binary_stored must be false")
+    if not firmware_source.get("checksum_available"):
+        issues.append("firmware_source.checksum_available should be true when the official page provides checksums")
+
     post_upload = profile.get("post_upload_behavior") if isinstance(profile.get("post_upload_behavior"), dict) else {}
     if post_upload.get("power_cycle_required") is not True:
         issues.append("post_upload_behavior.power_cycle_required must remain true")
@@ -94,6 +102,7 @@ def build_report(profile: dict[str, Any], schema_errors: list[str], guardrail_is
         "post-upload warning and manual power-cycle behavior are accurate",
         "configuration outcome remains mixed/uncertain",
         "ping and previous LAN IP are not reliable failure signals",
+        "official firmware source is identified and firmware binaries are not stored",
         "reviewed status is approved only as reviewed-candidate data, not final guidance",
     ]
     return {
@@ -112,6 +121,7 @@ def build_report(profile: dict[str, Any], schema_errors: list[str], guardrail_is
             "hardware_version": "unknown",
             "firmware_version": "unknown",
             "applies_to_all_firmware_versions": None,
+            "firmware_source.binary_stored": False,
             "observation_only_groups": profile.get("observation_only_groups"),
         },
         "next_action": "Owner must confirm the checklist before Codex prepares any reviewed-candidate migration.",

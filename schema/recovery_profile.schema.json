@@ -372,6 +372,58 @@
         }
       }
     },
+    "firmware_source": {
+      "type": "object",
+      "description": "Official firmware source and selection guidance. Store public support/download page metadata only; do not store firmware binaries.",
+      "properties": {
+        "official_download_page_url": {
+          "type": ["string", "null"],
+          "description": "Official vendor support or firmware download page where the user should obtain the firmware file"
+        },
+        "official_download_page_region": {
+          "type": ["string", "null"],
+          "description": "Region or locale of the official download page, if relevant"
+        },
+        "official_download_page_model": {
+          "type": ["string", "null"],
+          "description": "Model name shown by the official download page"
+        },
+        "source_type": {
+          "type": ["string", "null"],
+          "enum": [
+            "official_vendor_support_page",
+            "official_vendor_download_page",
+            "owner_supplied_file",
+            "unknown",
+            null
+          ],
+          "description": "Type of firmware source represented by this object"
+        },
+        "checksum_available": {
+          "type": ["boolean", "null"],
+          "description": "Whether the official page provides checksum information for at least some firmware files"
+        },
+        "checksum_algorithms": {
+          "type": "array",
+          "description": "Checksum algorithms observed on the official page, if any",
+          "items": {
+            "type": "string"
+          }
+        },
+        "binary_stored": {
+          "type": "boolean",
+          "description": "Must be false. Profiles store source metadata only, never firmware binaries."
+        },
+        "version_selection_guidance": {
+          "type": ["string", "null"],
+          "description": "Short user/app guidance for selecting the correct firmware from the official page"
+        },
+        "risk_warning": {
+          "type": ["string", "null"],
+          "description": "Warning about model, hardware version, firmware version, or region matching before flashing"
+        }
+      }
+    },
     "post_upload_behavior": {
       "type": "object",
       "description": "Required behavior after firmware upload completes",

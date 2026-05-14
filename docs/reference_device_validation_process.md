@@ -66,6 +66,7 @@ Required:
 
 - hardware version scope reviewed
 - firmware version scope reviewed
+- official firmware source reviewed
 - observed-only behavior not generalized
 - brand-level or workflow-level evidence kept separate from model profile facts
 
@@ -74,6 +75,8 @@ Pass criteria:
 - `hardware_version: "unknown"` remains if not evidenced
 - `firmware_version: "unknown"` remains if not evidenced
 - `applies_to_all_firmware_versions` remains null unless directly evidenced
+- `firmware_source` identifies the official vendor support/download page when the profile is intended for App guidance
+- firmware binaries are never stored in the repository
 - all observed-only groups remain labeled
 
 ### Gate 4: App Guidance Safety
@@ -124,12 +127,15 @@ If promoted, the reviewed candidate must preserve:
 - `hardware_version: "unknown"` unless directly evidenced
 - `firmware_version: "unknown"` unless directly evidenced
 - `applies_to_all_firmware_versions: null`
+- official firmware source metadata with `binary_stored: false`
 - `observation_only_groups`
 - risk warnings about post-upload wait, power cycle, ping unreliability, and mixed configuration retention
 
 ## Do Not Do
 
 - Do not backfill unknown hardware or firmware values.
+- Do not treat an official firmware download page as proof of recovery behavior or broad firmware-version applicability.
+- Do not store firmware binaries or unstable direct binary download URLs.
 - Do not generalize RT-AC86U observations to all ASUS routers.
 - Do not use official ASUS brand-level sources as proof of RT-AC86U macOS behavior.
 - Do not write `final/`.

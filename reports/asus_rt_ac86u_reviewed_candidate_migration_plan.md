@@ -60,6 +60,7 @@ Forbidden:
 - do not set `applies_to_all_firmware_versions` to true
 - do not remove observation-only labels
 - do not remove risk warnings
+- do not store firmware binaries or direct binary URLs
 - do not generalize this profile to other ASUS models
 
 ## Fields To Preserve Exactly
@@ -73,6 +74,7 @@ These values must remain unchanged:
 | `applies_to_all_firmware_versions` | `null` |
 | `confidence_level` | `medium` |
 | `source_type` | `personal_testing` |
+| `firmware_source.binary_stored` | `false` |
 | `blocking_incidents` | `[]` |
 
 Observation-only groups must remain:
@@ -83,6 +85,13 @@ Observation-only groups must remain:
 - `firmware_details`
 - `post_upload_behavior`
 - `observed_outcomes`
+
+Firmware source metadata must be preserved separately from firmware applicability:
+
+- official ASUS RT-AC86U support/download page URL
+- page region/model metadata
+- checksum availability/algorithm metadata
+- warning that the download page does not prove broad hardware or firmware-version applicability
 
 ## Proposed Reviewed File
 
