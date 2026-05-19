@@ -1,0 +1,99 @@
+{
+  "attempt_id": "asus-rt-ax86u-passive-tftp-put-2026-05-17",
+  "status": "completed",
+  "created_date": "2026-05-17",
+  "profile_id": null,
+  "workflow_ids": [
+    "passive-tftp-put",
+    "post-upload-phase"
+  ],
+  "device": {
+    "vendor": "ASUS",
+    "model": "RT-AX86U",
+    "hardware_version": "1.0",
+    "firmware_version_before": "3004.388.11",
+    "firmware_version_after": "3004.388.10_2",
+    "serial_number_recorded": false
+  },
+  "firmware_file": {
+    "source_type": "official_vendor_page",
+    "official_download_page_url": "https://www.asuswrt-merlin.net/download",
+    "local_path_recorded": false,
+    "filename_recorded": "388102.w",
+    "extension": ".w",
+    "size_bytes": 86900756,
+    "appears_compressed": false,
+    "checksum_algorithm": "SHA256",
+    "checksum_status": "not_checked",
+    "model_match_confirmed_by_user": true
+  },
+  "macos_preflight": {
+    "wired_interface_selected": "unknown",
+    "wifi_available_during_recovery": true,
+    "wired_route_confirmed": true,
+    "local_network_permission": "allowed",
+    "file_picker_authorized": true,
+    "static_ip_set": true,
+    "client_ip": "192.168.1.10",
+    "client_cidr": "192.168.1.10/24",
+    "notes": "Mac Ethernet was manually set to the recovery subnet. POC App bound UDP to 192.168.1.10 and sent from a local UDP socket."
+  },
+  "recovery_entry": {
+    "method": "reset_hold_power_on",
+    "button": "reset",
+    "hold_seconds_observed": null,
+    "lan_port_used": "LAN1",
+    "led_state_observed": "Power LED slow flashing; LAN1 white LED active during recovery-like state.",
+    "user_confirmed_recovery_mode": true
+  },
+  "readiness_observations": {
+    "ping_replied": true,
+    "ttl_observed": 100,
+    "service_probe_attempted": true,
+    "service_probe_result": "reachable",
+    "readiness_signal_strength": "strong",
+    "notes": "Earlier passive capture observed no router-initiated TFTP RRQ. POC App WRQ was accepted immediately during TTL=100 state."
+  },
+  "transfer": {
+    "method": "passive_tftp_put",
+    "tftp_direction": "passive_put",
+    "mac_role": "tftp_client",
+    "router_role": "tftp_server",
+    "started": true,
+    "completed": true,
+    "duration_seconds": 40,
+    "bytes_sent": 86900756,
+    "block_count": 169729,
+    "ack_source_port": 69,
+    "server_uses_ephemeral_port_observed": false,
+    "required_filename": null,
+    "first_packet_timing": "WRQ sent during observed Rescue Mode / TTL=100 window.",
+    "retry_pattern": "WRQ attempt #1 accepted immediately.",
+    "retry_effect": "no_visible_effect",
+    "error_category": "none",
+    "error_message": null
+  },
+  "post_upload": {
+    "wait_completed": true,
+    "wait_seconds_actual": 300,
+    "power_cycle_performed": true,
+    "dhcp_restored": true,
+    "gateway_detected": "192.168.50.1",
+    "admin_ui_opened": true,
+    "notes": "After upload completion and more than 5 minutes of waiting, router front state was only LAN1 white LED solid with other LEDs off. Mac wired interface switched to DHCP for about 1 minute and received only a self-assigned 169.254.x.x address with no router/gateway/DNS. After a normal power cycle, DHCP returned on 192.168.50.0/24, Mac received 192.168.50.5 with gateway/DNS 192.168.50.1, and admin UI opened at 192.168.50.1. Stability follow-up confirmed admin UI, firmware page, DHCP page, Wi-Fi settings, WAN connectivity, and existing JFFS ShellCrash installation were still usable."
+  },
+  "outcome": {
+    "result": "success",
+    "firmware_version_after_observed": "3004.388.10_2",
+    "configuration_state": "retained",
+    "incident_candidate": false,
+    "incident_reason": null
+  },
+  "privacy": {
+    "local_only_by_default": true,
+    "user_export_approved": false,
+    "private_paths_redacted": true,
+    "serials_redacted": true
+  },
+  "notes": "POC App log still labels the target as R7000 in UI text, but the observed target device for this runtime attempt is ASUS RT-AX86U. POC measured upload duration was 39.956 seconds at 2123.94 KiB/s; schema stores integer duration. WRQ attempt #1 was accepted immediately, so retry behavior was not needed. Configuration_state=retained describes this single RT-AX86U attempt only and is supported by LAN/DHCP/Wi-Fi/WAN/JFFS ShellCrash follow-up checks. Prior RT-AC86U repeated tests reportedly produced mixed retention/reset outcomes, so configuration retention must not be presented as controllable or guaranteed for ASUS Rescue/TFTP workflows."
+}
