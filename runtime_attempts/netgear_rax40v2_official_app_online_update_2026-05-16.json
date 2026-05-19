@@ -1,0 +1,99 @@
+{
+  "attempt_id": "netgear-rax40v2-official-app-online-update-2026-05-16",
+  "status": "completed",
+  "created_date": "2026-05-16",
+  "profile_id": null,
+  "workflow_ids": [
+    "official-app-online-update",
+    "post-upload-phase"
+  ],
+  "device": {
+    "vendor": "NETGEAR",
+    "model": "RAX40v2",
+    "hardware_version": "RAX40v2",
+    "firmware_version_before": "1.0.2.82",
+    "firmware_version_after": "v1.0.17.142",
+    "serial_number_recorded": false
+  },
+  "firmware_file": {
+    "source_type": "official_vendor_page",
+    "official_download_page_url": null,
+    "local_path_recorded": false,
+    "filename_recorded": null,
+    "extension": null,
+    "size_bytes": null,
+    "appears_compressed": null,
+    "checksum_algorithm": null,
+    "checksum_status": "not_checked",
+    "model_match_confirmed_by_user": true
+  },
+  "macos_preflight": {
+    "wired_interface_selected": null,
+    "wifi_available_during_recovery": true,
+    "wired_route_confirmed": null,
+    "local_network_permission": "not_checked",
+    "file_picker_authorized": null,
+    "static_ip_set": false,
+    "client_ip": null,
+    "client_cidr": null,
+    "notes": "Official online update was performed through the NETGEAR Nighthawk mobile app after browser setup/admin paths were blocked by 404 behavior. No static recovery IP was used."
+  },
+  "recovery_entry": {
+    "method": "normal-nighthawk-app-online-update",
+    "button": null,
+    "hold_seconds_observed": null,
+    "lan_port_used": null,
+    "led_state_observed": null,
+    "user_confirmed_recovery_mode": false
+  },
+  "readiness_observations": {
+    "ping_replied": null,
+    "ttl_observed": null,
+    "service_probe_attempted": true,
+    "service_probe_result": "reachable",
+    "readiness_signal_strength": "medium",
+    "notes": "Nighthawk app remained the reliable official management path immediately after update. Post-update app check reported firmware current with no newer firmware available. DHCP was maintained. Browser access via 192.168.1.1 and routerlogin.net initially remained abnormal/404, but the official App new-router setup flow later restored the browser local admin UI."
+  },
+  "transfer": {
+    "method": "web_upload",
+    "tftp_direction": "not_applicable",
+    "mac_role": "web_client",
+    "router_role": "web_server",
+    "started": true,
+    "completed": true,
+    "duration_seconds": 241,
+    "bytes_sent": null,
+    "block_count": null,
+    "ack_source_port": null,
+    "server_uses_ephemeral_port_observed": null,
+    "required_filename": null,
+    "first_packet_timing": "Nighthawk app update started at relative 0s after offering firmware update from 1.0.2.82 to 1.0.17.142.",
+    "retry_pattern": "not_applicable",
+    "retry_effect": "not_tested",
+    "error_category": "none",
+    "error_message": null
+  },
+  "post_upload": {
+    "wait_completed": true,
+    "wait_seconds_actual": 241,
+    "power_cycle_performed": false,
+    "dhcp_restored": true,
+    "gateway_detected": "192.168.1.1",
+    "admin_ui_opened": true,
+    "notes": "Visible timeline: update started at 0s; app reported rebooting router at 2m19s; app reported update success at 4m01s. Firmware reached v1.0.17.142 and the app reported firmware current. DHCP was maintained. Browser local-admin paths initially remained abnormal/404 after update, but the official App new-router setup flow later restored the browser admin UI at 192.168.1.1/start.htm. Browser UI then showed firmware V1.0.17.142_2.0.100 and Nighthawk RAX40v2."
+  },
+  "outcome": {
+    "result": "success",
+    "firmware_version_after_observed": "V1.0.17.142_2.0.100",
+    "configuration_state": "retained",
+    "incident_candidate": false,
+    "incident_reason": null
+  },
+  "privacy": {
+    "local_only_by_default": true,
+    "user_export_approved": false,
+    "private_paths_redacted": true,
+    "serials_redacted": true
+  },
+  "notes": "Structured record generated from live session lab_tests/live_sessions/netgear_rax40_official_baseline_2026-05-16.md. This is an official Nighthawk app online firmware update baseline, not a Recovery Mode, Web Recovery, TFTP, or NMRP validation. Serial number, MAC addresses, Wi-Fi credentials, admin password, and private local paths were not recorded."
+}
