@@ -1,0 +1,99 @@
+{
+  "attempt_id": "tplink-archer-ax55-official-online-update-2026-05-16",
+  "status": "completed",
+  "created_date": "2026-05-16",
+  "profile_id": null,
+  "workflow_ids": [
+    "official-web-ui-online-update",
+    "post-upload-phase"
+  ],
+  "device": {
+    "vendor": "TP-Link",
+    "model": "Archer AX55",
+    "hardware_version": "v1.0 / CA label",
+    "firmware_version_before": "1.3.1 Build 20240129 rel.57815(4341)",
+    "firmware_version_after": "1.5.11 Build 20251119 rel.49503(4341)",
+    "serial_number_recorded": false
+  },
+  "firmware_file": {
+    "source_type": "official_vendor_page",
+    "official_download_page_url": null,
+    "local_path_recorded": false,
+    "filename_recorded": null,
+    "extension": null,
+    "size_bytes": null,
+    "appears_compressed": null,
+    "checksum_algorithm": null,
+    "checksum_status": "not_checked",
+    "model_match_confirmed_by_user": true
+  },
+  "macos_preflight": {
+    "wired_interface_selected": null,
+    "wifi_available_during_recovery": true,
+    "wired_route_confirmed": null,
+    "local_network_permission": "not_checked",
+    "file_picker_authorized": null,
+    "static_ip_set": false,
+    "client_ip": null,
+    "client_cidr": null,
+    "notes": "Official online update from router Web UI at 192.168.0.1. No static recovery IP was used. Exact Mac interface and route ownership were not recorded."
+  },
+  "recovery_entry": {
+    "method": "normal-admin-ui-online-update",
+    "button": null,
+    "hold_seconds_observed": null,
+    "lan_port_used": null,
+    "led_state_observed": "Several front LEDs remained visible in submitted screenshots; exact reboot/off transition was not captured.",
+    "user_confirmed_recovery_mode": false
+  },
+  "readiness_observations": {
+    "ping_replied": null,
+    "ttl_observed": null,
+    "service_probe_attempted": true,
+    "service_probe_result": "reachable",
+    "readiness_signal_strength": "strong",
+    "notes": "Admin UI at 192.168.0.1 returned to the local-password login screen about 3m35s after upgrade confirmation. Ping and TTL were not recorded."
+  },
+  "transfer": {
+    "method": "web_upload",
+    "tftp_direction": "not_applicable",
+    "mac_role": "web_client",
+    "router_role": "web_server",
+    "started": true,
+    "completed": true,
+    "duration_seconds": 47,
+    "bytes_sent": null,
+    "block_count": null,
+    "ack_source_port": null,
+    "server_uses_ephemeral_port_observed": null,
+    "required_filename": null,
+    "first_packet_timing": "Official Web UI online update was confirmed at about 5s; visible download phase started by 14s.",
+    "retry_pattern": "not_applicable",
+    "retry_effect": "not_tested",
+    "error_category": "none",
+    "error_message": null
+  },
+  "post_upload": {
+    "wait_completed": true,
+    "wait_seconds_actual": 215,
+    "power_cycle_performed": false,
+    "dhcp_restored": true,
+    "gateway_detected": "192.168.0.1",
+    "admin_ui_opened": true,
+    "notes": "Visible timeline: download phase at 0% around 14s, upgrade/write phase at 1% around 31s, upgrade/write phase at 100% around 47s, admin login page reachable around 3m35s. Progress reaching 100% did not mean the router was usable. Overnight check on 2026-05-17 around 10:46 confirmed admin UI remained reachable, firmware stayed at 1.5.11 Build 20251119 rel.49503(4341), DHCP remained enabled, range stayed 192.168.0.2-192.168.0.253, lease time stayed 120 minutes, and gateway stayed 192.168.0.1."
+  },
+  "outcome": {
+    "result": "success",
+    "firmware_version_after_observed": "1.5.11 Build 20251119 rel.49503(4341)",
+    "configuration_state": "retained",
+    "incident_candidate": false,
+    "incident_reason": null
+  },
+  "privacy": {
+    "local_only_by_default": true,
+    "user_export_approved": false,
+    "private_paths_redacted": true,
+    "serials_redacted": true
+  },
+  "notes": "Structured record generated from live session lab_tests/live_sessions/tplink_archer_ax55_v1_official_baseline_2026-05-15.md. This is an official Web UI online firmware update baseline, not a Recovery Mode, Web Recovery, or TFTP validation. Pre-upgrade configuration backup existed locally but was not read or committed. User reported the 2026-05-17 overnight check looked normal."
+}
