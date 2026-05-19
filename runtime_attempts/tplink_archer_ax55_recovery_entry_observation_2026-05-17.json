@@ -1,0 +1,100 @@
+{
+  "attempt_id": "tplink-archer-ax55-recovery-entry-observation-2026-05-17",
+  "status": "completed",
+  "created_date": "2026-05-17",
+  "profile_id": null,
+  "workflow_ids": [
+    "recovery-entry-observation",
+    "web-recovery",
+    "tftp-direction-probe"
+  ],
+  "device": {
+    "vendor": "TP-Link",
+    "model": "Archer AX55",
+    "hardware_version": "v1.0 / CA label",
+    "firmware_version_before": "1.5.11 Build 20251119 rel.49503(4341)",
+    "firmware_version_after": null,
+    "serial_number_recorded": false
+  },
+  "firmware_file": {
+    "source_type": "official_vendor_page",
+    "official_download_page_url": null,
+    "local_path_recorded": false,
+    "filename_recorded": null,
+    "extension": null,
+    "size_bytes": null,
+    "appears_compressed": null,
+    "checksum_algorithm": null,
+    "checksum_status": "not_checked",
+    "model_match_confirmed_by_user": null
+  },
+  "macos_preflight": {
+    "wired_interface_selected": null,
+    "wifi_available_during_recovery": true,
+    "wired_route_confirmed": false,
+    "local_network_permission": "not_checked",
+    "file_picker_authorized": null,
+    "static_ip_set": true,
+    "client_ip": "192.168.0.10",
+    "client_cidr": "192.168.0.10/24",
+    "notes": "Observation-only recovery entry attempt. Mac Ethernet was set to static 192.168.0.10/24 for Attempt 1. Ethernet showed connected around 2m03s, but ping alternated with no route to host before normal admin UI returned; route behavior should be confirmed before treating ping as router-state evidence."
+  },
+  "recovery_entry": {
+    "method": "reset_hold_power_on",
+    "button": "Reset",
+    "hold_seconds_observed": 6,
+    "lan_port_used": null,
+    "led_state_observed": "Attempt 1 with WPS did not enter recovery. Attempt 2 with Reset held during power-on showed middle orange LED around 6 seconds after power-on; Reset was released and recovery page became reachable.",
+    "user_confirmed_recovery_mode": true
+  },
+  "readiness_observations": {
+    "ping_replied": true,
+    "ttl_observed": null,
+    "service_probe_attempted": true,
+    "service_probe_result": "reachable",
+    "readiness_signal_strength": "strong",
+    "notes": "Attempt 1: WPS power-on entry failed and normal admin UI returned around 2m47s. Attempt 2: Reset held during power-on, middle orange LED appeared around 6 seconds after power-on, ping responded around 29 seconds, and 192.168.0.1 opened the Firmware Upgrade recovery page. TTL was not recorded."
+  },
+  "transfer": {
+    "method": "unknown",
+    "tftp_direction": "not_applicable",
+    "mac_role": "web_client",
+    "router_role": "web_server",
+    "started": false,
+    "completed": false,
+    "duration_seconds": null,
+    "bytes_sent": null,
+    "block_count": null,
+    "ack_source_port": null,
+    "server_uses_ephemeral_port_observed": null,
+    "required_filename": null,
+    "first_packet_timing": null,
+    "retry_pattern": null,
+    "retry_effect": "not_tested",
+    "error_category": "none",
+    "error_message": null
+  },
+  "post_upload": {
+    "wait_completed": true,
+    "wait_seconds_actual": 147,
+    "power_cycle_performed": true,
+    "dhcp_restored": null,
+    "gateway_detected": null,
+    "admin_ui_opened": true,
+    "notes": "No upload was performed in the recovery-entry observation stage. Recovery page appeared but firmware acceptance and post-upload behavior were intentionally not tested. After observing the recovery page, user unplugged power and reconnected power; ping and normal admin login page returned after about 147 seconds."
+  },
+  "outcome": {
+    "result": "success",
+    "firmware_version_after_observed": null,
+    "configuration_state": "unknown",
+    "incident_candidate": false,
+    "incident_reason": null
+  },
+  "privacy": {
+    "local_only_by_default": true,
+    "user_export_approved": false,
+    "private_paths_redacted": true,
+    "serials_redacted": true
+  },
+  "notes": "Two live observations recorded on 2026-05-17. Attempt 1: WPS was held during power-on and did not enter recovery; router returned to normal admin UI. Attempt 2: power unplugged at 0:04, Reset held and power connected at 0:14, middle orange LED appeared at 0:20, Reset released, ping responded at 0:29, and 192.168.0.1 opened a Firmware Upgrade recovery page. After no-upload observation, power-cycle return to normal admin UI took about 147 seconds. This proves recovery page entry for this physical AX55(CA) v1.0 unit under the observed conditions, but does not prove firmware acceptance, post-upload behavior after flashing, TFTP direction, or broad AX55 applicability."
+}
