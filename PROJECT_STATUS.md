@@ -15,7 +15,7 @@ Model expansion remains paused. Work should focus on the three reference directi
 | Priority | Reference direction | Current status |
 | --- | --- | --- |
 | 1 | TP-Link Archer AX55 | Official baseline and recovery-entry observation exist. Firmware upload recovery is not tested. |
-| 2 | ASUS RT-AC86U / RT-AX86U | RT-AC86U incoming draft exists. RT-AX86U owner-lab Passive TFTP PUT succeeded and review prompt is prepared; candidate evidence is not final. |
+| 2 | ASUS RT-AC86U / RT-AX86U | RT-AC86U incoming draft exists. RT-AX86U owner-lab Passive TFTP PUT succeeded; Claude review accepts candidate draft after Owner confirmation. |
 | 3 | NETGEAR RAX40 / RAX40v2 | Official App/Web management baseline exists. Recovery method remains research-only. R7000 remains blocked incident context. |
 
 ## Completed Work
@@ -86,8 +86,9 @@ Important design docs are in place:
 
 - `4bfe41c Add 2026-05 reference device evidence batch`
 - `1c108f2 Add RT-AX86U candidate review prompt`
+- `5d93b4d Update handoff for RT-AX86U review step`
 
-Local `main` is ahead of `origin/main` by two commits unless pushed.
+These commits were pushed to `origin/main` on 2026-05-26.
 
 ### Reference Device Work
 
@@ -131,7 +132,7 @@ Boundary:
 
 #### ASUS RT-AX86U
 
-Current status: strong owner-lab candidate evidence exists and an external reviewed-candidate evidence review prompt is prepared. It is not promoted.
+Current status: strong owner-lab candidate evidence exists. Claude Code review accepts candidate draft preparation after Owner confirmation. It is not promoted.
 
 Evidence recorded:
 
@@ -157,6 +158,8 @@ Boundary:
 - RT-AX86U and RT-AC86U must not be merged.
 - LAN1 requirement, ACK port behavior, power-cycle requirement, and configuration retention are observation-only until reviewed.
 - Prepared prompt: `prompts/agent_tasks/claude_stage1_asus_rt_ax86u_reviewed_candidate_review.md`.
+- Review report: `reports/claude_stage1_asus_rt_ax86u_reviewed_candidate_review.md`.
+- Migration plan: `reports/asus_rt_ax86u_reviewed_candidate_migration_plan.md`.
 
 #### NETGEAR R7000
 
@@ -211,9 +214,9 @@ Boundary:
 
 ### Near-Term
 
-- Send the prepared RT-AX86U reviewed-candidate evidence review prompt to Claude Code.
-- Save the returned review under `reports/`.
-- Decide whether to prepare an RT-AX86U incoming/reviewed-candidate draft after review; do not write `reviewed/` or `final/` without explicit Owner approval.
+- Ask Owner to confirm the RT-AX86U 9-item checklist before candidate draft preparation.
+- If confirmed, prepare an RT-AX86U candidate draft in `incoming/` only.
+- Do not write `reviewed/` or `final/` without explicit Owner approval.
 - Keep AX55 at recovery-entry observed until an explicit firmware upload/acceptance test is approved.
 - Keep RAX40 at official baseline until a recovery-specific test is planned.
 - Keep R7000 blocked.
@@ -238,8 +241,7 @@ Boundary:
 
 ## Risks
 
-- Local `main` is ahead of `origin/main` by two commits unless pushed.
-- RT-AX86U review prompt is prepared, but no external review result has been saved yet.
+- RT-AX86U candidate draft is not authorized until Owner confirms the 9-item checklist.
 - AX86U evidence is strong but disruptive-device testing should stop unless a product-blocking question remains.
 - AX55 recovery entry could be mistaken for recovery success; no upload was performed.
 - RAX40 normal App/Web recovery of management access could be mistaken for router firmware recovery; it is not.
@@ -308,21 +310,28 @@ Boundary:
 
 - `prompts/agent_tasks/claude_stage1_asus_rt_ax86u_reviewed_candidate_review.md`
 
+### Completed External Review And Plan
+
+- `reports/claude_stage1_asus_rt_ax86u_reviewed_candidate_review.md`
+- `reports/asus_rt_ax86u_reviewed_candidate_migration_plan.md`
+
 ## Recommended Next Step
 
-Send this prompt to Claude Code:
+Ask Owner for this explicit confirmation:
 
 ```text
-Please read and strictly follow this task file:
-
-/Users/YiYuan/Projects/router-recovery-knowledge/prompts/agent_tasks/claude_stage1_asus_rt_ax86u_reviewed_candidate_review.md
-
-Only output the review report. Do not browse the web, collect new sources, edit files, generate profiles, write incoming/, write reviewed/, or write final/.
+RT-AX86U checklist 9 items confirmed. Approve candidate draft preparation only. Do not write final.
 ```
 
-After the review is returned:
+The checklist is defined in:
 
-1. Save the review under `reports/`.
+```text
+reports/asus_rt_ax86u_reviewed_candidate_migration_plan.md
+```
+
+If Owner confirms:
+
+1. Prepare an RT-AX86U candidate draft in `incoming/` only.
 2. Re-run validation.
-3. Decide whether to prepare an RT-AX86U incoming/reviewed-candidate draft.
+3. Do not write `reviewed/` or `final/` without explicit Owner approval.
 4. Keep AX55, RAX40, and R7000 blocked at their current evidence gates until the next planned lab tests.

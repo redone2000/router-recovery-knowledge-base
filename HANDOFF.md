@@ -34,6 +34,8 @@ The repo has established:
 - source/workflow indexing reviews from OpenClaw and Claude Code
 - 2026-05 reference-device evidence batch committed locally
 - RT-AX86U reviewed-candidate review prompt prepared
+- RT-AX86U Claude Code review report saved
+- RT-AX86U reviewed-candidate migration plan prepared, not executed
 
 Validated on 2026-05-19 before the evidence-batch commit:
 
@@ -119,7 +121,7 @@ Do not:
 
 Next useful AX86U task:
 
-- Send the prepared RT-AX86U reviewed-candidate evidence review prompt to Claude Code.
+- Ask Owner to confirm the RT-AX86U 9-item checklist before any candidate draft preparation.
 
 ### NETGEAR R7000
 
@@ -173,8 +175,7 @@ Do not:
 
 ## Current Risks
 
-- Local `main` is ahead of `origin/main` by two commits unless pushed.
-- RT-AX86U reviewed-candidate review has been prepared but not completed by Claude Code.
+- RT-AX86U candidate draft is not authorized until Owner confirms the 9-item checklist.
 - AX55 recovery page entry may be overread as recovery success.
 - AX86U evidence is strong but still observation-only for many fields.
 - RAX40 management recovery could be confused with firmware recovery.
@@ -241,19 +242,22 @@ Prepared review prompt:
 
 - `prompts/agent_tasks/claude_stage1_asus_rt_ax86u_reviewed_candidate_review.md`
 
+Completed review and plan:
+
+- `reports/claude_stage1_asus_rt_ax86u_reviewed_candidate_review.md`
+- `reports/asus_rt_ax86u_reviewed_candidate_migration_plan.md`
+
 ## Recommended Next Step
 
-Send the RT-AX86U reviewed-candidate evidence review prompt to Claude Code:
+Ask Owner for explicit RT-AX86U candidate draft confirmation:
 
 ```text
-Please read and strictly follow this task file:
-
-/Users/YiYuan/Projects/router-recovery-knowledge/prompts/agent_tasks/claude_stage1_asus_rt_ax86u_reviewed_candidate_review.md
-
-Only output the review report. Do not browse the web, collect new sources, edit files, generate profiles, write incoming/, write reviewed/, or write final/.
+RT-AX86U checklist 9 items confirmed. Approve candidate draft preparation only. Do not write final.
 ```
 
-After Claude Code returns the review, save the report under `reports/`, then decide whether an RT-AX86U incoming/reviewed-candidate draft should be prepared. Do not write `reviewed/` or `final/` without explicit Owner approval.
+The checklist is defined in `reports/asus_rt_ax86u_reviewed_candidate_migration_plan.md`.
+
+If Owner confirms, prepare an RT-AX86U candidate draft in `incoming/` only. Do not write `reviewed/` or `final/` without explicit Owner approval.
 
 Do not start new model expansion.
 
@@ -270,7 +274,7 @@ Goal: continue the router recovery knowledge project from Stage 1 reference-devi
 
 Current priorities:
 1. Protect evidence boundaries.
-2. Send the prepared RT-AX86U reviewed-candidate evidence review prompt to Claude Code.
+2. Ask Owner to confirm the RT-AX86U 9-item checklist before candidate draft preparation.
 3. Keep AX55 at recovery-entry observed until firmware upload is explicitly approved.
 4. Treat ASUS RT-AX86U evidence as candidate/review material, not final.
 5. Keep R7000 blocked as incident-only.
@@ -293,5 +297,5 @@ Important rules:
 - Keep runtime attempts, incidents, workflow evidence, and model profiles separate.
 
 Recommended first task:
-Use `prompts/agent_tasks/claude_stage1_asus_rt_ax86u_reviewed_candidate_review.md` as the next external review task. Save the returned review under `reports/`, then decide whether to prepare an RT-AX86U incoming/reviewed-candidate draft. Do not write reviewed/ or final/ without explicit Owner approval.
+Ask Owner whether they confirm the 9-item checklist in `reports/asus_rt_ax86u_reviewed_candidate_migration_plan.md`. If confirmed, prepare an RT-AX86U candidate draft in incoming/ only. Do not write reviewed/ or final/ without explicit Owner approval.
 ```
