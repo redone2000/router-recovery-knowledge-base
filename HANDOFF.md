@@ -39,6 +39,8 @@ The repo has established:
 - Owner confirmed the RT-AX86U 9-item checklist on 2026-05-26
 - RT-AX86U incoming candidate draft prepared
 - RT-AX86U incoming candidate draft reviewed by Codex and accepted for reviewed-migration request
+- Owner approved RT-AX86U reviewed-candidate migration only on 2026-05-26
+- RT-AX86U reviewed-candidate copy prepared
 
 Validated on 2026-05-19 before the evidence-batch commit:
 
@@ -97,7 +99,7 @@ Do not:
 
 ### ASUS RT-AX86U
 
-Gate: incoming candidate draft only.
+Gate: reviewed candidate only, not final.
 
 Facts:
 
@@ -114,6 +116,7 @@ Facts:
 - Configuration appeared retained in that one attempt.
 - Router was later returned to `3004.388.11` through normal Web UI upgrade.
 - Incoming draft exists: `incoming/asus-rt-ax86u-1-0-merlin.jsonl`.
+- Reviewed-candidate copy exists: `reviewed/asus-rt-ax86u-1-0-merlin.jsonl`.
 
 Do not:
 
@@ -125,7 +128,7 @@ Do not:
 
 Next useful AX86U task:
 
-- Ask Owner whether to approve RT-AX86U reviewed-candidate migration only.
+- Decide whether to generate App/profile export from reviewed candidates, while preserving observation-only warnings.
 
 ### NETGEAR R7000
 
@@ -179,7 +182,7 @@ Do not:
 
 ## Current Risks
 
-- RT-AX86U candidate draft exists but is not reviewed or final.
+- RT-AX86U reviewed candidate exists but is not final.
 - AX55 recovery page entry may be overread as recovery success.
 - AX86U evidence is strong but still observation-only for many fields.
 - RAX40 management recovery could be confused with firmware recovery.
@@ -223,6 +226,7 @@ Schemas/tools:
 Data:
 
 - `incoming/asus-rt-ax86u-1-0-merlin.jsonl`
+- `reviewed/asus-rt-ax86u-1-0-merlin.jsonl`
 - `incoming/asus-rt-ac86u-unknown-unknown.jsonl`
 - `incoming/netgear-r7000-unknown-unknown.jsonl`
 - `incidents/lab/netgear_r7000_ttl100_tftp_timeout_2026-05-13.json`
@@ -255,13 +259,14 @@ Completed review and plan:
 
 ## Recommended Next Step
 
-Ask Owner for explicit RT-AX86U reviewed-candidate migration approval:
+Review App/export readiness for the reviewed RT-AX86U candidate:
 
-```text
-Approve RT-AX86U reviewed-candidate migration only. Do not write final.
-```
+- `reviewed/asus-rt-ax86u-1-0-merlin.jsonl`
+- `reports/app_copy_upload_complete_vs_recovery_complete_2026-05-17.md`
+- `docs/app_recovery_runtime_workflow.md`
+- `docs/app_upgrade_field_contract.md`
 
-If approved, create a reviewed copy under `reviewed/`, update review metadata and lifecycle decision records, and run validators with reviewed allowed. Do not write `final/`.
+Do not write `final/`. Do not remove observation-only warnings.
 
 Do not start new model expansion.
 
@@ -278,9 +283,9 @@ Goal: continue the router recovery knowledge project from Stage 1 reference-devi
 
 Current priorities:
 1. Protect evidence boundaries.
-2. Ask Owner whether to approve RT-AX86U reviewed-candidate migration only.
+2. Review App/export readiness for the RT-AX86U reviewed candidate.
 3. Keep AX55 at recovery-entry observed until firmware upload is explicitly approved.
-4. Treat ASUS RT-AX86U draft as incoming only, not reviewed or final.
+4. Treat ASUS RT-AX86U as reviewed candidate only, not final.
 5. Keep R7000 blocked as incident-only.
 6. Treat RAX40v2 as official management/update baseline only, not recovery proof.
 
@@ -301,5 +306,5 @@ Important rules:
 - Keep runtime attempts, incidents, workflow evidence, and model profiles separate.
 
 Recommended first task:
-Ask Owner whether to approve RT-AX86U reviewed-candidate migration only. If approved, create reviewed/asus-rt-ax86u-1-0-merlin.jsonl, update lifecycle records, and validate with reviewed allowed. Do not write final/.
+Review App/export readiness for reviewed/asus-rt-ax86u-1-0-merlin.jsonl while preserving observation-only warnings. Do not write final/.
 ```

@@ -11,9 +11,9 @@ Goal: continue the router recovery knowledge project from Stage 1 reference-devi
 
 Current priorities:
 1. Protect evidence boundaries.
-2. Ask Owner whether to approve RT-AX86U reviewed-candidate migration only.
+2. Review App/export readiness for the RT-AX86U reviewed candidate.
 3. Keep AX55 at recovery-entry observed until firmware upload is explicitly approved.
-4. Treat ASUS RT-AX86U draft as incoming only, not reviewed or final.
+4. Treat ASUS RT-AX86U as reviewed candidate only, not final.
 5. Keep R7000 blocked as incident-only.
 6. Treat RAX40v2 as official management/update baseline only, not recovery proof.
 
@@ -34,5 +34,5 @@ Important rules:
 - Keep runtime attempts, incidents, workflow evidence, and model profiles separate.
 
 Recommended first task:
-Ask Owner whether to approve RT-AX86U reviewed-candidate migration only. If approved, create reviewed/asus-rt-ax86u-1-0-merlin.jsonl, update lifecycle records, and validate with reviewed allowed. Do not write final/.
+Review App/export readiness for reviewed/asus-rt-ax86u-1-0-merlin.jsonl while preserving observation-only warnings. Do not write final/.
 ```
