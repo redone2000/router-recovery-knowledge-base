@@ -11,7 +11,7 @@ Goal: continue the router recovery knowledge project from Stage 1 reference-devi
 
 Current priorities:
 1. Protect evidence boundaries.
-2. Decide what to do with the untracked 2026-05-16/17 local evidence batch.
+2. Send the prepared RT-AX86U reviewed-candidate evidence review prompt to Claude Code.
 3. Keep AX55 at recovery-entry observed until firmware upload is explicitly approved.
 4. Treat ASUS RT-AX86U evidence as candidate/review material, not final.
 5. Keep R7000 blocked as incident-only.
@@ -34,6 +34,5 @@ Important rules:
 - Keep runtime attempts, incidents, workflow evidence, and model profiles separate.
 
 Recommended first task:
-Review the untracked 2026-05-16/17 evidence files, confirm they pass validation and contain no sensitive data, then ask whether to commit them as one evidence batch. After that, prepare the RT-AX86U reviewed-candidate review prompt.
+Use `prompts/agent_tasks/claude_stage1_asus_rt_ax86u_reviewed_candidate_review.md` as the next external review task. Save the returned review under `reports/`, then decide whether to prepare an RT-AX86U incoming/reviewed-candidate draft. Do not write reviewed/ or final/ without explicit Owner approval.
 ```
-

@@ -1,6 +1,6 @@
 # Project Status
 
-Last updated: 2026-05-19
+Last updated: 2026-05-26
 Owner timezone: Asia/Shanghai
 Repository: `/Users/YiYuan/Projects/router-recovery-knowledge`
 
@@ -15,7 +15,7 @@ Model expansion remains paused. Work should focus on the three reference directi
 | Priority | Reference direction | Current status |
 | --- | --- | --- |
 | 1 | TP-Link Archer AX55 | Official baseline and recovery-entry observation exist. Firmware upload recovery is not tested. |
-| 2 | ASUS RT-AC86U / RT-AX86U | RT-AC86U incoming draft exists. RT-AX86U owner-lab Passive TFTP PUT succeeded and is candidate evidence, not final. |
+| 2 | ASUS RT-AC86U / RT-AX86U | RT-AC86U incoming draft exists. RT-AX86U owner-lab Passive TFTP PUT succeeded and review prompt is prepared; candidate evidence is not final. |
 | 3 | NETGEAR RAX40 / RAX40v2 | Official App/Web management baseline exists. Recovery method remains research-only. R7000 remains blocked incident context. |
 
 ## Completed Work
@@ -82,6 +82,13 @@ Important design docs are in place:
 - `docs/app_upgrade_field_contract.md`
 - `docs/recovery_hygiene_defaults.md`
 
+### Latest Local Commits
+
+- `4bfe41c Add 2026-05 reference device evidence batch`
+- `1c108f2 Add RT-AX86U candidate review prompt`
+
+Local `main` is ahead of `origin/main` by two commits unless pushed.
+
 ### Reference Device Work
 
 #### TP-Link Archer AX55
@@ -124,7 +131,7 @@ Boundary:
 
 #### ASUS RT-AX86U
 
-Current status: strong owner-lab candidate evidence exists locally, but it is not promoted.
+Current status: strong owner-lab candidate evidence exists and an external reviewed-candidate evidence review prompt is prepared. It is not promoted.
 
 Evidence recorded:
 
@@ -149,6 +156,7 @@ Boundary:
 - This is not final profile evidence yet.
 - RT-AX86U and RT-AC86U must not be merged.
 - LAN1 requirement, ACK port behavior, power-cycle requirement, and configuration retention are observation-only until reviewed.
+- Prepared prompt: `prompts/agent_tasks/claude_stage1_asus_rt_ax86u_reviewed_candidate_review.md`.
 
 #### NETGEAR R7000
 
@@ -203,9 +211,9 @@ Boundary:
 
 ### Near-Term
 
-- Decide whether to add the local untracked 2026-05-16/17 evidence artifacts to version control.
-- If approved, commit the live-session notes, runtime attempts, and reports as one evidence batch.
-- Prepare reviewed-candidate discussion for RT-AX86U, not final profile.
+- Send the prepared RT-AX86U reviewed-candidate evidence review prompt to Claude Code.
+- Save the returned review under `reports/`.
+- Decide whether to prepare an RT-AX86U incoming/reviewed-candidate draft after review; do not write `reviewed/` or `final/` without explicit Owner approval.
 - Keep AX55 at recovery-entry observed until an explicit firmware upload/acceptance test is approved.
 - Keep RAX40 at official baseline until a recovery-specific test is planned.
 - Keep R7000 blocked.
@@ -230,7 +238,8 @@ Boundary:
 
 ## Risks
 
-- The newest 2026-05-16/17 artifacts are currently untracked local files. They are visible locally but may not exist on GitHub or in a fresh checkout.
+- Local `main` is ahead of `origin/main` by two commits unless pushed.
+- RT-AX86U review prompt is prepared, but no external review result has been saved yet.
 - AX86U evidence is strong but disruptive-device testing should stop unless a product-blocking question remains.
 - AX55 recovery entry could be mistaken for recovery success; no upload was performed.
 - RAX40 normal App/Web recovery of management access could be mistaken for router firmware recovery; it is not.
@@ -281,7 +290,7 @@ Boundary:
 - `runtime_attempts/examples/asus_rt_ac86u_success_observed_2026-05-12.json`
 - `app_exports/examples/asus_rt_ac86u_app_profile_draft.json`
 
-### Local Untracked Evidence As Of 2026-05-19
+### Committed 2026-05 Reference-Device Evidence Batch
 
 - `lab_tests/live_sessions/asus_rt_ax86u_official_baseline_2026-05-17.md`
 - `lab_tests/live_sessions/netgear_rax40_official_baseline_2026-05-16.md`
@@ -295,15 +304,25 @@ Boundary:
 - `reports/tplink_archer_ax55_recovery_entry_observation_summary_2026-05-17.md`
 - `reports/app_copy_upload_complete_vs_recovery_complete_2026-05-17.md`
 
+### Prepared External Review Prompt
+
+- `prompts/agent_tasks/claude_stage1_asus_rt_ax86u_reviewed_candidate_review.md`
+
 ## Recommended Next Step
 
-The next session should start by deciding whether to commit the local untracked 2026-05-16/17 evidence batch.
+Send this prompt to Claude Code:
 
-Recommended sequence:
+```text
+Please read and strictly follow this task file:
 
-1. Re-run validation.
-2. Review untracked files for sensitive data.
-3. If clean, commit the evidence batch.
-4. Prepare RT-AX86U reviewed-candidate review prompt.
-5. Keep AX55, RAX40, and R7000 blocked at their current evidence gates until the next planned lab tests.
+/Users/YiYuan/Projects/router-recovery-knowledge/prompts/agent_tasks/claude_stage1_asus_rt_ax86u_reviewed_candidate_review.md
 
+Only output the review report. Do not browse the web, collect new sources, edit files, generate profiles, write incoming/, write reviewed/, or write final/.
+```
+
+After the review is returned:
+
+1. Save the review under `reports/`.
+2. Re-run validation.
+3. Decide whether to prepare an RT-AX86U incoming/reviewed-candidate draft.
+4. Keep AX55, RAX40, and R7000 blocked at their current evidence gates until the next planned lab tests.

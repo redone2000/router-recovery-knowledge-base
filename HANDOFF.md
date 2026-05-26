@@ -3,7 +3,7 @@
 Use this file as the startup context for a new Codex thread working on this repository.
 
 Repository: `/Users/YiYuan/Projects/router-recovery-knowledge`
-Last updated: 2026-05-19
+Last updated: 2026-05-26
 Current mode: Stage 1 reference-device evidence and App-upgrade preparation
 
 ## Working Principle
@@ -32,8 +32,10 @@ The repo has established:
 - App runtime workflow mapping
 - initial profile export path
 - source/workflow indexing reviews from OpenClaw and Claude Code
+- 2026-05 reference-device evidence batch committed locally
+- RT-AX86U reviewed-candidate review prompt prepared
 
-Validated on 2026-05-19:
+Validated on 2026-05-19 before the evidence-batch commit:
 
 ```text
 python3 tools/validate_runtime_attempts.py runtime_attempts
@@ -117,7 +119,7 @@ Do not:
 
 Next useful AX86U task:
 
-- Prepare reviewed-candidate review, or commit evidence batch first.
+- Send the prepared RT-AX86U reviewed-candidate evidence review prompt to Claude Code.
 
 ### NETGEAR R7000
 
@@ -171,7 +173,8 @@ Do not:
 
 ## Current Risks
 
-- The newest 2026-05-16/17 evidence artifacts are untracked local files.
+- Local `main` is ahead of `origin/main` by two commits unless pushed.
+- RT-AX86U reviewed-candidate review has been prepared but not completed by Claude Code.
 - AX55 recovery page entry may be overread as recovery success.
 - AX86U evidence is strong but still observation-only for many fields.
 - RAX40 management recovery could be confused with firmware recovery.
@@ -220,7 +223,7 @@ Data:
 - `runtime_attempts/examples/asus_rt_ac86u_success_observed_2026-05-12.json`
 - `app_exports/examples/asus_rt_ac86u_app_profile_draft.json`
 
-Untracked local evidence as of 2026-05-19:
+Committed 2026-05 reference-device evidence batch:
 
 - `lab_tests/live_sessions/asus_rt_ax86u_official_baseline_2026-05-17.md`
 - `lab_tests/live_sessions/netgear_rax40_official_baseline_2026-05-16.md`
@@ -234,16 +237,23 @@ Untracked local evidence as of 2026-05-19:
 - `reports/tplink_archer_ax55_recovery_entry_observation_summary_2026-05-17.md`
 - `reports/app_copy_upload_complete_vs_recovery_complete_2026-05-17.md`
 
+Prepared review prompt:
+
+- `prompts/agent_tasks/claude_stage1_asus_rt_ax86u_reviewed_candidate_review.md`
+
 ## Recommended Next Step
 
-Start by handling the untracked evidence batch:
+Send the RT-AX86U reviewed-candidate evidence review prompt to Claude Code:
 
-1. Run `git status --short`.
-2. Re-run validation.
-3. Review the untracked 2026-05-16/17 artifacts for sensitive data.
-4. Ask owner whether to commit them.
-5. If approved, commit them as one local evidence batch.
-6. Then prepare an RT-AX86U reviewed-candidate review prompt.
+```text
+Please read and strictly follow this task file:
+
+/Users/YiYuan/Projects/router-recovery-knowledge/prompts/agent_tasks/claude_stage1_asus_rt_ax86u_reviewed_candidate_review.md
+
+Only output the review report. Do not browse the web, collect new sources, edit files, generate profiles, write incoming/, write reviewed/, or write final/.
+```
+
+After Claude Code returns the review, save the report under `reports/`, then decide whether an RT-AX86U incoming/reviewed-candidate draft should be prepared. Do not write `reviewed/` or `final/` without explicit Owner approval.
 
 Do not start new model expansion.
 
@@ -260,7 +270,7 @@ Goal: continue the router recovery knowledge project from Stage 1 reference-devi
 
 Current priorities:
 1. Protect evidence boundaries.
-2. Decide what to do with the untracked 2026-05-16/17 local evidence batch.
+2. Send the prepared RT-AX86U reviewed-candidate evidence review prompt to Claude Code.
 3. Keep AX55 at recovery-entry observed until firmware upload is explicitly approved.
 4. Treat ASUS RT-AX86U evidence as candidate/review material, not final.
 5. Keep R7000 blocked as incident-only.
@@ -283,6 +293,5 @@ Important rules:
 - Keep runtime attempts, incidents, workflow evidence, and model profiles separate.
 
 Recommended first task:
-Review the untracked 2026-05-16/17 evidence files, confirm they pass validation and contain no sensitive data, then ask whether to commit them as one evidence batch. After that, prepare the RT-AX86U reviewed-candidate review prompt.
+Use `prompts/agent_tasks/claude_stage1_asus_rt_ax86u_reviewed_candidate_review.md` as the next external review task. Save the returned review under `reports/`, then decide whether to prepare an RT-AX86U incoming/reviewed-candidate draft. Do not write reviewed/ or final/ without explicit Owner approval.
 ```
-
