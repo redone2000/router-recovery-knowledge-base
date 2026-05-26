@@ -46,6 +46,7 @@ The repo has established:
 - RT-AX86U App integration slice spec prepared
 - Router Recovery App project handoff prompt prepared for RT-AX86U integration planning
 - AI-assisted model hypothesis queue added for outward model expansion without profile pollution
+- RT-AX86U Pro official source probe completed; evidence indexed but insufficient for incoming profile
 
 Validated on 2026-05-19 before the evidence-batch commit:
 
@@ -212,6 +213,8 @@ Hypotheses:
 
 - `model_hypotheses/README.md`
 - `model_hypotheses/asus-expansion-seeds.jsonl`
+- `model_hypotheses/tplink-expansion-seeds.jsonl`
+- `model_hypotheses/netgear-expansion-seeds.jsonl`
 
 Docs:
 
@@ -276,6 +279,8 @@ Completed review and plan:
 - `reports/codex_asus_rt_ax86u_incoming_draft_review_2026-05-26.md`
 - `reports/asus_rt_ax86u_app_export_readiness_2026-05-26.md`
 - `reports/rt_ax86u_app_integration_slice_2026-05-26.md`
+- `reports/claude_stage1_model_hypothesis_expansion_review_2026-05-26.md`
+- `reports/asus_rt_ax86u_pro_source_probe_2026-05-26.md`
 
 ## Recommended Next Step
 

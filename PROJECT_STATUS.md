@@ -94,15 +94,26 @@ Purpose:
 - preserve missing-proof lists before any profile drafting
 - prevent AI-generated breadth from polluting `incoming/`, `reviewed/`, or `final/`
 
-Current seed:
+Current queue:
 
-- `model_hypotheses/asus-expansion-seeds.jsonl` contains a research seed for ASUS RT-AX88U. It is not evidence and not an App support claim.
+- `model_hypotheses/asus-expansion-seeds.jsonl`
+- `model_hypotheses/tplink-expansion-seeds.jsonl`
+- `model_hypotheses/netgear-expansion-seeds.jsonl`
+
+Current notable states:
+
+- ASUS RT-AX86U Pro has official source evidence indexed, but remains insufficient for `incoming/` because TFTP direction, recovery IP, post-upload behavior, hardware revision scope, and firmware scope remain unproven.
+- ASUS RT-AC86U mirrors the existing incoming profile evidence and remains Owner-gated for any reviewed migration.
+- NETGEAR R7000 remains blocked.
+- Other added candidates remain research seeds with `suspected_workflows=["unknown"]`.
 
 Tooling and prompts:
 
 - `schema/model_hypothesis.schema.json`
 - `tools/validate_model_hypotheses.py`
 - `prompts/agent_tasks/claude_stage1_model_hypothesis_expansion_review.md`
+- `reports/claude_stage1_model_hypothesis_expansion_review_2026-05-26.md`
+- `reports/asus_rt_ax86u_pro_source_probe_2026-05-26.md`
 
 ### Latest Local Commits
 
