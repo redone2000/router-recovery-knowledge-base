@@ -15,7 +15,7 @@ Model expansion remains paused. Work should focus on the three reference directi
 | Priority | Reference direction | Current status |
 | --- | --- | --- |
 | 1 | TP-Link Archer AX55 | Official baseline and recovery-entry observation exist. Firmware upload recovery is not tested. |
-| 2 | ASUS RT-AC86U / RT-AX86U | RT-AC86U incoming draft exists. RT-AX86U owner-lab Passive TFTP PUT succeeded; Claude review accepts candidate draft after Owner confirmation. |
+| 2 | ASUS RT-AC86U / RT-AX86U | RT-AC86U incoming draft exists. RT-AX86U incoming candidate draft exists after Owner checklist confirmation. |
 | 3 | NETGEAR RAX40 / RAX40v2 | Official App/Web management baseline exists. Recovery method remains research-only. R7000 remains blocked incident context. |
 
 ## Completed Work
@@ -132,7 +132,7 @@ Boundary:
 
 #### ASUS RT-AX86U
 
-Current status: strong owner-lab candidate evidence exists. Claude Code review accepts candidate draft preparation after Owner confirmation. It is not promoted.
+Current status: incoming candidate draft exists. It is not reviewed or final.
 
 Evidence recorded:
 
@@ -157,6 +157,7 @@ Boundary:
 - This is not final profile evidence yet.
 - RT-AX86U and RT-AC86U must not be merged.
 - LAN1 requirement, ACK port behavior, power-cycle requirement, and configuration retention are observation-only until reviewed.
+- Incoming draft: `incoming/asus-rt-ax86u-1-0-merlin.jsonl`.
 - Prepared prompt: `prompts/agent_tasks/claude_stage1_asus_rt_ax86u_reviewed_candidate_review.md`.
 - Review report: `reports/claude_stage1_asus_rt_ax86u_reviewed_candidate_review.md`.
 - Migration plan: `reports/asus_rt_ax86u_reviewed_candidate_migration_plan.md`.
@@ -214,8 +215,7 @@ Boundary:
 
 ### Near-Term
 
-- Ask Owner to confirm the RT-AX86U 9-item checklist before candidate draft preparation.
-- If confirmed, prepare an RT-AX86U candidate draft in `incoming/` only.
+- Review the RT-AX86U incoming candidate draft before any reviewed-candidate migration.
 - Do not write `reviewed/` or `final/` without explicit Owner approval.
 - Keep AX55 at recovery-entry observed until an explicit firmware upload/acceptance test is approved.
 - Keep RAX40 at official baseline until a recovery-specific test is planned.
@@ -241,7 +241,7 @@ Boundary:
 
 ## Risks
 
-- RT-AX86U candidate draft is not authorized until Owner confirms the 9-item checklist.
+- RT-AX86U candidate draft exists but is not reviewed or final.
 - AX86U evidence is strong but disruptive-device testing should stop unless a product-blocking question remains.
 - AX55 recovery entry could be mistaken for recovery success; no upload was performed.
 - RAX40 normal App/Web recovery of management access could be mistaken for router firmware recovery; it is not.
@@ -286,6 +286,7 @@ Boundary:
 
 ### Current Data
 
+- `incoming/asus-rt-ax86u-1-0-merlin.jsonl`
 - `incoming/asus-rt-ac86u-unknown-unknown.jsonl`
 - `incoming/netgear-r7000-unknown-unknown.jsonl`
 - `incidents/lab/netgear_r7000_ttl100_tftp_timeout_2026-05-13.json`
@@ -317,21 +318,16 @@ Boundary:
 
 ## Recommended Next Step
 
-Ask Owner for this explicit confirmation:
+Review the RT-AX86U incoming candidate draft:
 
 ```text
-RT-AX86U checklist 9 items confirmed. Approve candidate draft preparation only. Do not write final.
+incoming/asus-rt-ax86u-1-0-merlin.jsonl
 ```
 
-The checklist is defined in:
+Recommended sequence:
 
-```text
-reports/asus_rt_ax86u_reviewed_candidate_migration_plan.md
-```
-
-If Owner confirms:
-
-1. Prepare an RT-AX86U candidate draft in `incoming/` only.
+1. Compare the draft against `reports/asus_rt_ax86u_reviewed_candidate_migration_plan.md`.
 2. Re-run validation.
-3. Do not write `reviewed/` or `final/` without explicit Owner approval.
-4. Keep AX55, RAX40, and R7000 blocked at their current evidence gates until the next planned lab tests.
+3. If acceptable, ask Owner whether to approve reviewed-candidate migration.
+4. Do not write `reviewed/` or `final/` without explicit Owner approval.
+5. Keep AX55, RAX40, and R7000 blocked at their current evidence gates until the next planned lab tests.

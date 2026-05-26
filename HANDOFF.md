@@ -36,6 +36,8 @@ The repo has established:
 - RT-AX86U reviewed-candidate review prompt prepared
 - RT-AX86U Claude Code review report saved
 - RT-AX86U reviewed-candidate migration plan prepared, not executed
+- Owner confirmed the RT-AX86U 9-item checklist on 2026-05-26
+- RT-AX86U incoming candidate draft prepared
 
 Validated on 2026-05-19 before the evidence-batch commit:
 
@@ -94,7 +96,7 @@ Do not:
 
 ### ASUS RT-AX86U
 
-Gate: candidate evidence, not promoted.
+Gate: incoming candidate draft only.
 
 Facts:
 
@@ -110,6 +112,7 @@ Facts:
 - DHCP/admin did not return until normal power cycle after waiting more than 5 minutes.
 - Configuration appeared retained in that one attempt.
 - Router was later returned to `3004.388.11` through normal Web UI upgrade.
+- Incoming draft exists: `incoming/asus-rt-ax86u-1-0-merlin.jsonl`.
 
 Do not:
 
@@ -121,7 +124,7 @@ Do not:
 
 Next useful AX86U task:
 
-- Ask Owner to confirm the RT-AX86U 9-item checklist before any candidate draft preparation.
+- Review the RT-AX86U incoming candidate draft and decide whether a separate reviewed-candidate migration should be requested from Owner.
 
 ### NETGEAR R7000
 
@@ -175,7 +178,7 @@ Do not:
 
 ## Current Risks
 
-- RT-AX86U candidate draft is not authorized until Owner confirms the 9-item checklist.
+- RT-AX86U candidate draft exists but is not reviewed or final.
 - AX55 recovery page entry may be overread as recovery success.
 - AX86U evidence is strong but still observation-only for many fields.
 - RAX40 management recovery could be confused with firmware recovery.
@@ -218,6 +221,7 @@ Schemas/tools:
 
 Data:
 
+- `incoming/asus-rt-ax86u-1-0-merlin.jsonl`
 - `incoming/asus-rt-ac86u-unknown-unknown.jsonl`
 - `incoming/netgear-r7000-unknown-unknown.jsonl`
 - `incidents/lab/netgear_r7000_ttl100_tftp_timeout_2026-05-13.json`
@@ -249,15 +253,13 @@ Completed review and plan:
 
 ## Recommended Next Step
 
-Ask Owner for explicit RT-AX86U candidate draft confirmation:
+Review the RT-AX86U incoming candidate draft:
 
-```text
-RT-AX86U checklist 9 items confirmed. Approve candidate draft preparation only. Do not write final.
-```
+- `incoming/asus-rt-ax86u-1-0-merlin.jsonl`
+- `reports/asus_rt_ax86u_reviewed_candidate_migration_plan.md`
+- `reports/claude_stage1_asus_rt_ax86u_reviewed_candidate_review.md`
 
-The checklist is defined in `reports/asus_rt_ax86u_reviewed_candidate_migration_plan.md`.
-
-If Owner confirms, prepare an RT-AX86U candidate draft in `incoming/` only. Do not write `reviewed/` or `final/` without explicit Owner approval.
+If the draft is acceptable, ask Owner whether to approve reviewed-candidate migration. Do not write `reviewed/` or `final/` without explicit Owner approval.
 
 Do not start new model expansion.
 
@@ -274,9 +276,9 @@ Goal: continue the router recovery knowledge project from Stage 1 reference-devi
 
 Current priorities:
 1. Protect evidence boundaries.
-2. Ask Owner to confirm the RT-AX86U 9-item checklist before candidate draft preparation.
+2. Review the RT-AX86U incoming candidate draft before any reviewed-candidate migration.
 3. Keep AX55 at recovery-entry observed until firmware upload is explicitly approved.
-4. Treat ASUS RT-AX86U evidence as candidate/review material, not final.
+4. Treat ASUS RT-AX86U draft as incoming only, not reviewed or final.
 5. Keep R7000 blocked as incident-only.
 6. Treat RAX40v2 as official management/update baseline only, not recovery proof.
 
@@ -297,5 +299,5 @@ Important rules:
 - Keep runtime attempts, incidents, workflow evidence, and model profiles separate.
 
 Recommended first task:
-Ask Owner whether they confirm the 9-item checklist in `reports/asus_rt_ax86u_reviewed_candidate_migration_plan.md`. If confirmed, prepare an RT-AX86U candidate draft in incoming/ only. Do not write reviewed/ or final/ without explicit Owner approval.
+Review `incoming/asus-rt-ax86u-1-0-merlin.jsonl` against `reports/asus_rt_ax86u_reviewed_candidate_migration_plan.md`. If acceptable, ask Owner whether to approve reviewed-candidate migration. Do not write reviewed/ or final/ without explicit Owner approval.
 ```
