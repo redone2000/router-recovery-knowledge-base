@@ -43,6 +43,7 @@ The repo has established:
 - RT-AX86U reviewed-candidate copy prepared
 - RT-AX86U App-facing implementation draft export generated
 - RT-AX86U App integration slice spec prepared
+- Router Recovery App project handoff prompt prepared for RT-AX86U integration planning
 
 Validated on 2026-05-19 before the evidence-batch commit:
 
@@ -130,7 +131,9 @@ Do not:
 
 Next useful AX86U task:
 
-- Use the RT-AX86U App integration slice spec as implementation input for the macOS App.
+- Give the Router Recovery App project thread `prompts/router_recovery_app_rt_ax86u_integration_prompt.md`.
+- Do not directly modify the App project from this knowledge-system thread.
+- Treat the App integration slice as a future-build planning input while the App is under review.
 
 ### NETGEAR R7000
 
@@ -199,6 +202,7 @@ Root:
 - `PROJECT_STATUS.md`
 - `HANDOFF.md`
 - `prompts/new_thread_start_prompt.md`
+- `prompts/router_recovery_app_rt_ax86u_integration_prompt.md`
 
 Docs:
 

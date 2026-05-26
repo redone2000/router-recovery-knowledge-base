@@ -161,6 +161,7 @@ Boundary:
 - Reviewed candidate: `reviewed/asus-rt-ax86u-1-0-merlin.jsonl`.
 - App export draft: `app_exports/examples/asus_rt_ax86u_app_profile_draft.json`.
 - App integration slice: `reports/rt_ax86u_app_integration_slice_2026-05-26.md`.
+- App project prompt: `prompts/router_recovery_app_rt_ax86u_integration_prompt.md`.
 - Prepared prompt: `prompts/agent_tasks/claude_stage1_asus_rt_ax86u_reviewed_candidate_review.md`.
 - Review report: `reports/claude_stage1_asus_rt_ax86u_reviewed_candidate_review.md`.
 - Migration plan: `reports/asus_rt_ax86u_reviewed_candidate_migration_plan.md`.
@@ -219,7 +220,8 @@ Boundary:
 
 ### Near-Term
 
-- Use the RT-AX86U App integration slice as internal App implementation input only.
+- Communicate RT-AX86U App integration through `prompts/router_recovery_app_rt_ax86u_integration_prompt.md`; do not directly modify the App project from this knowledge-system thread.
+- Keep the RT-AX86U App integration slice as future-build input only while the App project is in App Review waiting mode.
 - Do not write `final/` without explicit Owner approval.
 - Keep AX55 at recovery-entry observed until an explicit firmware upload/acceptance test is approved.
 - Keep RAX40 at official baseline until a recovery-specific test is planned.
