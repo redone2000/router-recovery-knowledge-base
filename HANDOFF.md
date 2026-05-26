@@ -38,6 +38,7 @@ The repo has established:
 - RT-AX86U reviewed-candidate migration plan prepared, not executed
 - Owner confirmed the RT-AX86U 9-item checklist on 2026-05-26
 - RT-AX86U incoming candidate draft prepared
+- RT-AX86U incoming candidate draft reviewed by Codex and accepted for reviewed-migration request
 
 Validated on 2026-05-19 before the evidence-batch commit:
 
@@ -124,7 +125,7 @@ Do not:
 
 Next useful AX86U task:
 
-- Review the RT-AX86U incoming candidate draft and decide whether a separate reviewed-candidate migration should be requested from Owner.
+- Ask Owner whether to approve RT-AX86U reviewed-candidate migration only.
 
 ### NETGEAR R7000
 
@@ -250,16 +251,17 @@ Completed review and plan:
 
 - `reports/claude_stage1_asus_rt_ax86u_reviewed_candidate_review.md`
 - `reports/asus_rt_ax86u_reviewed_candidate_migration_plan.md`
+- `reports/codex_asus_rt_ax86u_incoming_draft_review_2026-05-26.md`
 
 ## Recommended Next Step
 
-Review the RT-AX86U incoming candidate draft:
+Ask Owner for explicit RT-AX86U reviewed-candidate migration approval:
 
-- `incoming/asus-rt-ax86u-1-0-merlin.jsonl`
-- `reports/asus_rt_ax86u_reviewed_candidate_migration_plan.md`
-- `reports/claude_stage1_asus_rt_ax86u_reviewed_candidate_review.md`
+```text
+Approve RT-AX86U reviewed-candidate migration only. Do not write final.
+```
 
-If the draft is acceptable, ask Owner whether to approve reviewed-candidate migration. Do not write `reviewed/` or `final/` without explicit Owner approval.
+If approved, create a reviewed copy under `reviewed/`, update review metadata and lifecycle decision records, and run validators with reviewed allowed. Do not write `final/`.
 
 Do not start new model expansion.
 
@@ -276,7 +278,7 @@ Goal: continue the router recovery knowledge project from Stage 1 reference-devi
 
 Current priorities:
 1. Protect evidence boundaries.
-2. Review the RT-AX86U incoming candidate draft before any reviewed-candidate migration.
+2. Ask Owner whether to approve RT-AX86U reviewed-candidate migration only.
 3. Keep AX55 at recovery-entry observed until firmware upload is explicitly approved.
 4. Treat ASUS RT-AX86U draft as incoming only, not reviewed or final.
 5. Keep R7000 blocked as incident-only.
@@ -299,5 +301,5 @@ Important rules:
 - Keep runtime attempts, incidents, workflow evidence, and model profiles separate.
 
 Recommended first task:
-Review `incoming/asus-rt-ax86u-1-0-merlin.jsonl` against `reports/asus_rt_ax86u_reviewed_candidate_migration_plan.md`. If acceptable, ask Owner whether to approve reviewed-candidate migration. Do not write reviewed/ or final/ without explicit Owner approval.
+Ask Owner whether to approve RT-AX86U reviewed-candidate migration only. If approved, create reviewed/asus-rt-ax86u-1-0-merlin.jsonl, update lifecycle records, and validate with reviewed allowed. Do not write final/.
 ```

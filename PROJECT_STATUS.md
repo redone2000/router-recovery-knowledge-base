@@ -15,7 +15,7 @@ Model expansion remains paused. Work should focus on the three reference directi
 | Priority | Reference direction | Current status |
 | --- | --- | --- |
 | 1 | TP-Link Archer AX55 | Official baseline and recovery-entry observation exist. Firmware upload recovery is not tested. |
-| 2 | ASUS RT-AC86U / RT-AX86U | RT-AC86U incoming draft exists. RT-AX86U incoming candidate draft exists after Owner checklist confirmation. |
+| 2 | ASUS RT-AC86U / RT-AX86U | RT-AC86U incoming draft exists. RT-AX86U incoming candidate draft exists and passed Codex draft review; reviewed migration requires Owner approval. |
 | 3 | NETGEAR RAX40 / RAX40v2 | Official App/Web management baseline exists. Recovery method remains research-only. R7000 remains blocked incident context. |
 
 ## Completed Work
@@ -132,7 +132,7 @@ Boundary:
 
 #### ASUS RT-AX86U
 
-Current status: incoming candidate draft exists. It is not reviewed or final.
+Current status: incoming candidate draft exists and passed Codex draft review. It is not reviewed or final.
 
 Evidence recorded:
 
@@ -161,6 +161,7 @@ Boundary:
 - Prepared prompt: `prompts/agent_tasks/claude_stage1_asus_rt_ax86u_reviewed_candidate_review.md`.
 - Review report: `reports/claude_stage1_asus_rt_ax86u_reviewed_candidate_review.md`.
 - Migration plan: `reports/asus_rt_ax86u_reviewed_candidate_migration_plan.md`.
+- Codex draft review: `reports/codex_asus_rt_ax86u_incoming_draft_review_2026-05-26.md`.
 
 #### NETGEAR R7000
 
@@ -215,7 +216,7 @@ Boundary:
 
 ### Near-Term
 
-- Review the RT-AX86U incoming candidate draft before any reviewed-candidate migration.
+- Ask Owner whether to approve RT-AX86U reviewed-candidate migration only.
 - Do not write `reviewed/` or `final/` without explicit Owner approval.
 - Keep AX55 at recovery-entry observed until an explicit firmware upload/acceptance test is approved.
 - Keep RAX40 at official baseline until a recovery-specific test is planned.
@@ -318,16 +319,16 @@ Boundary:
 
 ## Recommended Next Step
 
-Review the RT-AX86U incoming candidate draft:
+Ask Owner for explicit RT-AX86U reviewed-candidate migration approval:
 
 ```text
-incoming/asus-rt-ax86u-1-0-merlin.jsonl
+Approve RT-AX86U reviewed-candidate migration only. Do not write final.
 ```
 
-Recommended sequence:
+If approved:
 
-1. Compare the draft against `reports/asus_rt_ax86u_reviewed_candidate_migration_plan.md`.
-2. Re-run validation.
-3. If acceptable, ask Owner whether to approve reviewed-candidate migration.
-4. Do not write `reviewed/` or `final/` without explicit Owner approval.
+1. Create `reviewed/asus-rt-ax86u-1-0-merlin.jsonl`.
+2. Update review metadata and lifecycle decision records only.
+3. Run validators with reviewed allowed.
+4. Do not write `final/`.
 5. Keep AX55, RAX40, and R7000 blocked at their current evidence gates until the next planned lab tests.
