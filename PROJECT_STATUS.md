@@ -15,7 +15,7 @@ Model expansion remains paused. Work should focus on the three reference directi
 | Priority | Reference direction | Current status |
 | --- | --- | --- |
 | 1 | TP-Link Archer AX55 | Official baseline and recovery-entry observation exist. Firmware upload recovery is not tested. |
-| 2 | ASUS RT-AC86U / RT-AX86U | RT-AC86U incoming draft exists. RT-AX86U reviewed candidate exists; final remains prohibited. |
+| 2 | ASUS RT-AC86U / RT-AX86U | RT-AC86U incoming draft exists. RT-AX86U reviewed candidate and App export draft exist; final remains prohibited. |
 | 3 | NETGEAR RAX40 / RAX40v2 | Official App/Web management baseline exists. Recovery method remains research-only. R7000 remains blocked incident context. |
 
 ## Completed Work
@@ -132,7 +132,7 @@ Boundary:
 
 #### ASUS RT-AX86U
 
-Current status: reviewed candidate exists. It is not final.
+Current status: reviewed candidate and App-facing draft export exist. Neither is final.
 
 Evidence recorded:
 
@@ -159,6 +159,7 @@ Boundary:
 - LAN1 requirement, ACK port behavior, power-cycle requirement, and configuration retention are observation-only until reviewed.
 - Incoming draft: `incoming/asus-rt-ax86u-1-0-merlin.jsonl`.
 - Reviewed candidate: `reviewed/asus-rt-ax86u-1-0-merlin.jsonl`.
+- App export draft: `app_exports/examples/asus_rt_ax86u_app_profile_draft.json`.
 - Prepared prompt: `prompts/agent_tasks/claude_stage1_asus_rt_ax86u_reviewed_candidate_review.md`.
 - Review report: `reports/claude_stage1_asus_rt_ax86u_reviewed_candidate_review.md`.
 - Migration plan: `reports/asus_rt_ax86u_reviewed_candidate_migration_plan.md`.
@@ -217,7 +218,7 @@ Boundary:
 
 ### Near-Term
 
-- Review App/export readiness for the RT-AX86U reviewed candidate.
+- Use the RT-AX86U App export as internal App integration input only.
 - Do not write `final/` without explicit Owner approval.
 - Keep AX55 at recovery-entry observed until an explicit firmware upload/acceptance test is approved.
 - Keep RAX40 at official baseline until a recovery-specific test is planned.
@@ -243,7 +244,7 @@ Boundary:
 
 ## Risks
 
-- RT-AX86U reviewed candidate exists but is not final.
+- RT-AX86U reviewed candidate and App export draft exist, but neither is final.
 - AX86U evidence is strong but disruptive-device testing should stop unless a product-blocking question remains.
 - AX55 recovery entry could be mistaken for recovery success; no upload was performed.
 - RAX40 normal App/Web recovery of management access could be mistaken for router firmware recovery; it is not.
@@ -290,6 +291,7 @@ Boundary:
 
 - `incoming/asus-rt-ax86u-1-0-merlin.jsonl`
 - `reviewed/asus-rt-ax86u-1-0-merlin.jsonl`
+- `app_exports/examples/asus_rt_ax86u_app_profile_draft.json`
 - `incoming/asus-rt-ac86u-unknown-unknown.jsonl`
 - `incoming/netgear-r7000-unknown-unknown.jsonl`
 - `incidents/lab/netgear_r7000_ttl100_tftp_timeout_2026-05-13.json`
@@ -321,16 +323,16 @@ Boundary:
 
 ## Recommended Next Step
 
-Review App/export readiness for:
+Use this App-facing implementation draft as the next App integration input:
 
 ```text
-reviewed/asus-rt-ax86u-1-0-merlin.jsonl
+app_exports/examples/asus_rt_ax86u_app_profile_draft.json
 ```
 
 Recommended sequence:
 
-1. Check whether `tools/export_app_profile.py` supports reviewed candidates and preserves observation-only warnings.
-2. Compare App copy with `reports/app_copy_upload_complete_vs_recovery_complete_2026-05-17.md`.
-3. If export is safe, generate App-ready draft export from reviewed candidate only.
+1. Keep `production_allowed=false` and `final_allowed=false`.
+2. Preserve observation-only warnings in App UI.
+3. Preserve upload-complete-vs-recovery-complete copy in the post-upload flow.
 4. Do not write `final/`.
 5. Keep AX55, RAX40, and R7000 blocked at their current evidence gates until the next planned lab tests.

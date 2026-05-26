@@ -313,15 +313,15 @@ UI rule:
 
 | App module | TP-Link AX55 | ASUS RT-AC86U / RT-AX86U direction | NETGEAR RAX40 |
 | --- | --- | --- | --- |
-| Device selection | queue/reference only | RT-AC86U incoming exists; RT-AX86U separate | reference target only |
-| Risk confirmation | pending profile | covered for RT-AC86U | pending |
+| Device selection | queue/reference only | RT-AC86U incoming exists; RT-AX86U reviewed candidate exists separately | reference target only |
+| Risk confirmation | pending profile | covered for RT-AC86U and RT-AX86U reviewed candidate | pending |
 | Firmware source | needs model-specific official source | covered for RT-AC86U | pending |
 | macOS preflight | likely needed | needed and partly observed | likely needed |
 | Physical setup | unknown | covered for RT-AC86U | unknown |
 | Readiness | unknown | partially covered; ping weak | likely critical |
-| Transfer | Web recovery target | passive TFTP covered for RT-AC86U | unresolved; likely orchestration-heavy |
+| Transfer | Web recovery target | passive TFTP covered for RT-AC86U and RT-AX86U reviewed candidate | unresolved; likely orchestration-heavy |
 | Error interpretation | pending incidents | initial taxonomy useful | critical |
-| Post-upload | unknown | covered for RT-AC86U | unknown |
+| Post-upload | unknown | covered for RT-AC86U and RT-AX86U reviewed candidate | unknown |
 | Outcome feedback | pending | covered conceptually | pending |
 | Privacy/export | generic App requirement | supported by runtime schema | supported by runtime schema |
 
@@ -329,7 +329,7 @@ UI rule:
 
 Recommended first implementation slice:
 
-1. Device/profile selection for RT-AC86U only.
+1. Device/profile selection for one reviewed candidate first; RT-AX86U is now available as reviewed-candidate data, while RT-AC86U remains incoming unless separately migrated.
 2. Firmware source and local file metadata capture.
 3. macOS preflight checklist.
 4. Passive TFTP transfer screen with progress and error category.
@@ -338,7 +338,12 @@ Recommended first implementation slice:
 
 Do not implement AX55 or RAX40 user-facing flows until their source/lab coverage improves.
 
-For a generated RT-AC86U App-facing draft, see `app_exports/examples/asus_rt_ac86u_app_profile_draft.json`. This export is an implementation aid only and is not final production guidance.
+For generated App-facing drafts, see:
+
+- `app_exports/examples/asus_rt_ac86u_app_profile_draft.json`
+- `app_exports/examples/asus_rt_ax86u_app_profile_draft.json`
+
+These exports are implementation aids only and are not final production guidance.
 
 ## Stop Lines
 

@@ -1,0 +1,221 @@
+{
+  "export_metadata": {
+    "generated_at": "2026-05-26T14:18:08.813108+00:00",
+    "export_type": "app_profile_implementation_draft",
+    "source_profile_id": "asus-rt-ax86u-1-0-merlin",
+    "source_profile_status": "reviewed",
+    "production_allowed": false,
+    "final_allowed": false,
+    "review_required": true,
+    "notes": "Generated for App upgrade integration testing only. This is not final guidance."
+  },
+  "device_selection": {
+    "profile_id": "asus-rt-ax86u-1-0-merlin",
+    "vendor": "ASUS",
+    "model": "RT-AX86U",
+    "hardware_version": "1.0",
+    "firmware_version": "unknown",
+    "applies_to_all_firmware_versions": false,
+    "device_type": "router",
+    "confidence_level": "medium",
+    "tags": [
+      "incoming_draft",
+      "human_review_required",
+      "personal_testing",
+      "asus_rescue_mode",
+      "rt_ax86u",
+      "asuswrt_merlin",
+      "macos_tftp_client",
+      "post_upload_power_cycle",
+      "observation_only",
+      "reviewed_candidate"
+    ]
+  },
+  "risk_and_scope": {
+    "known_issues": [
+      "Stock ASUSWRT behavior is unknown.",
+      "Firmware version applicability is unknown; tested versions are recorded only in evidence and firmware_details.",
+      "Other RT-AX86U hardware revisions, regions, and firmware variants are unknown.",
+      "Web Recovery page was not observed during the tested TTL=100 state.",
+      "Active TFTP / router-pulls-firmware was not observed or supported by this evidence.",
+      "LAN1 was used successfully, but LAN2-LAN4 were not evaluated.",
+      "Exact button hold duration was not recorded.",
+      "TFTP filename requirement is unknown; 388102.w is only an accepted filename example.",
+      "Configuration retention was observed once but is not guaranteed."
+    ],
+    "risk_warnings": [
+      "Upload completion does not mean recovery is complete.",
+      "Wait several minutes after upload before power action; the observed run waited more than 5 minutes.",
+      "A normal power cycle may be required before DHCP and admin UI return.",
+      "Configuration retention is not guaranteed. Back up configuration before recovery.",
+      "Do not judge recovery success by ping or TTL alone.",
+      "Web Recovery was not observed for this tested state.",
+      "Use Passive TFTP PUT only; Active TFTP router-pulls-firmware is not supported by this evidence.",
+      "Use model-matched official ASUSWRT-Merlin RT-AX86U firmware and extract the .w image before upload.",
+      "This candidate is not final and must not be generalized to RT-AC86U, stock ASUSWRT, other hardware revisions, or other regions."
+    ],
+    "observation_only_groups": [
+      "button_recovery",
+      "network_recovery",
+      "tftp_details",
+      "firmware_details",
+      "post_upload_behavior",
+      "observed_outcomes"
+    ],
+    "source_evidence_count": 4,
+    "review_notes": "Reviewed-candidate migration approved by Owner on 2026-05-26. This is reviewed-candidate only, not final. All core groups remain observation-only. Do not write final without separate explicit Owner approval."
+  },
+  "firmware_preparation": {
+    "official_download_page_url": "https://www.asuswrt-merlin.net/download",
+    "official_download_page_region": null,
+    "official_download_page_model": "RT-AX86U",
+    "source_type": "official_vendor_download_page",
+    "file_type": ".w",
+    "official_format": true,
+    "checksum_available": true,
+    "checksum_algorithms": [
+      "SHA256"
+    ],
+    "version_selection_guidance": "Use official ASUSWRT-Merlin firmware explicitly matching RT-AX86U. Extract the .w firmware image from the archive before TFTP upload.",
+    "risk_warning": "This candidate evidence covers ASUSWRT-Merlin on one RT-AX86U H/W Ver. 1.0 unit. It does not prove stock ASUSWRT, other hardware revisions, other regions, or all firmware versions behave the same.",
+    "binary_stored": false
+  },
+  "macos_preflight": {
+    "client_ip_assignment": "static",
+    "client_static_ip": "192.168.1.10",
+    "client_static_cidr": "192.168.1.10/24",
+    "default_subnet": "255.255.255.0",
+    "local_network_permission_warning": "Initial macOS Local Network permission denial can appear as sendto() No route to host.",
+    "file_picker_required": true,
+    "wired_interface_required": true,
+    "wifi_can_remain_available": true,
+    "wired_service_priority_or_route_check_required": true
+  },
+  "physical_setup": {
+    "required_lan_port": "LAN1 observed; other LAN ports were not evaluated.",
+    "button_name": "reset",
+    "entry_method": "reset_hold_power_on",
+    "press_duration_seconds_min": null,
+    "press_duration_seconds_max": null,
+    "led_indicator": "Slow-flashing power LED plus LAN1 activity was observed during the recovery-like state."
+  },
+  "readiness": {
+    "recovery_ip": "192.168.1.1",
+    "expected_ttl": 100,
+    "ping_signal_strength": "weak",
+    "readiness_warning": "Ping and TTL can support readiness but must not be the sole success or failure signal."
+  },
+  "transfer": {
+    "recovery_methods": [
+      "tftp_passive"
+    ],
+    "passive_tftp_from_router": true,
+    "active_tftp_to_router": false,
+    "runtime_tftp_direction_field": "transfer.tftp_direction",
+    "runtime_role_fields": [
+      "transfer.mac_role",
+      "transfer.router_role"
+    ],
+    "listen_port": 69,
+    "tftp_mode": "octet",
+    "filename_required": null,
+    "accepted_filename_examples": [
+      "388102.w"
+    ],
+    "server_uses_ephemeral_port": false,
+    "port_behavior": "fixed_server_port",
+    "ack_source_port": 69,
+    "client_behavior_requirement": "Use Passive TFTP PUT/WRQ to 192.168.1.1:69 and follow the router ACK source port. In the observed run, ACKs stayed on source port 69."
+  },
+  "post_upload": {
+    "wait_seconds": 300,
+    "power_cycle_required": true,
+    "dhcp_after_power_cycle": true,
+    "gateway_ip_as_admin_url": true,
+    "user_warning_after_upload": "Firmware upload finished, but recovery is not complete. Wait several minutes before any power action. In the observed run, DHCP and admin UI returned only after a normal power cycle, then the Mac used DHCP and opened the gateway 192.168.50.1."
+  },
+  "outcome_guidance": {
+    "config_retention_observed": "retained",
+    "factory_reset_observed": false,
+    "firmware_downgrade_supported": true,
+    "known_recovery_variants": [
+      "Configuration retained after TFTP recovery in this single RT-AX86U attempt",
+      "Manual power cycle required after post-upload wait before DHCP/admin returned"
+    ],
+    "do_not_infer_config_state_from_transfer_success": true
+  },
+  "runtime_attempt_mapping": {
+    "schema": "schema/app_runtime_attempt.schema.json",
+    "recommended_export_for_internal_testing": true,
+    "local_only_by_default": true,
+    "private_paths_redacted": true,
+    "serials_redacted": true
+  },
+  "stop_lines": [
+    "Do not present this export as final production guidance.",
+    "Do not generalize observations from this profile to other ASUS models.",
+    "Do not claim all hardware or firmware versions are covered.",
+    "Do not store firmware binaries or private local file paths.",
+    "Do not infer configuration retention or factory reset from transfer success."
+  ],
+  "source_trace": [
+    {
+      "source_type": "personal_testing",
+      "source_url": null,
+      "source_document": "lab_tests/live_sessions/asus_rt_ax86u_official_baseline_2026-05-17.md",
+      "supports_fields": [
+        "model",
+        "hardware_version",
+        "firmware_details.known_successful_versions",
+        "button_recovery",
+        "network_recovery.default_ip",
+        "network_recovery.client_static_ip",
+        "network_recovery.required_lan_port",
+        "network_recovery.rescue_ping_ttl"
+      ],
+      "notes": "Personal testing source. Scope is limited to the tested RT-AX86U H/W Ver. 1.0 unit and ASUSWRT-Merlin firmware family."
+    },
+    {
+      "source_type": "personal_testing",
+      "source_url": null,
+      "source_document": "runtime_attempts/asus_rt_ax86u_passive_tftp_put_2026-05-17.json",
+      "supports_fields": [
+        "recovery_methods",
+        "tftp_passive",
+        "network_recovery.passive_tftp_from_router",
+        "network_recovery.active_tftp_to_router",
+        "tftp_details",
+        "firmware_details",
+        "post_upload_behavior",
+        "observed_outcomes"
+      ],
+      "notes": "Supports Passive TFTP PUT for the tested unit. Active TFTP router-pulls-firmware was not observed in passive capture."
+    },
+    {
+      "source_type": "personal_testing",
+      "source_url": null,
+      "source_document": "reports/asus_rt_ax86u_reference_observation_summary_2026-05-17.md",
+      "supports_fields": [
+        "post_upload_behavior.power_cycle_required",
+        "post_upload_behavior.wait_seconds",
+        "post_upload_behavior.dhcp_after_power_cycle",
+        "post_upload_behavior.gateway_ip_as_admin_url",
+        "observed_outcomes.config_retention_observed",
+        "risk_warnings"
+      ],
+      "notes": "Configuration retention is this-run evidence only and must not be promised."
+    },
+    {
+      "source_type": "personal_testing",
+      "source_url": null,
+      "source_document": "reports/claude_stage1_asus_rt_ax86u_reviewed_candidate_review.md",
+      "supports_fields": [
+        "confidence_level",
+        "observation_only_groups",
+        "risk_warnings",
+        "known_issues"
+      ],
+      "notes": "Review report only. Does not approve final publication."
+    }
+  ]
+}

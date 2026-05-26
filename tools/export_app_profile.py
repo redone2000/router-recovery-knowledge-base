@@ -35,7 +35,7 @@ def pick(profile: dict[str, Any], field: str) -> Any:
     return value
 
 
-def build_export(profile: dict[str, Any]) -> dict[str, Any]:
+def build_export(profile: dict[str, Any], source_profile_status: str) -> dict[str, Any]:
     network = profile.get("network_recovery") if isinstance(profile.get("network_recovery"), dict) else {}
     button = profile.get("button_recovery") if isinstance(profile.get("button_recovery"), dict) else {}
     firmware_source = profile.get("firmware_source") if isinstance(profile.get("firmware_source"), dict) else {}
@@ -49,7 +49,7 @@ def build_export(profile: dict[str, Any]) -> dict[str, Any]:
             "generated_at": datetime.now(timezone.utc).isoformat(),
             "export_type": "app_profile_implementation_draft",
             "source_profile_id": profile.get("id"),
-            "source_profile_status": "incoming",
+            "source_profile_status": source_profile_status,
             "production_allowed": False,
             "final_allowed": False,
             "review_required": True,
@@ -149,7 +149,7 @@ def build_export(profile: dict[str, Any]) -> dict[str, Any]:
         },
         "stop_lines": [
             "Do not present this export as final production guidance.",
-            "Do not generalize RT-AC86U observations to RT-AX86U or other ASUS models.",
+            "Do not generalize observations from this profile to other ASUS models.",
             "Do not claim all hardware or firmware versions are covered.",
             "Do not store firmware binaries or private local file paths.",
             "Do not infer configuration retention or factory reset from transfer success.",
@@ -173,11 +173,17 @@ def main() -> int:
     parser.add_argument("--profile-id", default=DEFAULT_PROFILE_ID)
     parser.add_argument("--input", default=DEFAULT_INPUT)
     parser.add_argument("--output", default="app_exports/examples/asus_rt_ac86u_app_profile_draft.json")
+    parser.add_argument(
+        "--source-profile-status",
+        default="incoming",
+        choices=("incoming", "reviewed"),
+        help="Lifecycle status of the source profile used for export metadata.",
+    )
     args = parser.parse_args()
 
     try:
         profile = load_profile(repo_path(args.input), args.profile_id)
-        exported = build_export(profile)
+        exported = build_export(profile, args.source_profile_status)
         safe_write_text(repo_path(args.output), json.dumps(exported, indent=2, ensure_ascii=False) + "\n")
     except (ValueError, FileExistsError) as exc:
         print(f"ERROR: {exc}", file=sys.stderr)

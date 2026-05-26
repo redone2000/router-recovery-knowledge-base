@@ -41,6 +41,7 @@ The repo has established:
 - RT-AX86U incoming candidate draft reviewed by Codex and accepted for reviewed-migration request
 - Owner approved RT-AX86U reviewed-candidate migration only on 2026-05-26
 - RT-AX86U reviewed-candidate copy prepared
+- RT-AX86U App-facing implementation draft export generated
 
 Validated on 2026-05-19 before the evidence-batch commit:
 
@@ -128,7 +129,7 @@ Do not:
 
 Next useful AX86U task:
 
-- Decide whether to generate App/profile export from reviewed candidates, while preserving observation-only warnings.
+- Use the RT-AX86U App export as an internal implementation aid, while preserving observation-only warnings.
 
 ### NETGEAR R7000
 
@@ -182,7 +183,7 @@ Do not:
 
 ## Current Risks
 
-- RT-AX86U reviewed candidate exists but is not final.
+- RT-AX86U reviewed candidate and App export draft exist, but neither is final.
 - AX55 recovery page entry may be overread as recovery success.
 - AX86U evidence is strong but still observation-only for many fields.
 - RAX40 management recovery could be confused with firmware recovery.
@@ -227,6 +228,7 @@ Data:
 
 - `incoming/asus-rt-ax86u-1-0-merlin.jsonl`
 - `reviewed/asus-rt-ax86u-1-0-merlin.jsonl`
+- `app_exports/examples/asus_rt_ax86u_app_profile_draft.json`
 - `incoming/asus-rt-ac86u-unknown-unknown.jsonl`
 - `incoming/netgear-r7000-unknown-unknown.jsonl`
 - `incidents/lab/netgear_r7000_ttl100_tftp_timeout_2026-05-13.json`
@@ -256,17 +258,19 @@ Completed review and plan:
 - `reports/claude_stage1_asus_rt_ax86u_reviewed_candidate_review.md`
 - `reports/asus_rt_ax86u_reviewed_candidate_migration_plan.md`
 - `reports/codex_asus_rt_ax86u_incoming_draft_review_2026-05-26.md`
+- `reports/asus_rt_ax86u_app_export_readiness_2026-05-26.md`
 
 ## Recommended Next Step
 
-Review App/export readiness for the reviewed RT-AX86U candidate:
+Use the RT-AX86U App export as the next App integration input:
 
 - `reviewed/asus-rt-ax86u-1-0-merlin.jsonl`
-- `reports/app_copy_upload_complete_vs_recovery_complete_2026-05-17.md`
+- `app_exports/examples/asus_rt_ax86u_app_profile_draft.json`
+- `reports/asus_rt_ax86u_app_export_readiness_2026-05-26.md`
 - `docs/app_recovery_runtime_workflow.md`
 - `docs/app_upgrade_field_contract.md`
 
-Do not write `final/`. Do not remove observation-only warnings.
+Do not write `final/`. Do not remove observation-only warnings. Do not treat the export as production guidance.
 
 Do not start new model expansion.
 
@@ -283,7 +287,7 @@ Goal: continue the router recovery knowledge project from Stage 1 reference-devi
 
 Current priorities:
 1. Protect evidence boundaries.
-2. Review App/export readiness for the RT-AX86U reviewed candidate.
+2. Use the RT-AX86U App export as internal App integration input only.
 3. Keep AX55 at recovery-entry observed until firmware upload is explicitly approved.
 4. Treat ASUS RT-AX86U as reviewed candidate only, not final.
 5. Keep R7000 blocked as incident-only.
@@ -306,5 +310,5 @@ Important rules:
 - Keep runtime attempts, incidents, workflow evidence, and model profiles separate.
 
 Recommended first task:
-Review App/export readiness for reviewed/asus-rt-ax86u-1-0-merlin.jsonl while preserving observation-only warnings. Do not write final/.
+Use app_exports/examples/asus_rt_ax86u_app_profile_draft.json as internal App integration input, preserving observation-only warnings and upload-complete-vs-recovery-complete copy. Do not write final/.
 ```
