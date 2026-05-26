@@ -76,7 +76,7 @@ def validate_schema_value(value: Any, schema: dict[str, Any], path: str) -> list
         for field in sorted(required):
             if field not in value:
                 errors.append(f"{path}.{field}: missing required field")
-            elif not is_non_empty(value.get(field)) and field != "evidence_items":
+            elif not is_non_empty(value.get(field)) and field != "evidence_items" and "null" not in properties.get(field, {}).get("type", []):
                 errors.append(f"{path}.{field}: must be non-empty")
         if schema.get("additionalProperties") is False:
             for field in sorted(set(value) - set(properties)):
@@ -115,6 +115,8 @@ def validate_hypothesis(hypothesis: dict[str, Any], schema: dict[str, Any]) -> l
             errors.append("research_seed hypotheses must use promotion_gate do_not_promote")
         if app_copy_allowed is not False:
             errors.append("research_seed hypotheses must set app_copy_allowed false")
+        if evidence_strength == "ai_research_seed" and hypothesis.get("suspected_workflows") != ["unknown"]:
+            errors.append("ai_research_seed records must use suspected_workflows ['unknown']")
     if status == "ready_for_incoming_review":
         if promotion_gate != "ready_for_owner_review":
             errors.append("ready_for_incoming_review requires promotion_gate ready_for_owner_review")
