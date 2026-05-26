@@ -18,6 +18,7 @@ Prioritize:
 4. workflow maturity
 5. reviewed profile candidates
 6. App-ready exports
+7. model hypotheses for AI-assisted expansion
 
 Do not prioritize broad model collection.
 
@@ -44,6 +45,7 @@ The repo has established:
 - RT-AX86U App-facing implementation draft export generated
 - RT-AX86U App integration slice spec prepared
 - Router Recovery App project handoff prompt prepared for RT-AX86U integration planning
+- AI-assisted model hypothesis queue added for outward model expansion without profile pollution
 
 Validated on 2026-05-19 before the evidence-batch commit:
 
@@ -187,6 +189,7 @@ Do not:
 
 ## Current Risks
 
+- AI-assisted expansion can easily create fake support breadth. Keep new models in `model_hypotheses/` until evidence and Owner review justify an `incoming/` draft.
 - RT-AX86U reviewed candidate and App export draft exist, but neither is final.
 - AX55 recovery page entry may be overread as recovery success.
 - AX86U evidence is strong but still observation-only for many fields.
@@ -203,6 +206,12 @@ Root:
 - `HANDOFF.md`
 - `prompts/new_thread_start_prompt.md`
 - `prompts/router_recovery_app_rt_ax86u_integration_prompt.md`
+- `prompts/agent_tasks/claude_stage1_model_hypothesis_expansion_review.md`
+
+Hypotheses:
+
+- `model_hypotheses/README.md`
+- `model_hypotheses/asus-expansion-seeds.jsonl`
 
 Docs:
 
@@ -221,7 +230,9 @@ Schemas/tools:
 - `schema/recovery_incident.schema.json`
 - `schema/recovery_workflow.schema.json`
 - `schema/app_runtime_attempt.schema.json`
+- `schema/model_hypothesis.schema.json`
 - `tools/validate_runtime_attempts.py`
+- `tools/validate_model_hypotheses.py`
 - `tools/validate_profiles.py`
 - `tools/validate_incidents.py`
 - `tools/validate_system_links.py`

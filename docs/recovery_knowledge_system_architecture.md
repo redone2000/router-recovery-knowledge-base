@@ -133,6 +133,20 @@ Current rule:
 
 App runtime execution is separate from model profiles. The profile provides parameters and warnings; the App records live state such as selected local firmware file, selected network interface, permission state, transfer progress, errors, and outcome. See `docs/app_recovery_runtime_workflow.md`.
 
+## Layer 4a: Model Hypotheses
+
+Model hypotheses are an expansion queue before model profiles.
+
+They are useful when AI agents can cheaply scan likely models, official sources, community reports, and tool issues, but the project should not yet create profile guidance.
+
+Rules:
+
+- Store these in `model_hypotheses/`.
+- Validate them with `tools/validate_model_hypotheses.py`.
+- Keep `research_seed` entries clearly marked as not evidence.
+- Promote only after evidence is indexed, gaps are explicit, and the Owner approves an `incoming/` draft.
+- Do not use this layer for App support claims or compatibility lists.
+
 ## Layer 5: Recovery Incidents
 
 Incidents record success/failure cases, timing clues, and tacit knowledge.
@@ -225,6 +239,8 @@ The App upgrade validation path should follow these reference devices before lon
 
 OpenClaw should collect by workflow coverage gap, not by unlimited model hunting.
 
+AI-assisted outward expansion should now use `model_hypotheses/`, not direct profile generation. This keeps model discovery cheap while preserving the project rule that support claims require evidence gates.
+
 ### R7000
 
 R7000 should not move to `reviewed/` right now.
@@ -272,10 +288,6 @@ OpenClaw must still avoid inference and must not generate final guidance.
 
 ## Next Architecture Tasks
 
-1. Create `docs/recovery_language.md`.
-2. Define an incident schema before recording more R7000 timing tests.
-3. Create workflow documents for:
-   - Passive TFTP PUT
-   - Web Recovery
-   - Post-upload phase
-4. Later, build an export tool that generates App-friendly JSON from reviewed/final profiles plus workflow metadata.
+1. Use the model hypothesis queue to test AI-assisted expansion on a small batch.
+2. Keep expanding workflow documents only where hypotheses reveal repeated evidence gaps.
+3. Later, build an export tool that generates App-friendly JSON from reviewed/final profiles plus workflow metadata.

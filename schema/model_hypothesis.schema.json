@@ -1,0 +1,169 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/your-org/router-recovery-knowledge/schema/model_hypothesis.schema.json",
+  "title": "Router Recovery Model Hypothesis",
+  "description": "AI-assisted model expansion queue entry. Hypotheses are not profiles and must not be shown as support claims.",
+  "type": "object",
+  "required": [
+    "id",
+    "hypothesis_status",
+    "vendor",
+    "model",
+    "hardware_version",
+    "firmware_scope",
+    "suspected_workflows",
+    "evidence_strength",
+    "evidence_items",
+    "missing_proof",
+    "recommended_next_step",
+    "risk_level",
+    "app_copy_allowed",
+    "promotion_gate",
+    "created_date",
+    "last_reviewed_date"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "hypothesis_status": {
+      "type": "string",
+      "enum": ["research_seed", "needs_source_review", "evidence_indexed", "blocked", "ready_for_incoming_review"]
+    },
+    "vendor": {
+      "type": "string"
+    },
+    "model": {
+      "type": "string"
+    },
+    "hardware_version": {
+      "type": "string"
+    },
+    "firmware_scope": {
+      "type": "string"
+    },
+    "device_type": {
+      "type": ["string", "null"]
+    },
+    "suspected_workflows": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "enum": [
+          "asus_rescue_passive_tftp_put",
+          "asus_rescue_active_tftp_upload",
+          "tplink_web_recovery",
+          "openwrt_passive_tftp_rrq",
+          "netgear_nmrp",
+          "netgear_official_tftp",
+          "uboot_web_recovery",
+          "uboot_tftp",
+          "vendor_web_recovery",
+          "unknown"
+        ]
+      }
+    },
+    "workflow_confidence": {
+      "type": ["string", "null"],
+      "enum": ["none", "low", "medium", "high", null]
+    },
+    "evidence_strength": {
+      "type": "string",
+      "enum": [
+        "none",
+        "ai_research_seed",
+        "single_unverified_source",
+        "multiple_community_sources",
+        "official_but_incomplete",
+        "official_workflow_evidence",
+        "lab_observed"
+      ]
+    },
+    "evidence_items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["source_type", "source_url", "supports_fields", "summary", "extracted_date"],
+        "properties": {
+          "source_type": {
+            "type": "string",
+            "enum": [
+              "official_documentation",
+              "vendor_support_forum",
+              "verified_community_guide",
+              "community_forum_post",
+              "third_party_repository",
+              "firmware_analysis",
+              "lab_observation",
+              "ai_research_seed"
+            ]
+          },
+          "source_url": {
+            "type": ["string", "null"]
+          },
+          "source_document": {
+            "type": ["string", "null"]
+          },
+          "supports_fields": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "summary": {
+            "type": "string"
+          },
+          "extracted_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "limitations": {
+            "type": ["string", "null"]
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "missing_proof": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    },
+    "conflicting_evidence": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "recommended_next_step": {
+      "type": "string"
+    },
+    "risk_level": {
+      "type": "string",
+      "enum": ["low", "medium", "high"]
+    },
+    "app_copy_allowed": {
+      "type": "boolean"
+    },
+    "promotion_gate": {
+      "type": "string",
+      "enum": ["do_not_promote", "needs_official_source", "needs_model_specific_evidence", "needs_lab_attempt", "ready_for_owner_review"]
+    },
+    "collector_notes": {
+      "type": ["string", "null"]
+    },
+    "created_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "last_reviewed_date": {
+      "type": "string",
+      "format": "date"
+    }
+  },
+  "additionalProperties": false
+}

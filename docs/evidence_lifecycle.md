@@ -12,7 +12,8 @@ The goal is to prevent raw observations, source fragments, or failed tests from 
 ## Core Lifecycle
 
 ```text
-source / lab observation / user report
+AI model hypothesis
+  -> source / lab observation / user report
   -> source index or incident
   -> pattern candidate
   -> workflow update
@@ -25,7 +26,39 @@ No stage automatically promotes to the next stage.
 
 Every promotion requires an explicit gate decision.
 
+`model_hypotheses/` is a pre-evidence queue. It may suggest what to research next, but it is not itself source evidence.
+
 ## Evidence Types
+
+### Model Hypothesis Queue
+
+Location:
+
+- `model_hypotheses/`
+- `schema/model_hypothesis.schema.json`
+
+Purpose:
+
+- let AI agents propose and audit candidate models
+- classify suspected workflows only when evidence supports them
+- preserve missing proof before any profile draft
+- keep research seeds out of `incoming/`, `reviewed/`, and `final/`
+
+Allowed outputs:
+
+- hypothesis JSONL records
+- source-gap reports
+- blocked/deferred candidate notes
+- exact JSONL proposals for Owner review
+
+Disallowed outputs:
+
+- automatic `incoming/` profile generation
+- automatic App support claims
+- inferred TFTP direction
+- reviewed/final profile writes
+
+Promotion from hypothesis to `incoming/` requires `hypothesis_status=ready_for_incoming_review`, `promotion_gate=ready_for_owner_review`, and explicit Owner approval.
 
 ### Source Index Evidence
 
@@ -292,6 +325,7 @@ Must not:
 Run these before committing related changes:
 
 ```bash
+python3 tools/validate_model_hypotheses.py model_hypotheses
 python3 tools/validate_profiles.py incoming
 python3 tools/validate_incidents.py
 python3 tools/validate_workflows.py

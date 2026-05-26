@@ -43,6 +43,29 @@ def load_profiles(directory: str) -> list[dict[str, Any]]:
     return profiles
 
 
+def load_jsonl_records(directory: str) -> list[dict[str, Any]]:
+    root = repo_path(directory)
+    if not root.exists():
+        return []
+    records: list[dict[str, Any]] = []
+    for path in sorted(root.glob("*.jsonl")):
+        for record in iter_jsonl(path):
+            if record.json_error or record.data is None:
+                records.append(
+                    {
+                        "_file": str(record.path.relative_to(repo_path("."))),
+                        "_line": record.line_number,
+                        "_error": record.json_error,
+                    }
+                )
+                continue
+            item = dict(record.data)
+            item["_file"] = str(record.path.relative_to(repo_path(".")))
+            item["_line"] = record.line_number
+            records.append(item)
+    return records
+
+
 def load_json_tree(directory: str) -> list[dict[str, Any]]:
     root = repo_path(directory)
     if not root.exists():
@@ -91,10 +114,42 @@ def profile_summary(profiles: list[dict[str, Any]]) -> dict[str, Any]:
     }
 
 
+def hypothesis_summary(hypotheses: list[dict[str, Any]]) -> dict[str, Any]:
+    valid = [hypothesis for hypothesis in hypotheses if "_error" not in hypothesis]
+    by_status = Counter(str(hypothesis.get("hypothesis_status") or "unknown") for hypothesis in valid)
+    by_vendor = Counter(str(hypothesis.get("vendor") or "UNKNOWN") for hypothesis in valid)
+    return {
+        "count": len(hypotheses),
+        "valid_count": len(valid),
+        "invalid_count": sum(1 for hypothesis in hypotheses if "_error" in hypothesis),
+        "status_distribution": dict(sorted(by_status.items())),
+        "vendor_distribution": dict(sorted(by_vendor.items())),
+        "ready_for_incoming_review_count": sum(
+            1
+            for hypothesis in valid
+            if hypothesis.get("hypothesis_status") == "ready_for_incoming_review"
+            and hypothesis.get("promotion_gate") == "ready_for_owner_review"
+        ),
+        "hypotheses": [
+            {
+                "id": hypothesis.get("id"),
+                "vendor": hypothesis.get("vendor"),
+                "model": hypothesis.get("model"),
+                "hypothesis_status": hypothesis.get("hypothesis_status"),
+                "evidence_strength": hypothesis.get("evidence_strength"),
+                "promotion_gate": hypothesis.get("promotion_gate"),
+                "file": hypothesis.get("_file"),
+            }
+            for hypothesis in valid
+        ],
+    }
+
+
 def build_report() -> dict[str, Any]:
     incoming = load_profiles("incoming")
     reviewed = load_profiles("reviewed")
     final = load_profiles("final")
+    hypotheses = load_jsonl_records("model_hypotheses")
     incidents = load_json_tree("incidents")
     workflows = load_json_tree("workflows")
     decisions = load_lifecycle_decisions()
@@ -139,9 +194,12 @@ def build_report() -> dict[str, Any]:
         recommended_next_actions.append("Keep NETGEAR R7000 out of reviewed/final until lab retest resolves timing incident.")
     if workflows:
         recommended_next_actions.append("Draft Web Recovery workflow before expanding TP-Link/AX model coverage.")
+    if hypotheses:
+        recommended_next_actions.append("Use model_hypotheses/ for AI-assisted model expansion; promote none without Owner approval.")
 
     prohibited_actions = [
         "Do not write final/ automatically.",
+        "Do not create incoming profiles directly from AI model hypotheses.",
         "Do not promote incidents directly to profile guidance.",
         "Do not use R7000 as App-ready guidance while paused.",
         "Do not expand broad model coverage before workflow and incident gates are stable.",
@@ -154,6 +212,7 @@ def build_report() -> dict[str, Any]:
             "reviewed": profile_summary(reviewed),
             "final": profile_summary(final),
         },
+        "model_hypotheses": hypothesis_summary(hypotheses),
         "incidents": {
             "count": len(incidents),
             "blocked_profile_gate_count": len(blocked_incidents),
@@ -184,10 +243,11 @@ def main() -> int:
     safe_write_text(output_path, json.dumps(report, indent=2, ensure_ascii=False) + "\n")
     print(f"Wrote system status report: {output_path}")
     print(
-        "Incoming: {incoming}; reviewed: {reviewed}; final: {final}; incidents: {incidents}; workflows: {workflows}".format(
+        "Incoming: {incoming}; reviewed: {reviewed}; final: {final}; hypotheses: {hypotheses}; incidents: {incidents}; workflows: {workflows}".format(
             incoming=report["profiles"]["incoming"]["count"],
             reviewed=report["profiles"]["reviewed"]["count"],
             final=report["profiles"]["final"]["count"],
+            hypotheses=report["model_hypotheses"]["count"],
             incidents=report["incidents"]["count"],
             workflows=report["workflows"]["count"],
         )

@@ -37,10 +37,12 @@ Implemented or extended:
 - `schema/recovery_incident.schema.json`
 - `schema/recovery_workflow.schema.json`
 - `schema/app_runtime_attempt.schema.json`
+- `schema/model_hypothesis.schema.json`
 - `tools/validate_profiles.py`
 - `tools/validate_incidents.py`
 - `tools/validate_workflows.py`
 - `tools/validate_runtime_attempts.py`
+- `tools/validate_model_hypotheses.py`
 - `tools/validate_system_links.py`
 - `tools/create_runtime_attempt_template.py`
 - `tools/create_incident_from_runtime_attempt.py`
@@ -81,6 +83,26 @@ Important design docs are in place:
 - `docs/app_recovery_runtime_workflow.md`
 - `docs/app_upgrade_field_contract.md`
 - `docs/recovery_hygiene_defaults.md`
+
+### AI-Assisted Model Expansion
+
+The repository now has a separate `model_hypotheses/` layer for outward model expansion.
+
+Purpose:
+
+- let AI agents collect candidate model evidence and workflow hypotheses
+- preserve missing-proof lists before any profile drafting
+- prevent AI-generated breadth from polluting `incoming/`, `reviewed/`, or `final/`
+
+Current seed:
+
+- `model_hypotheses/asus-expansion-seeds.jsonl` contains a research seed for ASUS RT-AX88U. It is not evidence and not an App support claim.
+
+Tooling and prompts:
+
+- `schema/model_hypothesis.schema.json`
+- `tools/validate_model_hypotheses.py`
+- `prompts/agent_tasks/claude_stage1_model_hypothesis_expansion_review.md`
 
 ### Latest Local Commits
 
@@ -222,6 +244,8 @@ Boundary:
 
 - Communicate RT-AX86U App integration through `prompts/router_recovery_app_rt_ax86u_integration_prompt.md`; do not directly modify the App project from this knowledge-system thread.
 - Keep the RT-AX86U App integration slice as future-build input only while the App project is in App Review waiting mode.
+- Use `model_hypotheses/` for AI-assisted outward model expansion; do not generate `incoming/` profiles directly from AI research.
+- Run `python3 tools/validate_model_hypotheses.py model_hypotheses` whenever hypothesis records change.
 - Do not write `final/` without explicit Owner approval.
 - Keep AX55 at recovery-entry observed until an explicit firmware upload/acceptance test is approved.
 - Keep RAX40 at official baseline until a recovery-specific test is planned.
