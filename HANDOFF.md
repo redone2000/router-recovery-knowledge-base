@@ -42,6 +42,7 @@ The repo has established:
 - Owner approved RT-AX86U reviewed-candidate migration only on 2026-05-26
 - RT-AX86U reviewed-candidate copy prepared
 - RT-AX86U App-facing implementation draft export generated
+- RT-AX86U App integration slice spec prepared
 
 Validated on 2026-05-19 before the evidence-batch commit:
 
@@ -129,7 +130,7 @@ Do not:
 
 Next useful AX86U task:
 
-- Use the RT-AX86U App export as an internal implementation aid, while preserving observation-only warnings.
+- Use the RT-AX86U App integration slice spec as implementation input for the macOS App.
 
 ### NETGEAR R7000
 
@@ -259,14 +260,14 @@ Completed review and plan:
 - `reports/asus_rt_ax86u_reviewed_candidate_migration_plan.md`
 - `reports/codex_asus_rt_ax86u_incoming_draft_review_2026-05-26.md`
 - `reports/asus_rt_ax86u_app_export_readiness_2026-05-26.md`
+- `reports/rt_ax86u_app_integration_slice_2026-05-26.md`
 
 ## Recommended Next Step
 
-Use the RT-AX86U App export as the next App integration input:
+Use the RT-AX86U App integration slice as the next App implementation input:
 
-- `reviewed/asus-rt-ax86u-1-0-merlin.jsonl`
+- `reports/rt_ax86u_app_integration_slice_2026-05-26.md`
 - `app_exports/examples/asus_rt_ax86u_app_profile_draft.json`
-- `reports/asus_rt_ax86u_app_export_readiness_2026-05-26.md`
 - `docs/app_recovery_runtime_workflow.md`
 - `docs/app_upgrade_field_contract.md`
 
@@ -287,7 +288,7 @@ Goal: continue the router recovery knowledge project from Stage 1 reference-devi
 
 Current priorities:
 1. Protect evidence boundaries.
-2. Use the RT-AX86U App export as internal App integration input only.
+2. Use the RT-AX86U App integration slice as internal App implementation input only.
 3. Keep AX55 at recovery-entry observed until firmware upload is explicitly approved.
 4. Treat ASUS RT-AX86U as reviewed candidate only, not final.
 5. Keep R7000 blocked as incident-only.
@@ -310,5 +311,5 @@ Important rules:
 - Keep runtime attempts, incidents, workflow evidence, and model profiles separate.
 
 Recommended first task:
-Use app_exports/examples/asus_rt_ax86u_app_profile_draft.json as internal App integration input, preserving observation-only warnings and upload-complete-vs-recovery-complete copy. Do not write final/.
+Use reports/rt_ax86u_app_integration_slice_2026-05-26.md and app_exports/examples/asus_rt_ax86u_app_profile_draft.json as internal App implementation input, preserving observation-only warnings and upload-complete-vs-recovery-complete copy. Do not write final/.
 ```

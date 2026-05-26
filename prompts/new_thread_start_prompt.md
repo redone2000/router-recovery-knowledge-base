@@ -11,7 +11,7 @@ Goal: continue the router recovery knowledge project from Stage 1 reference-devi
 
 Current priorities:
 1. Protect evidence boundaries.
-2. Use the RT-AX86U App export as internal App integration input only.
+2. Use the RT-AX86U App integration slice as internal App implementation input only.
 3. Keep AX55 at recovery-entry observed until firmware upload is explicitly approved.
 4. Treat ASUS RT-AX86U as reviewed candidate only, not final.
 5. Keep R7000 blocked as incident-only.
@@ -34,5 +34,5 @@ Important rules:
 - Keep runtime attempts, incidents, workflow evidence, and model profiles separate.
 
 Recommended first task:
-Use app_exports/examples/asus_rt_ax86u_app_profile_draft.json as internal App integration input, preserving observation-only warnings and upload-complete-vs-recovery-complete copy. Do not write final/.
+Use reports/rt_ax86u_app_integration_slice_2026-05-26.md and app_exports/examples/asus_rt_ax86u_app_profile_draft.json as internal App implementation input, preserving observation-only warnings and upload-complete-vs-recovery-complete copy. Do not write final/.
 ```
