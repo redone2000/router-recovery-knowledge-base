@@ -2,7 +2,7 @@
 
 ## v0.1.0 - Public Knowledge Base Foundation
 
-Planned initial public release.
+Released 2026-05-30.
 
 ### Added
 
