@@ -1,85 +1,92 @@
 # Router Recovery Knowledge Base
 
-A community-curated knowledge base of router and network device recovery methods.
+An open, evidence-based knowledge base for router firmware recovery, TFTP recovery, OpenWrt recovery, and device-specific troubleshooting.
 
-## Schema Version
-Current schema version: v0.1
+This repository is not the source code for the Router Recovery macOS app. It contains public documentation, evidence notes, troubleshooting guides, schemas, and validation tooling for safer router recovery work. Commercial app development remains separate.
 
-## Directory Structure
+## Start Here
 
+- [TFTP Recovery Guide](docs/tftp-recovery-guide.md)
+- [OpenWrt Recovery Guide](docs/openwrt-recovery-guide.md)
+- [Firmware Selection Guide](docs/firmware-selection-guide.md)
+- [Common Recovery Failures](docs/common-recovery-failures.md)
+- [ASUS Recovery Guide](docs/asus-recovery-guide.md)
+- [TP-Link Recovery Guide](docs/tplink-recovery-guide.md)
+- [NETGEAR Recovery Guide](docs/netgear-recovery-guide.md)
+
+## What This Project Covers
+
+- TFTP recovery workflows
+- OpenWrt and ImmortalWrt recovery notes
+- ASUS Rescue Mode recovery notes
+- TP-Link Web Recovery notes
+- NETGEAR TFTP and NMRP-related notes
+- Firmware selection and region or hardware-version checks
+- Common recovery failures and troubleshooting
+- Evidence-backed device recovery profiles
+
+## What This Project Does Not Do
+
+- It does not publish the Router Recovery app source code.
+- It does not promise that a firmware upload equals a complete recovery.
+- It does not generalize one hardware revision to every device variant.
+- It does not treat AI-generated model lists as verified recovery instructions.
+- It does not copy vendor documentation into this repository.
+
+## Core Principles
+
+- Recovery claims need evidence.
+- TFTP direction must be proven or clearly marked unknown.
+- Upload completion is not the same as recovery completion.
+- Failed attempts are useful when they reveal timing, network, firmware, or device-state behavior.
+- Device-specific pages must separate confirmed facts from assumptions.
+
+## Evidence Levels
+
+- `official`: documented by the vendor or upstream project.
+- `lab-observed`: reproduced in hands-on testing.
+- `community-reported`: reported by users but not independently verified here.
+- `hypothesis`: plausible, but not enough for user-facing recovery instructions.
+
+## Repository Layout
+
+```text
+router-recovery-knowledge-base/
+├── docs/             # Public guides and recovery explanations
+├── incoming/         # Draft recovery profiles awaiting review
+├── reviewed/         # Reviewed profile candidates, not final user promises
+├── incidents/        # Failure cases and lab incidents with useful recovery signals
+├── model_hypotheses/ # AI-assisted expansion seeds, not recovery guidance
+├── schema/           # JSON schemas and enumerations
+├── sources/          # Source notes and evidence excerpts
+├── data/             # Source indexes and workflow indexes
+├── reports/          # Review reports and project decisions
+└── tools/            # Validation and export scripts
 ```
-router-recovery-knowledge/
-├── incoming/       # Newly submitted profiles awaiting review
-├── reviewed/       # Profiles that have passed initial review, pending final approval
-├── final/          # Finalized, verified profiles ready for use
-├── schema/         # JSON schema and enumeration definitions
-├── prompts/        # AI prompt templates for review and processing
-├── sources/        # Source documents (manuals, forum posts, etc.) referenced by profiles
-├── data/           # Additional supporting data files
-├── reports/        # Generated reports and statistics
-└── tools/          # Utility scripts for validation and processing
-```
 
-## Data Flow & Review Workflow
+## Using Router Recovery for macOS
 
-```
-[Submission] → [incoming/] → [AI Review] → [Human Review] → [reviewed/] → [Final Approval] → [final/]
-                                                                  ↓
-                                                          [Changes Requested] → [Update] → [Re-review]
-```
+The public guides in this repository are written so users can understand recovery concepts and manual steps. If you want a guided macOS tool for TFTP-oriented recovery workflows and local recovery attempt records, see Router Recovery for macOS.
 
-### Workflow Stages
-
-1. **Submission**: New profiles are submitted to the `incoming/` directory
-   - Must be JSONL records following the JSON schema in `schema/recovery_profile.schema.json`
-   - Must include source information
-   - Must include `source_evidence` for each claimed recovery method
-   - Initial confidence level set by submitter
-
-2. **AI Review**: Automated review using Claude with the prompt in `prompts/claude_profile_review_prompt.md`
-   - Validates schema compliance
-   - Checks enum values
-   - Verifies confidence level is appropriate
-   - Flags missing information or inconsistencies
-   - Generates review report
-
-3. **Human Review**: Human reviewer evaluates the AI report and profile
-   - Approves, requests changes, or rejects
-   - Adjusts confidence level if needed
-   - Validates source credibility
-   - Moves approved profiles to `reviewed/` directory
-
-4. **Final Approval**: Senior reviewer does final check
-   - Verifies accuracy and completeness
-   - Moves fully verified profiles to `final/` directory
-   - Profiles in `final/` are considered production-ready
-
-## Core Rules
-
-### Required Fields
-All profiles must include:
-- `id`: Unique identifier (vendor-model-firmware-version format)
-- `vendor`: Device manufacturer
-- `model`: Device model
-- `recovery_methods`: List of supported recovery methods
-- `source_type`: Type of source information
-- `confidence_level`: Confidence in the accuracy of the information
-- `submitted_date`: Date of submission
-
-### Confidence Downgrade Rules
-Confidence level must be lowered if:
-- Source is AI-generated, unknown, or from social media (max `low`)
-- Source is an unverified community post (max `medium`)
-- Required fields are missing (max `low`)
-- There are conflicting reports about recovery methods (max `low`)
-- TFTP type is specified without supporting evidence (max `medium`)
-
-### TFTP Method Classification
-- **Passive TFTP (`passive_tftp_from_router`)**: Router acts as TFTP server. User connects to router's IP to perform recovery.
-- **Active TFTP (`active_tftp_to_router`)**: Router acts as TFTP client. User must run a TFTP server for the router to connect to.
-
-## Usage
-TODO: Add usage instructions for tools and querying the knowledge base.
+The app is optional. This knowledge base should remain useful even if you never use the app.
 
 ## Contributing
-TODO: Add contribution guidelines.
+
+Contributions are welcome, especially:
+
+- verified recovery steps
+- device-specific observations
+- corrections to firmware version or hardware revision notes
+- failure cases with logs or screenshots
+- links to official documentation
+
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) before submitting recovery claims.
+
+## Maintainer Notes
+
+- [OpenAI Codex for Open Source Application Notes](docs/openai-codex-for-oss-application.md)
+- [Public Launch Checklist](docs/public-launch-checklist.md)
+
+## License
+
+Documentation is licensed under [CC BY 4.0](LICENSE). Code, schemas, and tooling are licensed under [MIT](LICENSE-CODE).
