@@ -13,6 +13,8 @@ Possible paths include:
 
 Treat each path separately. A page asking you to create an administrator password is usually setup or factory-reset behavior, not proof of firmware recovery mode.
 
+For common page-entry and upload boundary problems, see [TP-Link Web Recovery Troubleshooting](tplink-web-recovery-troubleshooting.md).
+
 ## Web Recovery Checklist
 
 1. Confirm exact model, hardware version, and region.

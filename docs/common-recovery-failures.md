@@ -57,6 +57,8 @@ Likely causes:
 
 For TP-Link-style web recovery, reaching a page is useful evidence of entry, but it does not prove firmware acceptance or completed recovery.
 
+See [TP-Link Web Recovery Troubleshooting](tplink-web-recovery-troubleshooting.md) for TP-Link-specific page-entry and upload boundary examples.
+
 ## Wrong Subnet
 
 Common examples:
