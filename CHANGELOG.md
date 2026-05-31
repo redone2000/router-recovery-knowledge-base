@@ -28,3 +28,11 @@ Released 2026-05-30.
 - The public repository should remain useful without the app.
 - Recovery claims must separate upload completion from completed recovery.
 - Device-specific observations must not be generalized without evidence.
+
+## Unreleased
+
+### Added
+
+- OpenWrt Failsafe Guide.
+- TTL=100 troubleshooting guide.
+- Maintenance log for public upkeep and application follow-up.

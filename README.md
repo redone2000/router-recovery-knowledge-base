@@ -10,6 +10,8 @@ This repository is not the source code for the Router Recovery macOS app. It con
 - [OpenWrt Recovery Guide](docs/openwrt-recovery-guide.md)
 - [Firmware Selection Guide](docs/firmware-selection-guide.md)
 - [Common Recovery Failures](docs/common-recovery-failures.md)
+- [OpenWrt Failsafe Guide](docs/openwrt-failsafe-guide.md)
+- [TTL=100 Does Not Mean TFTP Is Ready](docs/ttl-100-does-not-mean-tftp-ready.md)
 - [ASUS Recovery Guide](docs/asus-recovery-guide.md)
 - [TP-Link Recovery Guide](docs/tplink-recovery-guide.md)
 - [NETGEAR Recovery Guide](docs/netgear-recovery-guide.md)
@@ -86,6 +88,7 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) before submitting recovery claims
 
 - [OpenAI Codex for Open Source Application Notes](docs/openai-codex-for-oss-application.md)
 - [Public Launch Checklist](docs/public-launch-checklist.md)
+- [Maintenance Log](docs/maintenance-log.md)
 
 ## License
 
