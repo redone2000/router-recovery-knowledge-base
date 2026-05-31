@@ -29,7 +29,9 @@ Released 2026-05-30.
 - Recovery claims must separate upload completion from completed recovery.
 - Device-specific observations must not be generalized without evidence.
 
-## Unreleased
+## v0.2.0 - Maintenance Follow-up and Evidence Boundaries
+
+Released 2026-05-31.
 
 ### Added
 
