@@ -33,6 +33,7 @@ Released 2026-05-30.
 
 ### Added
 
+- ImmortalWrt Recovery Notes.
 - OpenWrt Failsafe Guide.
 - TTL=100 troubleshooting guide.
 - Router recovery glossary.

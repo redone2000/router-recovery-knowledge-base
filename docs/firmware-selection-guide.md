@@ -28,6 +28,8 @@ For OpenWrt and ImmortalWrt:
 
 Using the wrong type can fail or cause a harder recovery problem.
 
+Do not assume OpenWrt and ImmortalWrt images are interchangeable. Match the firmware family, device target, hardware revision, and upstream device page before flashing.
+
 ## Region and Hardware Version
 
 Some vendors publish separate firmware for regions or hardware versions. If the label, web UI, and download page disagree, stop and resolve the mismatch before flashing.

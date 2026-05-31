@@ -6,6 +6,7 @@ This log records public maintenance work for Router Recovery Knowledge Base. It 
 
 ### Added
 
+- ImmortalWrt recovery notes.
 - OpenWrt failsafe recovery guide.
 - TTL=100 troubleshooting guide.
 - Public maintenance log.
@@ -21,6 +22,7 @@ This log records public maintenance work for Router Recovery Knowledge Base. It 
 
 ### Evidence Boundaries
 
+- ImmortalWrt is documented as OpenWrt-related, but firmware images and device support are not treated as interchangeable.
 - OpenWrt failsafe is documented as distinct from vendor bootloader recovery.
 - TTL=100 is documented as a signal, not proof of TFTP readiness or completed recovery.
 - Glossary terms separate transfer, firmware acceptance, and completed recovery.

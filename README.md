@@ -8,6 +8,7 @@ This repository is not the source code for the Router Recovery macOS app. It con
 
 - [TFTP Recovery Guide](docs/tftp-recovery-guide.md)
 - [OpenWrt Recovery Guide](docs/openwrt-recovery-guide.md)
+- [ImmortalWrt Recovery Notes](docs/immortalwrt-recovery-notes.md)
 - [Firmware Selection Guide](docs/firmware-selection-guide.md)
 - [Common Recovery Failures](docs/common-recovery-failures.md)
 - [Router Recovery Glossary](docs/router-recovery-glossary.md)

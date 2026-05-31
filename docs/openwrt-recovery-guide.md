@@ -2,6 +2,8 @@
 
 OpenWrt and ImmortalWrt recovery depends on the device, bootloader, firmware format, and vendor recovery path. There is no single universal OpenWrt recovery method.
 
+For ImmortalWrt-specific firmware and recovery boundaries, see [ImmortalWrt Recovery Notes](immortalwrt-recovery-notes.md).
+
 ## First Decision: Recovery Path
 
 Most devices fall into one of these paths:
