@@ -17,6 +17,11 @@ This log records public maintenance work for Router Recovery Knowledge Base. It 
 - Submitting router recovery reports guide.
 - TP-Link Web Recovery troubleshooting guide.
 
+### Repository Metadata
+
+- GitHub repository description, homepage, and topics now identify the project as a public router recovery knowledge base.
+- Recovery report issue template now uses the existing `device-report` triage label.
+
 ### Maintainer Notes
 
 - The repository is now public as `router-recovery-knowledge-base`.

@@ -2,7 +2,7 @@
 name: Recovery report
 about: Share a router recovery attempt or correction
 title: "[Recovery report]: "
-labels: recovery-report
+labels: device-report
 assignees: ""
 ---
 
