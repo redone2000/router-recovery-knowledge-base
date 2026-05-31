@@ -19,6 +19,7 @@ This repository is not the source code for the Router Recovery macOS app. It con
 - [TP-Link Recovery Guide](docs/tplink-recovery-guide.md)
 - [TP-Link Web Recovery Troubleshooting](docs/tplink-web-recovery-troubleshooting.md)
 - [NETGEAR Recovery Guide](docs/netgear-recovery-guide.md)
+- [Public Source Index](docs/public-source-index.md)
 
 ## What This Project Covers
 
