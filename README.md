@@ -90,6 +90,14 @@ Contributions are welcome, especially:
 
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) before submitting recovery claims.
 
+## Support
+
+Use GitHub issues for public recovery reports, documentation corrections, source additions, and evidence gaps.
+
+For private support requests or recovery details that should not be published publicly, use the official support page:
+
+https://www.router-recovery.com/en/support
+
 ## Maintainer Notes
 
 - [OpenAI Codex for Open Source Application Notes](docs/openai-codex-for-oss-application.md)

@@ -45,6 +45,19 @@ Do not submit:
 - vendor account credentials
 - proprietary firmware contents
 
+## Public Issues vs Private Support
+
+Use GitHub issues for information that can be public:
+
+- recovery reports with sensitive data removed
+- documentation corrections
+- official source links
+- evidence gaps
+
+Use the official support page for private support requests or recovery details that should not be published publicly:
+
+https://www.router-recovery.com/en/support
+
 ## Commercial App Boundary
 
 Router Recovery for macOS is a separate commercial app. This repository is for public recovery knowledge, documentation, schemas, and maintenance tooling. Contributions to this repository do not require using the app.
