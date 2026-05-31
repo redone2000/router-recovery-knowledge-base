@@ -14,6 +14,8 @@ Possible signals include:
 
 These signals are not universal. A signal should be tied to a specific model and observation.
 
+For source boundaries and public evidence links, see [ASUS Firmware Restoration Evidence Links](asus-firmware-restoration-evidence-links.md).
+
 ## TFTP Direction Must Be Proven
 
 Some ASUS recovery attempts behave as passive TFTP: the router acts as a TFTP server, and the computer uploads firmware as a client.

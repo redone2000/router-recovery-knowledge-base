@@ -34,6 +34,7 @@ Released 2026-05-30.
 ### Added
 
 - ImmortalWrt Recovery Notes.
+- ASUS Firmware Restoration evidence links.
 - OpenWrt Failsafe Guide.
 - TTL=100 troubleshooting guide.
 - Router recovery glossary.
