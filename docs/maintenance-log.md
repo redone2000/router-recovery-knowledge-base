@@ -14,6 +14,7 @@ This log records public maintenance work for Router Recovery Knowledge Base. It 
 - TTL=100 troubleshooting guide.
 - Public maintenance log.
 - Router recovery glossary.
+- Submitting router recovery reports guide.
 - TP-Link Web Recovery troubleshooting guide.
 
 ### Maintainer Notes
@@ -34,3 +35,4 @@ This log records public maintenance work for Router Recovery Knowledge Base. It 
 - Glossary terms separate transfer, firmware acceptance, and completed recovery.
 - TP-Link Web Recovery documentation separates page entry, firmware upload, firmware acceptance, and completed recovery.
 - Commercial app mentions remain optional and secondary.
+- Public issue reporting now links to official support for private or app-specific requests.

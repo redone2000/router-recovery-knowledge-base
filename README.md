@@ -11,6 +11,7 @@ This repository is not the source code for the Router Recovery macOS app. It con
 - [ImmortalWrt Recovery Notes](docs/immortalwrt-recovery-notes.md)
 - [Firmware Selection Guide](docs/firmware-selection-guide.md)
 - [Common Recovery Failures](docs/common-recovery-failures.md)
+- [Submitting Router Recovery Reports](docs/submitting-recovery-reports.md)
 - [Router Recovery Glossary](docs/router-recovery-glossary.md)
 - [OpenWrt Failsafe Guide](docs/openwrt-failsafe-guide.md)
 - [TTL=100 Does Not Mean TFTP Is Ready](docs/ttl-100-does-not-mean-tftp-ready.md)
@@ -89,6 +90,7 @@ Contributions are welcome, especially:
 - links to official documentation
 
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) before submitting recovery claims.
+For user-facing report guidance, see [Submitting Router Recovery Reports](docs/submitting-recovery-reports.md).
 
 ## Support
 
