@@ -8,6 +8,7 @@ This log records public maintenance work for Router Recovery Knowledge Base. It 
 
 - ImmortalWrt recovery notes.
 - ASUS Firmware Restoration evidence links.
+- NETGEAR NMRP evidence boundary page.
 - Public source index.
 - OpenWrt failsafe recovery guide.
 - TTL=100 troubleshooting guide.
@@ -26,6 +27,7 @@ This log records public maintenance work for Router Recovery Knowledge Base. It 
 
 - ImmortalWrt is documented as OpenWrt-related, but firmware images and device support are not treated as interchangeable.
 - ASUS official FAQ evidence is documented as workflow-level support unless model-specific proof exists.
+- NETGEAR NMRP documentation is separated from official NETGEAR TFTP guidance and from model-specific success claims.
 - Public source index separates official workflow evidence, model-scope notes, third-party context, and lab observations.
 - OpenWrt failsafe is documented as distinct from vendor bootloader recovery.
 - TTL=100 is documented as a signal, not proof of TFTP readiness or completed recovery.

@@ -46,6 +46,8 @@ When documenting NMRP-related recovery, label the evidence clearly:
 
 Do not present NMRP as an official NETGEAR method unless an official source for that device says so.
 
+For detailed source boundaries, see [NETGEAR NMRP Evidence Boundary](netgear-nmrp-evidence-boundary.md).
+
 ## Firmware Selection Risks
 
 NETGEAR firmware files are model-specific. A firmware image for a similar-looking model can fail or create a harder recovery problem.
