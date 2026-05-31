@@ -35,4 +35,5 @@ Released 2026-05-30.
 
 - OpenWrt Failsafe Guide.
 - TTL=100 troubleshooting guide.
+- Router recovery glossary.
 - Maintenance log for public upkeep and application follow-up.

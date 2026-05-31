@@ -10,6 +10,7 @@ This repository is not the source code for the Router Recovery macOS app. It con
 - [OpenWrt Recovery Guide](docs/openwrt-recovery-guide.md)
 - [Firmware Selection Guide](docs/firmware-selection-guide.md)
 - [Common Recovery Failures](docs/common-recovery-failures.md)
+- [Router Recovery Glossary](docs/router-recovery-glossary.md)
 - [OpenWrt Failsafe Guide](docs/openwrt-failsafe-guide.md)
 - [TTL=100 Does Not Mean TFTP Is Ready](docs/ttl-100-does-not-mean-tftp-ready.md)
 - [ASUS Recovery Guide](docs/asus-recovery-guide.md)

@@ -9,6 +9,7 @@ This log records public maintenance work for Router Recovery Knowledge Base. It 
 - OpenWrt failsafe recovery guide.
 - TTL=100 troubleshooting guide.
 - Public maintenance log.
+- Router recovery glossary.
 
 ### Maintainer Notes
 
@@ -21,4 +22,5 @@ This log records public maintenance work for Router Recovery Knowledge Base. It 
 
 - OpenWrt failsafe is documented as distinct from vendor bootloader recovery.
 - TTL=100 is documented as a signal, not proof of TFTP readiness or completed recovery.
+- Glossary terms separate transfer, firmware acceptance, and completed recovery.
 - Commercial app mentions remain optional and secondary.
