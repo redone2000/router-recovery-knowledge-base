@@ -106,6 +106,7 @@ https://www.router-recovery.com/en/support
 - [OpenAI Codex for Open Source Application Notes](docs/openai-codex-for-oss-application.md)
 - [Public Launch Checklist](docs/public-launch-checklist.md)
 - [Maintenance Log](docs/maintenance-log.md)
+- [Brand Capability Boundary Matrix](docs/brand-capability-boundary-matrix.md)
 
 ## License
 

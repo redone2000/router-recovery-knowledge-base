@@ -16,6 +16,7 @@ This log records public maintenance work for Router Recovery Knowledge Base. It 
 - Router recovery glossary.
 - Submitting router recovery reports guide.
 - OpenWrt failsafe vs TFTP recovery comparison guide.
+- Brand capability boundary matrix.
 - TP-Link Web Recovery troubleshooting guide.
 
 ### Repository Metadata
@@ -42,3 +43,4 @@ This log records public maintenance work for Router Recovery Knowledge Base. It 
 - TP-Link Web Recovery documentation separates page entry, firmware upload, firmware acceptance, and completed recovery.
 - Commercial app mentions remain optional and secondary.
 - Public issue reporting now links to official support for private or app-specific requests.
+- Brand and device expansion is defined as capability-boundary work, not model-count growth.
