@@ -14,6 +14,7 @@ This repository is not the source code for the Router Recovery macOS app. It con
 - [Submitting Router Recovery Reports](docs/submitting-recovery-reports.md)
 - [Router Recovery Glossary](docs/router-recovery-glossary.md)
 - [OpenWrt Failsafe Guide](docs/openwrt-failsafe-guide.md)
+- [OpenWrt Failsafe vs TFTP Recovery](docs/openwrt-failsafe-vs-tftp-recovery.md)
 - [TTL=100 Does Not Mean TFTP Is Ready](docs/ttl-100-does-not-mean-tftp-ready.md)
 - [ASUS Recovery Guide](docs/asus-recovery-guide.md)
 - [ASUS Firmware Restoration Evidence Links](docs/asus-firmware-restoration-evidence-links.md)

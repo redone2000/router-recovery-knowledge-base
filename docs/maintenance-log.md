@@ -15,6 +15,7 @@ This log records public maintenance work for Router Recovery Knowledge Base. It 
 - Public maintenance log.
 - Router recovery glossary.
 - Submitting router recovery reports guide.
+- OpenWrt failsafe vs TFTP recovery comparison guide.
 - TP-Link Web Recovery troubleshooting guide.
 
 ### Repository Metadata
