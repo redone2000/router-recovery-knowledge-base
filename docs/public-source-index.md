@@ -57,6 +57,7 @@ It is not a list of verified device profiles. A source can be useful without bei
 ## Public Documentation Pages Using These Sources
 
 - [ASUS Firmware Restoration Evidence Links](asus-firmware-restoration-evidence-links.md)
+- [ASUS Rescue Mode vs Firmware Restoration](asus-rescue-mode-vs-firmware-restoration.md)
 - [TP-Link Web Recovery Troubleshooting](tplink-web-recovery-troubleshooting.md)
 - [NETGEAR Recovery Guide](netgear-recovery-guide.md)
 - [NETGEAR NMRP Evidence Boundary](netgear-nmrp-evidence-boundary.md)

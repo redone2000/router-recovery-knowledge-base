@@ -16,6 +16,8 @@ These signals are not universal. A signal should be tied to a specific model and
 
 For source boundaries and public evidence links, see [ASUS Firmware Restoration Evidence Links](asus-firmware-restoration-evidence-links.md).
 
+For the difference between Rescue Mode, Firmware Restoration, passive TFTP, upload completion, and completed recovery, see [ASUS Rescue Mode vs Firmware Restoration](asus-rescue-mode-vs-firmware-restoration.md).
+
 ## TFTP Direction Must Be Proven
 
 Some ASUS recovery attempts behave as passive TFTP: the router acts as a TFTP server, and the computer uploads firmware as a client.

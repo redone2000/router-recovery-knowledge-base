@@ -17,6 +17,7 @@ This log records public maintenance work for Router Recovery Knowledge Base. It 
 - Submitting router recovery reports guide.
 - OpenWrt failsafe vs TFTP recovery comparison guide.
 - Brand capability boundary matrix.
+- ASUS Rescue Mode vs Firmware Restoration boundary guide.
 - TP-Link Web Recovery troubleshooting guide.
 
 ### Repository Metadata
@@ -44,3 +45,4 @@ This log records public maintenance work for Router Recovery Knowledge Base. It 
 - Commercial app mentions remain optional and secondary.
 - Public issue reporting now links to official support for private or app-specific requests.
 - Brand and device expansion is defined as capability-boundary work, not model-count growth.
+- ASUS Rescue Mode, Firmware Restoration, passive TFTP, and post-upload recovery are documented as separate concepts.
