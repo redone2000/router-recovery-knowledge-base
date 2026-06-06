@@ -15,6 +15,8 @@ Treat each path separately. A page asking you to create an administrator passwor
 
 For common page-entry and upload boundary problems, see [TP-Link Web Recovery Troubleshooting](tplink-web-recovery-troubleshooting.md).
 
+For the difference between browser-based Web Recovery / Emergency Mode and TFTP recovery, see [TP-Link Web Recovery vs TFTP Recovery](tplink-web-recovery-vs-tftp-recovery.md).
+
 ## Web Recovery Checklist
 
 1. Confirm exact model, hardware version, and region.

@@ -20,6 +20,7 @@ This repository is not the source code for the Router Recovery macOS app. It con
 - [ASUS Rescue Mode vs Firmware Restoration](docs/asus-rescue-mode-vs-firmware-restoration.md)
 - [ASUS Firmware Restoration Evidence Links](docs/asus-firmware-restoration-evidence-links.md)
 - [TP-Link Recovery Guide](docs/tplink-recovery-guide.md)
+- [TP-Link Web Recovery vs TFTP Recovery](docs/tplink-web-recovery-vs-tftp-recovery.md)
 - [TP-Link Web Recovery Troubleshooting](docs/tplink-web-recovery-troubleshooting.md)
 - [NETGEAR Recovery Guide](docs/netgear-recovery-guide.md)
 - [NETGEAR NMRP Evidence Boundary](docs/netgear-nmrp-evidence-boundary.md)
