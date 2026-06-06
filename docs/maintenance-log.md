@@ -2,6 +2,31 @@
 
 This log records public maintenance work for Router Recovery Knowledge Base. It is meant to show ongoing upkeep, not marketing activity.
 
+## 2026-06-06
+
+### Added
+
+- Submitting router recovery reports guide.
+- OpenWrt failsafe vs TFTP recovery comparison guide.
+- Brand capability boundary matrix.
+- ASUS Rescue Mode vs Firmware Restoration boundary guide.
+- TP-Link Web Recovery vs TFTP Recovery boundary guide.
+- v0.2.1 release notes.
+
+### Maintainer Notes
+
+- Public support routing now separates GitHub issues from private recovery support requests.
+- Recovery report issue routing now uses the existing `device-report` triage label.
+- The next maintenance focus is source freshness, incoming issue triage, and one NETGEAR boundary follow-up before any broader device expansion.
+
+### Evidence Boundaries
+
+- Public issue reporting now links to official support for private or app-specific requests.
+- Brand and device expansion is defined as capability-boundary work, not model-count growth.
+- OpenWrt failsafe and vendor bootloader/TFTP recovery are documented as separate paths.
+- ASUS Rescue Mode, Firmware Restoration, passive TFTP, and post-upload recovery are documented as separate concepts.
+- TP-Link Web Recovery, Emergency Mode, Active TFTP, Passive TFTP, and firmware filename boundaries are documented as separate concepts.
+
 ## 2026-05-31
 
 ### Added
@@ -14,11 +39,6 @@ This log records public maintenance work for Router Recovery Knowledge Base. It 
 - TTL=100 troubleshooting guide.
 - Public maintenance log.
 - Router recovery glossary.
-- Submitting router recovery reports guide.
-- OpenWrt failsafe vs TFTP recovery comparison guide.
-- Brand capability boundary matrix.
-- ASUS Rescue Mode vs Firmware Restoration boundary guide.
-- TP-Link Web Recovery vs TFTP Recovery boundary guide.
 - TP-Link Web Recovery troubleshooting guide.
 
 ### Repository Metadata
@@ -44,7 +64,3 @@ This log records public maintenance work for Router Recovery Knowledge Base. It 
 - Glossary terms separate transfer, firmware acceptance, and completed recovery.
 - TP-Link Web Recovery documentation separates page entry, firmware upload, firmware acceptance, and completed recovery.
 - Commercial app mentions remain optional and secondary.
-- Public issue reporting now links to official support for private or app-specific requests.
-- Brand and device expansion is defined as capability-boundary work, not model-count growth.
-- ASUS Rescue Mode, Firmware Restoration, passive TFTP, and post-upload recovery are documented as separate concepts.
-- TP-Link Web Recovery, Emergency Mode, Active TFTP, Passive TFTP, and firmware filename boundaries are documented as separate concepts.

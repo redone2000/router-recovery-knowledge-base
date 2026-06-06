@@ -109,6 +109,7 @@ https://www.router-recovery.com/en/support
 - [Public Launch Checklist](docs/public-launch-checklist.md)
 - [Maintenance Log](docs/maintenance-log.md)
 - [Brand Capability Boundary Matrix](docs/brand-capability-boundary-matrix.md)
+- [v0.2.1 Release Notes](docs/release-notes-v0.2.1.md)
 
 ## License
 
