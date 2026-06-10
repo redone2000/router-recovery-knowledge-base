@@ -48,6 +48,8 @@ Do not present NMRP as an official NETGEAR method unless an official source for 
 
 For detailed source boundaries, see [NETGEAR NMRP Evidence Boundary](netgear-nmrp-evidence-boundary.md).
 
+For the practical difference between official TFTP sources, NMRP tooling, and the R7000 timing incident, see [NETGEAR TFTP vs NMRP Recovery](netgear-tftp-vs-nmrp-recovery.md).
+
 ## Firmware Selection Risks
 
 NETGEAR firmware files are model-specific. A firmware image for a similar-looking model can fail or create a harder recovery problem.

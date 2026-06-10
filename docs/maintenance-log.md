@@ -2,6 +2,24 @@
 
 This log records public maintenance work for Router Recovery Knowledge Base. It is meant to show ongoing upkeep, not marketing activity.
 
+## 2026-06-10
+
+### Added
+
+- NETGEAR TFTP vs NMRP recovery boundary guide.
+
+### Maintainer Notes
+
+- GitHub release status checked: `v0.2.1` remains latest.
+- No open GitHub issues were present during maintenance.
+- NETGEAR official TFTP KB links and `nmrpflash` source link were reachable during the check.
+
+### Evidence Boundaries
+
+- NETGEAR official TFTP documentation, third-party NMRP tooling, and R7000 incident evidence are documented as separate source categories.
+- R7000 remains blocked from reviewed guidance until TFTP timing is reproduced or NMRP recovery is separately modeled and reviewed.
+- NETGEAR work remains focused on workflow uncertainty, not model-count expansion.
+
 ## 2026-06-06
 
 ### Added

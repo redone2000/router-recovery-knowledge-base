@@ -61,6 +61,7 @@ It is not a list of verified device profiles. A source can be useful without bei
 - [TP-Link Web Recovery vs TFTP Recovery](tplink-web-recovery-vs-tftp-recovery.md)
 - [TP-Link Web Recovery Troubleshooting](tplink-web-recovery-troubleshooting.md)
 - [NETGEAR Recovery Guide](netgear-recovery-guide.md)
+- [NETGEAR TFTP vs NMRP Recovery](netgear-tftp-vs-nmrp-recovery.md)
 - [NETGEAR NMRP Evidence Boundary](netgear-nmrp-evidence-boundary.md)
 - [TFTP Recovery Guide](tftp-recovery-guide.md)
 - [TTL=100 Does Not Mean TFTP Is Ready](ttl-100-does-not-mean-tftp-ready.md)

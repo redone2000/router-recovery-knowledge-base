@@ -23,6 +23,7 @@ This repository is not the source code for the Router Recovery macOS app. It con
 - [TP-Link Web Recovery vs TFTP Recovery](docs/tplink-web-recovery-vs-tftp-recovery.md)
 - [TP-Link Web Recovery Troubleshooting](docs/tplink-web-recovery-troubleshooting.md)
 - [NETGEAR Recovery Guide](docs/netgear-recovery-guide.md)
+- [NETGEAR TFTP vs NMRP Recovery](docs/netgear-tftp-vs-nmrp-recovery.md)
 - [NETGEAR NMRP Evidence Boundary](docs/netgear-nmrp-evidence-boundary.md)
 - [Public Source Index](docs/public-source-index.md)
 
