@@ -2,6 +2,24 @@
 
 This log records public maintenance work for Router Recovery Knowledge Base. It is meant to show ongoing upkeep, not marketing activity.
 
+## 2026-06-14
+
+### Added
+
+- Public maintenance review for repository discoverability, support-page routing, and GitHub traffic signals.
+
+### Maintainer Notes
+
+- GitHub release status checked: `v0.2.1` remains latest.
+- No open GitHub issues were present during maintenance.
+- GitHub traffic showed early search discovery from DuckDuckGo, but no community participation yet.
+- Live Router Recovery support page still links to the public knowledge base.
+
+### Follow-Up
+
+- Added a compatibility note to `TFTP_GUIDE.md` because it appeared in GitHub popular paths.
+- Next maintenance should observe search/referral trends and avoid forced content expansion without real feedback.
+
 ## 2026-06-10
 
 ### Added

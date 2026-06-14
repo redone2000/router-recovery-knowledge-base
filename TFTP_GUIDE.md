@@ -1,5 +1,9 @@
 # TFTP Recovery Mode Classification Guide v0.1
 
+> Public reader note: this is an older internal classification guide for active vs passive TFTP direction.
+> For the current user-facing guide, see [TFTP Recovery Guide](docs/tftp-recovery-guide.md).
+> For recovery completion boundaries, see [Common Recovery Failures](docs/common-recovery-failures.md).
+
 ## Core Definitions
 There are two distinct TFTP recovery modes used by network devices. Correct classification is critical for end users to successfully perform recovery.
 
