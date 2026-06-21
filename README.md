@@ -111,6 +111,7 @@ https://www.router-recovery.com/en/support
 - [Maintenance Log](docs/maintenance-log.md)
 - [Brand Capability Boundary Matrix](docs/brand-capability-boundary-matrix.md)
 - [Public Maintenance Review - 2026-06-14](docs/public-maintenance-review-2026-06-14.md)
+- [Public Maintenance Review - 2026-06-21](docs/public-maintenance-review-2026-06-21.md)
 - [v0.2.1 Release Notes](docs/release-notes-v0.2.1.md)
 
 ## License

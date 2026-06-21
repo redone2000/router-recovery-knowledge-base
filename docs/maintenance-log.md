@@ -2,6 +2,27 @@
 
 This log records public maintenance work for Router Recovery Knowledge Base. It is meant to show ongoing upkeep, not marketing activity.
 
+## 2026-06-21
+
+### Added
+
+- Weekly public maintenance review comparing GitHub traffic, referrals, release status, and community signals against the 2026-06-14 baseline.
+
+### Maintainer Notes
+
+- GitHub release status checked: `v0.2.1` remains latest.
+- No open GitHub issues were present during maintenance.
+- Stars, forks, and watchers remain at zero.
+- Views were essentially flat compared with the prior review.
+- DuckDuckGo remained present as a referrer, but did not grow.
+- Live Router Recovery support page still links to the public knowledge base.
+
+### Follow-Up
+
+- Do not add large new guides without real user feedback or a clear search-path gap.
+- Continue observing whether `router-recovery.com` appears as a referrer.
+- Keep watching whether `TFTP_GUIDE.md` remains in popular paths after the compatibility note.
+
 ## 2026-06-14
 
 ### Added
