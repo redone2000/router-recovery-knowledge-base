@@ -2,6 +2,27 @@
 
 This log records public maintenance work for Router Recovery Knowledge Base. It is meant to show ongoing upkeep, not marketing activity.
 
+## 2026-06-28
+
+### Added
+
+- Weekly public maintenance review comparing GitHub traffic, referrals, release status, and community signals against the 2026-06-21 baseline.
+
+### Maintainer Notes
+
+- GitHub release status checked: `v0.2.1` remains latest.
+- No open GitHub issues were present during maintenance.
+- Stars, forks, and watchers remain at zero.
+- Views and clone traffic declined compared with the prior review.
+- GitHub traffic reported no current referrers.
+- Live Router Recovery support page still links to the public knowledge base.
+
+### Follow-Up
+
+- Do not add large new guides without real user feedback or a clear search-path gap.
+- Consider moving public maintenance review from weekly to biweekly unless real activity appears.
+- Consider website-side SEO work before adding more GitHub-only documentation.
+
 ## 2026-06-21
 
 ### Added
