@@ -2,6 +2,49 @@
 
 This log records public maintenance work for Router Recovery Knowledge Base. It is meant to show ongoing upkeep, not marketing activity.
 
+## 2026-07-25
+
+### Added
+
+- Biweekly public maintenance review comparing current GitHub traffic, referral, release, issue, PR, and support-routing signals against the 2026-07-12 review.
+
+### Maintainer Notes
+
+- GitHub release status checked: `v0.2.1` remains latest.
+- No open GitHub issues or pull requests were present during maintenance.
+- Stars remained at one; forks and watchers remained at zero.
+- GitHub traffic remained very low: views and clones declined from the 2026-07-12 review window.
+- GitHub traffic reported no current referrers.
+- Current popular paths were the repository overview and `/issues`; no guide path persisted.
+- Live Router Recovery support page still links to the public knowledge base.
+
+### Follow-Up
+
+- Resolve the uncommitted 2026-07-12 and 2026-07-25 maintenance records before starting new documentation work.
+- Keep the review cadence biweekly or slower unless real activity appears.
+- Do not add model or ASUS-specific expansion based on the current weak traffic.
+
+## 2026-07-12
+
+### Added
+
+- Biweekly public maintenance review comparing current GitHub traffic, referral, release, and support-routing signals against the 2026-06-28 baseline.
+
+### Maintainer Notes
+
+- GitHub release status checked: `v0.2.1` remains latest.
+- No open GitHub issues or pull requests were present during maintenance.
+- Stars increased from zero to one.
+- GitHub traffic remained small overall, but the current referrer window showed Google again.
+- `docs/asus-firmware-restoration-evidence-links.md` appeared in current popular paths.
+- Live Router Recovery support page still links to the public knowledge base.
+
+### Follow-Up
+
+- Keep the review cadence biweekly unless real activity appears.
+- Do not add ASUS-specific expansion based on one weak traffic window.
+- Keep watching whether Google referrers or ASUS evidence paths persist.
+
 ## 2026-06-28
 
 ### Added
